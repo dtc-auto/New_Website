@@ -1,0 +1,10 @@
+from django.conf.urls import include, url
+from django.contrib import admin
+
+urlpatterns = [
+    # index page
+    # dashboard urls
+    url(r'^dashboard/$', include('dashboard.urls')),
+    # admin sites
+    url(r'^admin/', include(admin.site.urls)),
+]
