@@ -1,9 +1,8 @@
 from django.conf.urls import include, url
 from django.contrib import admin
+from .views import index
 
 urlpatterns = [
-    # Examples:
-    # url(r'^$', 'New_Website.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
-
+    # index
+    url(r'^$', index, name='index')
 ]
