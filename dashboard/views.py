@@ -5,3 +5,8 @@ from django.http import HttpResponse
 # index page
 def index(request):
     return render(request, 'dashboard/index.html')
+# dashboard page
+def carOwnerChartPage(request):
+    return render(request, 'dashboard/carEchartPage.html')
+
+
