@@ -23,14 +23,14 @@
     <!-- bootstrap-progressbar -->
     <link href="{% static 'vendor/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet">
     <!-- JQVMap -->
-    <link href="{% static 'vendor/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
+    <!--<link href="{% static 'vendor/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>-->
     <!-- bootstrap-daterangepicker -->
-    <link href="{% static 'vendor/bootstrap-daterangepicker/daterangepicker.css' %}" rel="stylesheet">
+    <!--<link href="{% static 'vendor/bootstrap-daterangepicker/daterangepicker.css' %}" rel="stylesheet">-->
 
     <!-- Custom Theme Style -->
     <link href="{% static 'polygon/custom.min.css' %}" rel="stylesheet">
-
-
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
 
 <body class="nav-md">
@@ -61,7 +61,7 @@
                 <div class="profile clearfix">
                     <!--用户头像-->
                     <div class="profile_pic">
-                        <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+                        <!--<img src="images/img.jpg" alt="..." class="img-circle profile_img">-->
                     </div>
                     <div class="profile_info">
                         <span>Detecon</span>
@@ -139,7 +139,7 @@
                         <li class="">
                             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
                                aria-expanded="false">
-                                <img src="images/img.jpg" alt="">dtc
+                                <!--<img src="images/img.jpg" alt="">dtc-->
                                 <span class=" fa fa-angle-down"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -225,28 +225,26 @@
             </div>
             <!-- /select tiles-->
 
-            <!-- Initialize the plugin: -->
-            <script type="text/javascript">
-                        $('#sel1').multiselect();
-            </script>
             <!--接收数据库返回信息-->
-            <script>
+            <script type="text/javascript">
                 $(document).ready(function(){
 
                   $("#sel1").change(function(){
                     var car = $("#sel1").val();
 
-                    $.getJSON('{% url 'dashboard' %}',{'a':car}, function(ret){
+                    $.getJSON('{% url 'carEchartPage' %}',{'a':car}, function(ret){
 
                         drawMarkersMap(ret.list1,car);
-                        <!--drawTrendlines(ret.list2);-->
+                        drawTrendlines(ret.list2,car);
+                        drawStacked(ret.list3);
                     })
                 });
               });
                 var car = $("#sel1").val();
-                $.getJSON('{% url 'dashboard' %}',{'a':car}, function(ret){
+                $.getJSON('{% url 'carEchartPage' %}',{'a':car}, function(ret){
                     drawMarkersMap(ret.list1,car);
-                    <!--drawTrendlines(ret.list2);-->
+                    drawTrendlines(ret.list2,car);
+                    drawStacked(ret.list3);
                 })
             </script>
 
@@ -256,89 +254,210 @@
 
                         <div class="row x_title">
                             <div class="col-md-6">
-                                <h3>Car Owner Regional Distribution
-                                    <small>车主区域分布</small>
+                                <h3>Regional distribution of mainstream vehicle owners
+                                    <!--<small>车主区域分布</small>-->
                                 </h3>
                             </div>
 
-                            <div class="col-md-9 col-sm-9 col-xs-12">
-                                <div id="main" style="width: 100%;height:300px;"></div>
-                                <script type="text/javascript">
-                                // 基于准备好的dom，初始化echarts实例
-                                var myChart = echarts.init(document.getElementById('main'));
+                            <div class="col-md-7 col-sm-7 col-xs-12">
 
-                                // 指定图表的配置项和数据
-                                var option = {
-                                    title: {
-                                        text: 'ECharts 入门示例'
-                                    },
-                                    tooltip: {},
-                                    legend: {
-                                        data:['销量']
-                                    },
-                                    xAxis: {
-                                        data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
-                                    },
-                                    yAxis: {},
-                                    series: [{
-                                        name: '销量',
-                                        type: 'bar',
-                                        data: [5, 20, 36, 10, 10, 20]
-                                    }]
-                                };
 
-                                // 使用刚指定的配置项和数据显示图表。
-                                myChart.setOption(option);
-                                </script>
+                                <!--<div id="chart_01" class="demo-placeholder">-->
+                                    <div id="line_1_map" style="width: 70%;height:500px;">
+                                        <script type="text/javascript">
+                                            function drawMarkersMap(test_list,car){
+                                            var dom = document.getElementById("container");
+                                            var drawMarkersMap = echarts.init(document.getElementById('line_1_map'));
 
-                                <div id="chart_plot_01" class="demo-placeholder"></div>
+                                            var app = {};
+                                            option = null;
+
+                                            option = {
+
+                                                tooltip: {
+                                                    trigger: 'item'
+                                                },
+                                                legend: {
+                                                    orient: 'vertical',
+                                                    left: 'left',
+
+                                                },
+                                                visualMap: {
+                                                    min: 0,
+                                                    max: 150,
+                                                    left: 'left',
+                                                    top: 'bottom',
+                                                    text: ['高','低'],           // 文本，默认为数值文本
+                                                    calculable: true
+                                                },
+                                                toolbox: {
+                                                    show: true,
+                                                    orient: 'vertical',
+                                                    left: 'right',
+                                                    top: 'center',
+                                                    feature: {
+                                                        dataView: {readOnly: false},
+                                                        restore: {},
+                                                        saveAsImage: {}
+                                                    }
+                                                },
+                                                series: [
+                                                    {
+                                                        name: car,
+                                                        type: 'map',
+                                                        mapType: 'china',
+                                                        roam: false,
+                                                        label: {
+                                                            normal: {
+                                                                show: true
+                                                            },
+                                                            emphasis: {
+                                                                show: true
+                                                            }
+                                                        },
+                                                        data:test_list
+                                                    },
+
+
+                                                ]
+                                            };
+                                                drawMarkersMap.setOption(option);
+                                            }
+                                            </script>
+                                    <!--</div>-->
+
+                                </div>
 
                             </div>
-                            <div class="col-md-3 col-sm-3 col-xs-12 bg-white">
+                            <!--chart_02-->
+                            <div class="col-md-5 col-sm-5 col-xs-12 bg-white">
                                 <div class="x_title">
-                                    <h2>Top Campaign Performance</h2>
+                                    <h2>Regional distribution of different model owners</h2>
                                     <div class="clearfix"></div>
                                 </div>
 
                                 <div class="col-md-12 col-sm-12 col-xs-6">
-                                    <div>
-                                        <p>Facebook Campaign</p>
-                                        <div class="">
-                                            <div class="progress progress_sm" style="width: 76%;">
-                                                <div class="progress-bar bg-green" role="progressbar"
-                                                     data-transitiongoal="80"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <p>Twitter Campaign</p>
-                                        <div class="">
-                                            <div class="progress progress_sm" style="width: 76%;">
-                                                <div class="progress-bar bg-green" role="progressbar"
-                                                     data-transitiongoal="60"></div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <div id="line_1_data" style="width: 100%;height:500px;">
+                                    <script type="text/javascript">
+                                function drawTrendlines(test_list){
+                                var dom = document.getElementById("container");
+                                var drawTrendlines = echarts.init(document.getElementById('line_1_data'));
+                                var app = {};
+                                option = null;
+                                app.title = '堆叠条形图';
+
+                                option = {
+                                    tooltip : {
+                                        trigger: 'axis',
+                                        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                                            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                                        }
+                                    },
+                                    legend: {
+                                        data: ['东北区', '华北区', '华东区', '华南区', '华中区', '西区']
+                                    },
+                                    grid: {
+                                        left: '3%',
+                                        right: '4%',
+                                        bottom: '3%',
+                                        containLabel: true
+                                    },
+                                    xAxis:  {
+                                        type: 'value',
+                                        max: 1
+                                    },
+                                    yAxis: {
+                                        type: 'category',
+                                        <!--定位y轴，详细数据格式请Debug数据查询-->
+                                        data: [test_list[1][0], test_list[2][0], test_list[3][0], test_list[4][0], test_list[5][0],test_list[6][0], test_list[7][0], test_list[8][0]]
+
+                                    },
+                                    series: [
+                                        {
+                                            name: test_list[0][1],
+                                            type: 'bar',
+                                            stack: '总量',
+                                            label: {
+                                                normal: {
+                                                    show: false,
+                                                    position: 'insideRight'
+                                                }
+                                            },
+                                            data: [test_list[1][1], test_list[2][1], test_list[3][1], test_list[4][1], test_list[5][1],test_list[6][1], test_list[7][1], test_list[8][1]]
+                                        },
+                                        {
+                                            name: test_list[0][2],
+                                            type: 'bar',
+                                            stack: '总量',
+                                            label: {
+                                                normal: {
+                                                    show: false,
+                                                    position: 'insideRight'
+                                                }
+                                            },
+                                            data: [test_list[1][2], test_list[2][2], test_list[3][2], test_list[4][2], test_list[5][2],test_list[6][2], test_list[7][2], test_list[8][2]]
+                                        },
+                                        {
+                                            name: test_list[0][3],
+                                            type: 'bar',
+                                            stack: '总量',
+                                            label: {
+                                                normal: {
+                                                    show: false,
+                                                    position: 'insideRight'
+                                                }
+                                            },
+                                            data: [test_list[1][3], test_list[2][3], test_list[3][3], test_list[4][3], test_list[5][3],test_list[6][3], test_list[7][3], test_list[8][3]]
+                                        },
+                                        {
+                                            name: test_list[0][4],
+                                            type: 'bar',
+                                            stack: '总量',
+                                            label: {
+                                                normal: {
+                                                    show: false,
+                                                    position: 'insideRight'
+                                                }
+                                            },
+                                            data: [test_list[1][4], test_list[2][4], test_list[3][4], test_list[4][4], test_list[5][4],test_list[6][4], test_list[7][4], test_list[8][4]]
+                                        },
+                                        {
+                                            name: test_list[0][5],
+                                            type: 'bar',
+                                            stack: '总量',
+                                            label: {
+                                                normal: {
+                                                    show: false,
+                                                    position: 'insideRight'
+                                                }
+                                            },
+                                            data: [test_list[1][5], test_list[2][5], test_list[3][5], test_list[4][5], test_list[5][5],test_list[6][5], test_list[7][5], test_list[8][5]]
+                                        },
+                                        {
+                                            name: test_list[0][6],
+                                            type: 'bar',
+                                            stack: '总量',
+                                            label: {
+                                                normal: {
+                                                    show: false,
+                                                    position: 'insideRight'
+                                                }
+                                            },
+                                            data: [test_list[1][6], test_list[2][6], test_list[3][6], test_list[4][6], test_list[5][6],test_list[6][6], test_list[7][6], test_list[8][6]]
+                                        }
+                                    ]
+                                };
+
+                                    drawTrendlines.setOption(option);
+
+                                  }
+
+                                    </script>
+
                                 </div>
-                                <div class="col-md-12 col-sm-12 col-xs-6">
-                                    <div>
-                                        <p>Conventional Media</p>
-                                        <div class="">
-                                            <div class="progress progress_sm" style="width: 76%;">
-                                                <div class="progress-bar bg-green" role="progressbar"
-                                                     data-transitiongoal="40"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <p>Bill boards</p>
-                                        <div class="">
-                                            <div class="progress progress_sm" style="width: 76%;">
-                                                <div class="progress-bar bg-green" role="progressbar"
-                                                     data-transitiongoal="50"></div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                   </div>
+
+
                                 </div>
 
                             </div>
@@ -349,6 +468,101 @@
 
                 </div>
                 <br/>
+
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div id="line_2_purpose" style="width: 100%;height:100%;">
+                            <script type="text/javascript">
+                            function drawStacked(test_list){
+                            var dom = document.getElementById("container");
+                            var drawStacked = echarts.init(document.getElementById('up'));
+                            var app = {};
+                            option = null;
+                            option = {
+                                title : {
+                                    text: '',
+                                    subtext: ''
+                                },
+                                tooltip : {
+                                    trigger: 'axis'
+                                },
+                                legend: {
+                                    data:[test_list[0][1],test_list[0][2]]
+                                },
+                                toolbox: {
+                                    show : true,
+                                    feature : {
+                                        dataView : {show: true, readOnly: false},
+                                        magicType : {show: true, type: ['line', 'bar']},
+                                        restore : {show: true},
+                                        saveAsImage : {show: true}
+                                    }
+                                },
+                                calculable : true,
+                                xAxis : [
+                                    {
+
+                                        type : 'category',
+                                        data : [test_list[1][0],test_list[2][0],test_list[3][0],test_list[4][0],test_list[5][0],test_list[6][0],test_list[7][0],test_list
+                            [8][0],test_list[9][0],test_list[10][0]],
+                                        axisLabel:{
+                                          rotate:-30, //刻度旋转45度角
+                                          interval:0
+                                        }
+
+                                    }
+                                ],
+                                yAxis : [
+                                    {
+                                        type : 'value'
+                                    }
+                                ],
+                                series : [
+                                    {
+                                        name:test_list[0][1],
+                                        type:'bar',
+                                        data:[test_list[1][1],test_list[2][1],test_list[3][1],test_list[4][1],test_list[5][1],test_list[6][1],test_list[7][1],test_list
+                            [8][1],test_list[9][1],test_list[10][1]],
+                                        markPoint : {
+                                            data : [
+                                                {type : 'max', name: '最大值'},
+                                                {type : 'min', name: '最小值'}
+                                            ]
+                                        },
+                                        <!--markLine : {-->
+                                            <!--data : [-->
+                                                <!--{type : 'average', name: test_list[0][1]}-->
+                                            <!--]-->
+                                        <!--}-->
+                                    },
+                                    {
+                                        name:test_list[0][2],
+                                        type:'bar',
+                                        data:[test_list[1][2],test_list[2][2],test_list[3][2],test_list[4][2],test_list[5][2],test_list[6][2],test_list[7][2],test_list
+                            [8][2],test_list[9][2],test_list[10][2]],
+                                        markPoint : {
+                                            data : [
+                                                {type : 'max', name: '最大值'},
+                                                {type : 'min', name: '最小值'}
+                                            ]
+                                        },
+                                        <!--markLine : {-->
+                                            <!--data : [-->
+                                                <!--{type : 'average', name : test_list[0][2]}-->
+                                            <!--]-->
+                                        <!--}-->
+                                    }
+                                ]
+                            };
+
+                                drawStacked.setOption(option, true);
+
+                            }
+                            </script>
+                            </div>
+                    </div>
+                </div>
+
 
                 <div class="row">
 
@@ -1027,9 +1241,9 @@
     <!-- NProgress -->
     <script src="{% static 'vendor/nprogress/nprogress.js' %}"></script>
     <!-- Chart.js -->
-    <script src="{% static 'vendor/Chart.js/dist/Chart.min.js' %}"></script>
+    <!--<script src="{% static 'vendor/Chart.js/dist/Chart.min.js' %}"></script>-->
     <!-- gauge.js -->
-    <script src="{% static 'vendor/gauge.js/dist/gauge.min.js' %}"></script>
+    <!--<script src="{% static 'vendor/gauge.js/dist/gauge.min.js' %}"></script>-->
     <!-- bootstrap-progressbar -->
     <script src="{% static 'vendor/bootstrap-progressbar/bootstrap-progressbar.min.js' %}"></script>
     <!-- iCheck -->
@@ -1037,24 +1251,24 @@
     <!-- Skycons -->
     <script src="{% static 'vendor/skycons/skycons.js' %}"></script>
     <!-- Flot -->
-    <script src="{% static 'vendor/Flot/jquery.flot.js' %}"></script>
-    <script src="{% static 'vendor/Flot/jquery.flot.pie.js' %}"></script>
-    <script src="{% static 'vendor/Flot/jquery.flot.time.js' %}"></script>
-    <script src="{% static 'vendor/Flot/jquery.flot.stack.js' %}"></script>
-    <script src="{% static 'vendor/Flot/jquery.flot.resize.js' %}"></script>
-    <!-- Flot plugins -->
-    <script src="{% static 'vendor/flot.orderbars/js/jquery.flot.orderBars.js' %}"></script>
-    <script src="{% static 'vendor/flot-spline/js/jquery.flot.spline.min.js' %}"></script>
-    <script src="{% static 'vendor/flot.curvedlines/curvedLines.js' %}"></script>
-    <!-- DateJS -->
-    <script src="{% static 'vendor/DateJS/build/date.js' %}"></script>
+    <!--<script src="{% static 'vendor/Flot/jquery.flot.js' %}"></script>-->
+    <!--<script src="{% static 'vendor/Flot/jquery.flot.pie.js' %}"></script>-->
+    <!--<script src="{% static 'vendor/Flot/jquery.flot.time.js' %}"></script>-->
+    <!--<script src="{% static 'vendor/Flot/jquery.flot.stack.js' %}"></script>-->
+    <!--<script src="{% static 'vendor/Flot/jquery.flot.resize.js' %}"></script>-->
+    <!--&lt;!&ndash; Flot plugins &ndash;&gt;-->
+    <!--<script src="{% static 'vendor/flot.orderbars/js/jquery.flot.orderBars.js' %}"></script>-->
+    <!--<script src="{% static 'vendor/flot-spline/js/jquery.flot.spline.min.js' %}"></script>-->
+    <!--<script src="{% static 'vendor/flot.curvedlines/curvedLines.js' %}"></script>-->
+    <!--&lt;!&ndash; DateJS &ndash;&gt;-->
+    <!--<script src="{% static 'vendor/DateJS/build/date.js' %}"></script>-->
     <!-- JQVMap -->
     <script src="{% static 'vendor/jqvmap/dist/jquery.vmap.js' %}"></script>
     <script src="{% static 'vendor/jqvmap/dist/maps/jquery.vmap.world.js' %}"></script>
     <script src="{% static 'vendor/jqvmap/examples/js/jquery.vmap.sampledata.js' %}"></script>
     <!-- bootstrap-daterangepicker -->
-    <script src="{% static 'vendor/moment/min/moment.min.js' %}"></script>
-    <script src="{% static 'vendor/bootstrap-daterangepicker/daterangepicker.js' %}"></script>
+    <!--<script src="{% static 'vendor/moment/min/moment.min.js' %}"></script>-->
+    <!--<script src="{% static 'vendor/bootstrap-daterangepicker/daterangepicker.js' %}"></script>-->
 
     <!-- Custom Theme Scripts -->
     <script src="{% static 'polygon/custom.min.js' %}"></script>

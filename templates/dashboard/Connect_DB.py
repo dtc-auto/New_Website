@@ -40,11 +40,11 @@ getCarOwner(u'凯美瑞')
 
 def getColumnChart_p1():
     sql = """SELECT w.brand,r.Region,count(w.brand) as no
-             FROM BDCI.dbo.DW_AutoHome_WOM AS w INNER JOIN0
-             BDCI.dbo.DM_VW_region AS r ON w.City = r.City
-             group by w.brand,r.Region
-             order by w.brand
-             """
+                 FROM BDCI.dbo.DW_AutoHome_WOM AS w INNER JOIN
+                 BDCI.dbo.DM_VW_region AS r ON w.City = r.City
+                 group by w.brand,r.Region
+                 order by w.brand
+                 """
     conn = pymssql.connect(server, user, password, "BDCI")
     df = pd.read_sql_query(sql, conn)
     result = [['brand','东北区','华北区','华东区','华南区','华中区','西区']]

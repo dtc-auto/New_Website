@@ -16,7 +16,8 @@ def carOwnerChart(request):
     target = request.GET.get('a', '')
     list1 = getCarOwner(target)
     list2 = getColumnChart_p1()
-    dict = {'list1': list1}
+    list3 = getPurpose(target)
+    dict = {'list1': list1, 'list2': list2, 'list3': list3}
     return HttpResponse(json.dumps(dict), content_type='application/json')
 
 
