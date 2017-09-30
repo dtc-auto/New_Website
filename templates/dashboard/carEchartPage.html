@@ -228,42 +228,63 @@
             <!--接收数据库返回信息-->
             <script type="text/javascript">
                 $(document).ready(function(){
-
-
                   $("#sel1").change(function(){
                     var car = $("#sel1").val();
-
                     $.getJSON('{% url 'carEchartPage' %}',{'a':car}, function(ret){
-
                         drawMarkersMap(ret.page_1_map,car);
                         drawTrendlines(ret.page_1_stacked,car);
                         drawStacked(ret.page_4_purpose);
-
                     })
-
                 });
               });
                 var car = $("#sel1").val();
                 $.getJSON('{% url 'carEchartPage' %}',{'a':car}, function(ret){
-
                     drawMarkersMap(ret.page_1_map,car);
                     drawTrendlines(ret.page_1_stacked,car);
                     drawStacked(ret.page_4_purpose);
-
                 })
-
                 var json_array1 = JSON.stringify("凯美瑞,帕萨特,雅阁,迈锐宝,迈锐宝XL,迈腾,蒙迪欧,名图");
                 $.getJSON('{% url 'carEchartPage' %}',{'a':json_array1}, function(ret){
                     drawLv1(ret.page_2_lv1);
-
               });
 
-
-
-
+              <!-- select for Lv2 -->
+              <!--$(document).ready(function(){-->
+                  <!--$("#sel1").change(function(){-->
+                    <!--var car = $("#sel1").val();-->
+                    <!--var dim = $("#selDim").val();-->
+                    <!--var array1 = [car,dim]-->
+                    <!--var json_array1 = JSON.stringify(array1);-->
+                    <!--console.log(json_array1)-->
+                    <!--$.getJSON('{% url 'carEchartPage' %}',{'a':json_array1}, function(ret){-->
+                        <!--drawLv2(ret.page_2_lv2);-->
+                    <!--})-->
+                  <!--});-->
+              <!--});-->
+              <!--$(document).ready(function(){-->
+                  <!--$("#selDim").change(function(){-->
+                    <!--var car = $("#sel1").val();-->
+                    <!--var dim = $("#selDim").val();-->
+                    <!--var array1 = [car,dim]-->
+                    <!--var json_array1 = JSON.stringify(array1);-->
+                    <!--console.log(json_array1)-->
+                    <!--$.getJSON('{% url 'carEchartPage' %}',{'a':json_array1}, function(ret){-->
+                        <!--drawLv2(ret.page_2_lv2);-->
+                    <!--})-->
+                  <!--});-->
+              <!--});-->
+                <!--var car = $("#sel1").val();-->
+                <!--var dim = $("#selDim").val();-->
+                <!--var array1 = [car,dim]-->
+                <!--var json_array1 = JSON.stringify(array1);-->
+                <!--console.log(json_array1)-->
+                <!--$.getJSON('{% url 'carEchartPage' %}',{'a':json_array1}, function(ret){-->
+                    <!--drawLv2(ret.page_2_lv2);-->
+                <!--})-->
 
             </script>
 
+            <!-- regional 行 -->
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12 ">
                     <div class="dashboard_graph">
@@ -494,8 +515,9 @@
 
             </div>
             <br/>
+            <!--/regional 行 -->
 
-
+            <!-- purpose 行 -->
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="dashboard_graph">
@@ -600,8 +622,9 @@
                     </div>
                 </div>
             </div>
+            <!--/purpose 行 -->
 
-
+            <!-- 新图表行（3图）-->
             <div class="row">
 
 
@@ -866,9 +889,8 @@
                 </div>
 
             </div>
+            <!--/新图表行（3图）-->
 
-
-            <!-- End to do list -->
 
 
             <div class="row">
@@ -1102,6 +1124,7 @@
                     <div class="x_panel">
                         <div class="col-md-6">
                             <h2>Level-2 Index Evaluation</h2>
+                            <!-- 维度选择按钮 -->
                             <form method="get">
                                 <div class="form-group">
                                     <!--<h4><label for="selDim">Select Dimension</label></h4>-->
@@ -1116,13 +1139,133 @@
                                     </select>
                                 </div>
                             </form>
+                            <!--/维度选择按钮 -->
 
                         </div>
 
+                    <script type="text/javascript">
+                  $("#sel1").change(function(){
+                    var car = $("#sel1").val();
+                    var dim = $("#selDim").val();
+                    var array1 = [car,dim]
+                    var json_array1 = JSON.stringify(array1);
+                    console.log(json_array1)
+                    $.getJSON('{% url 'carEchartPage' %}',{'a':json_array1}, function(ret){
+                        drawLv2(ret.page_2_lv2);
+
+                  });
+              });
+
+                  $("#selDim").change(function(){
+                    var car = $("#sel1").val();
+                    var dim = $("#selDim").val();
+                    var array1 = [car,dim]
+                    var json_array1 = JSON.stringify(array1);
+                    console.log(json_array1)
+                    $.getJSON('{% url 'carEchartPage' %}',{'a':json_array1}, function(ret){
+                        drawLv2(ret.page_2_lv2);
+
+                  });
+              });
+                var car = $("#sel1").val();
+                var dim = $("#selDim").val();
+                var array1 = [car,dim]
+                var json_array1 = JSON.stringify(array1);
+                console.log(json_array1)
+                $.getJSON('{% url 'carEchartPage' %}',{'a':json_array1}, function(ret){
+                    drawLv2(ret.page_2_lv2);
+                });
+                </script>
+
                         <!--chart_06_lv2-->
 
-                        <div id="line_3_lv2" style="width: 100%;height:300%;">
+                        <div id="line_3_lv2" style="width: 100%;height:400;">
+                            <script type="text/javascript">
+                            function drawLv2(test_list){
+                            var dom = document.getElementById("container");
+                            var drawLv2 = echarts.init(document.getElementById('line_3_lv2'));
+                            var app = {};
+                            var emotion = test_list[0]
 
+                            option = {
+                                tooltip : {
+                                    trigger: 'axis',
+                                    axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                                        type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                                    }
+                                },
+                                legend: {
+                                    data: [emotion[1],emotion[2],emotion[3]]
+                                },
+                                toolbox: {
+                                    show : true,
+                                    feature : {
+                                        dataView : {show: true, readOnly: false},
+                                        <!--magicType : {show: true, type: ['line', 'bar']},-->
+                                        restore : {show: true},
+                                        saveAsImage : {show: true}
+                                    }
+                                },
+                                grid: {
+                                    left: '3%',
+                                    right: '4%',
+                                    bottom: '3%',
+                                    containLabel: true
+                                },
+                                xAxis:  {
+                                    type: 'value'
+                                },
+                                yAxis: {
+                                    type: 'category',
+                                    data: [test_list[1][0],test_list[2][0],test_list[3][0],test_list[4][0],test_list[5][0],test_list[6][0],test_list[7][0],test_list[8][0],test_list[9][0]]
+                                },
+                                series: [
+                                    <!--满意-->
+                                    {
+                                        name: emotion[1],
+                                        type: 'bar',
+                                        stack: '总量',
+                                        label: {
+                                            normal: {
+                                                <!--show: true,-->
+                                                position: 'insideRight'
+                                            }
+                                        },
+                                        data: [test_list[1][1],test_list[2][1],test_list[3][1],test_list[4][1],test_list[5][1],test_list[6][1],test_list[7][1],test_list[8][1],test_list[9][1]]
+                                    },
+                                    <!--没感觉-->
+                                    {
+                                        name: emotion[2],
+                                        type: 'bar',
+                                        stack: '总量',
+                                        label: {
+                                            normal: {
+                                                <!--show: true,-->
+                                                position: 'insideRight'
+                                            }
+                                        },
+                                        data: [test_list[1][2],test_list[2][2],test_list[3][2],test_list[4][2],test_list[5][2],test_list[6][2],test_list[7][2],test_list[8][2],test_list[9][2]]
+                                    },
+                                    <!--不满意-->
+                                    {
+                                        name: emotion[3],
+                                        type: 'bar',
+                                        stack: '总量',
+                                        label: {
+                                            normal: {
+                                                <!--show: true,-->
+                                                position: 'insideRight'
+                                            }
+                                        },
+                                        data: [test_list[1][3],test_list[2][3],test_list[3][3],test_list[4][3],test_list[5][3],test_list[6][3],test_list[7][3],test_list[8][3],test_list[9][3]]
+                                    }
+                                ]
+                            };
+
+                            drawLv2.setOption(option, true);
+
+                            }
+                            </script>
                         </div>
                     </div>
 
