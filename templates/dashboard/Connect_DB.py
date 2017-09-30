@@ -36,7 +36,7 @@ def getCarOwner(para):
         result.append(dit_)
     re_list = result[1:]
     return re_list
-getCarOwner(u'凯美瑞')
+# getCarOwner(u'凯美瑞')
 
 def getColumnChart_p1():
     sql = """SELECT w.brand,r.Region,count(w.brand) as no
@@ -86,7 +86,7 @@ def getLevel1Attributes(paraList):
     data_list.append(aspect_list)
     result = []
     for brand_index in range(0, len(target)):
-        sub = unicode(target[brand_index])
+        sub = (target[brand_index])
         df_temp = df.loc[df['Brand'] == sub]
         scorelist = df_temp['Score'].tolist()
         result.append(scorelist)
