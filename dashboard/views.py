@@ -19,5 +19,3 @@ def carOwnerChart(request):
     list3 = getPurpose(target)
     dict = {'list1': list1, 'list2': list2, 'list3': list3}
     return HttpResponse(json.dumps(dict), content_type='application/json')
-
-
