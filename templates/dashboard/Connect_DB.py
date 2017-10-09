@@ -29,14 +29,18 @@ def getCarOwner(para):
     result = [['province', 'no']]
     proList = df['province'].tolist()
     noList = df['no'].tolist()
+    max_data = 0
     for i in range(0, len(noList)):
         pro = proList[i]
         no = noList[i]
+        if int(no) > max_data:
+            max_data = int(no)
         dit_ = {'name': pro, 'value': int(no)}
         result.append(dit_)
     re_list = result[1:]
-    return re_list
-# getCarOwner(u'凯美瑞')
+
+    return re_list, max_data
+a,b=getCarOwner(u'凯美瑞')
 
 def getColumnChart_p1():
     sql = """SELECT w.brand,r.Region,count(w.brand) as no

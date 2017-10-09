@@ -139,7 +139,7 @@
                         <li class="">
                             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
                                aria-expanded="false">
-                                <!--<img src="images/img.jpg" alt="">dtc-->
+                                <img src="images/img.jpg" alt="">Detecon
                                 <span class=" fa fa-angle-down"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -167,41 +167,32 @@
         <div class="right_col" role="main">
             <!-- top tiles -->
             <div class="row tile_count">
+
+                <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+                    <span class="count_top"><i class="fa fa-clone"></i> Total Case</span>
+                    <div class="count">Two</div>
+                </div>
+
                 <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                     <span class="count_top"><i class="fa fa-user"></i> Total Users</span>
-                    <div class="count">2500</div>
-                    <span class="count_bottom"><i class="green">4% </i> From last Week</span>
+                    <div class="count">939323</div>
                 </div>
+
                 <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                    <span class="count_top"><i class="fa fa-clock-o"></i> Average Time</span>
-                    <div class="count">123.50</div>
-                    <span class="count_bottom"><i class="green"><i
-                            class="fa fa-sort-asc"></i>3% </i> From last Week</span>
+                    <span class="count_top"><i class="fa fa-automobile "></i> Total Auto Models</span>
+                    <div class="count ">24998</div>
                 </div>
+
                 <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                    <span class="count_top"><i class="fa fa-user"></i> Total Males</span>
-                    <div class="count green">2,500</div>
-                    <span class="count_bottom"><i class="green"><i
-                            class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+                    <span class="count_top"><i class="fa fa-automobile "></i> Total Show Auto Models</span>
+                    <div class="count">Eight</div>
                 </div>
+
                 <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                    <span class="count_top"><i class="fa fa-user"></i> Total Females</span>
-                    <div class="count">4,567</div>
-                    <span class="count_bottom"><i class="red"><i
-                            class="fa fa-sort-desc"></i>12% </i> From last Week</span>
+                    <span class="count_top"><i class="fa fa-bar-chart"></i> Total Analysis Modes</span>
+                    <div class="count">Four</div>
                 </div>
-                <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                    <span class="count_top"><i class="fa fa-user"></i> Total Collections</span>
-                    <div class="count">2,315</div>
-                    <span class="count_bottom"><i class="green"><i
-                            class="fa fa-sort-asc"></i>34% </i> From last Week</span>
-                </div>
-                <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                    <span class="count_top"><i class="fa fa-user"></i> Total Connections</span>
-                    <div class="count">7,325</div>
-                    <span class="count_bottom"><i class="green"><i
-                            class="fa fa-sort-asc"></i>34% </i> From last Week</span>
-                </div>
+
             </div>
             <!-- /top tiles -->
 
@@ -231,7 +222,7 @@
                   $("#sel1").change(function(){
                     var car = $("#sel1").val();
                     $.getJSON('{% url 'carEchartPage' %}',{'a':car}, function(ret){
-                        drawMarkersMap(ret.page_1_map,car);
+                        drawMarkersMap(ret.page_1_map,ret.page_1_map_max_data,car);
                         drawTrendlines(ret.page_1_stacked,car);
                         drawStacked(ret.page_4_purpose);
                     })
@@ -239,7 +230,7 @@
               });
                 var car = $("#sel1").val();
                 $.getJSON('{% url 'carEchartPage' %}',{'a':car}, function(ret){
-                    drawMarkersMap(ret.page_1_map,car);
+                    drawMarkersMap(ret.page_1_map,ret.page_1_map_max_data,car);
                     drawTrendlines(ret.page_1_stacked,car);
                     drawStacked(ret.page_4_purpose);
                 })
@@ -261,18 +252,6 @@
                     <!--})-->
                   <!--});-->
               <!--});-->
-              <!--$(document).ready(function(){-->
-                  <!--$("#selDim").change(function(){-->
-                    <!--var car = $("#sel1").val();-->
-                    <!--var dim = $("#selDim").val();-->
-                    <!--var array1 = [car,dim]-->
-                    <!--var json_array1 = JSON.stringify(array1);-->
-                    <!--console.log(json_array1)-->
-                    <!--$.getJSON('{% url 'carEchartPage' %}',{'a':json_array1}, function(ret){-->
-                        <!--drawLv2(ret.page_2_lv2);-->
-                    <!--})-->
-                  <!--});-->
-              <!--});-->
                 <!--var car = $("#sel1").val();-->
                 <!--var dim = $("#selDim").val();-->
                 <!--var array1 = [car,dim]-->
@@ -282,16 +261,16 @@
                     <!--drawLv2(ret.page_2_lv2);-->
                 <!--})-->
 
+
             </script>
+            <!--/接收数据库返回信息-->
 
             <!-- regional 行 -->
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12 ">
                     <div class="dashboard_graph">
 
-                        <!--<div class="row x_title">-->
-
-
+                        <!--chart_map-->
                         <div class="col-md-7 col-sm-7 col-xs-12">
                             <!--题目长度-->
                             <div class="col-md-9">
@@ -300,67 +279,290 @@
                                 </h2>
                                 <div class="clearfix"></div>
                             </div>
-                            <!--<div id="chart_01" class="demo-placeholder">-->
-                            <div id="line_1_map" style="width: 100%;height:500px;">
+
+                            <div id="line_1_map" style="width: 100%;height:500%;">
                                 <script type="text/javascript">
-                                            function drawMarkersMap(test_list,car){
+                                            function drawMarkersMap(test_list,max_data,car){
                                             var dom = document.getElementById("container");
                                             var drawMarkersMap = echarts.init(document.getElementById('line_1_map'));
-
                                             var app = {};
                                             option = null;
-
+                                            var geoCoordMap = {
+                                               '海门':[121.15,31.89],
+                                               '鄂尔多斯':[109.781327,39.608266],
+                                               '招远':[120.38,37.35],
+                                               '舟山':[122.207216,29.985295],
+                                               '齐齐哈尔':[123.97,47.33],
+                                               '盐城':[120.13,33.38],
+                                               '赤峰':[118.87,42.28],
+                                               '青岛':[120.33,36.07],
+                                               '乳山':[121.52,36.89],
+                                               '金昌':[102.188043,38.520089],
+                                               '泉州':[118.58,24.93],
+                                               '莱西':[120.53,36.86],
+                                               '日照':[119.46,35.42],
+                                               '胶南':[119.97,35.88],
+                                               '南通':[121.05,32.08],
+                                               '拉萨':[91.11,29.97],
+                                               '云浮':[112.02,22.93],
+                                               '梅州':[116.1,24.55],
+                                               '文登':[122.05,37.2],
+                                               '上海':[121.48,31.22],
+                                               '攀枝花':[101.718637,26.582347],
+                                               '威海':[122.1,37.5],
+                                               '承德':[117.93,40.97],
+                                               '厦门':[118.1,24.46],
+                                               '汕尾':[115.375279,22.786211],
+                                               '潮州':[116.63,23.68],
+                                               '丹东':[124.37,40.13],
+                                               '太仓':[121.1,31.45],
+                                               '曲靖':[103.79,25.51],
+                                               '烟台':[121.39,37.52],
+                                               '福州':[119.3,26.08],
+                                               '瓦房店':[121.979603,39.627114],
+                                               '即墨':[120.45,36.38],
+                                               '抚顺':[123.97,41.97],
+                                               '玉溪':[102.52,24.35],
+                                               '张家口':[114.87,40.82],
+                                               '阳泉':[113.57,37.85],
+                                               '莱州':[119.942327,37.177017],
+                                               '湖州':[120.1,30.86],
+                                               '汕头':[116.69,23.39],
+                                               '昆山':[120.95,31.39],
+                                               '宁波':[121.56,29.86],
+                                               '湛江':[110.359377,21.270708],
+                                               '揭阳':[116.35,23.55],
+                                               '荣成':[122.41,37.16],
+                                               '连云港':[119.16,34.59],
+                                               '葫芦岛':[120.836932,40.711052],
+                                               '常熟':[120.74,31.64],
+                                               '东莞':[113.75,23.04],
+                                               '河源':[114.68,23.73],
+                                               '淮安':[119.15,33.5],
+                                               '泰州':[119.9,32.49],
+                                               '南宁':[108.33,22.84],
+                                               '营口':[122.18,40.65],
+                                               '惠州':[114.4,23.09],
+                                               '江阴':[120.26,31.91],
+                                               '蓬莱':[120.75,37.8],
+                                               '韶关':[113.62,24.84],
+                                               '嘉峪关':[98.289152,39.77313],
+                                               '广州':[113.23,23.16],
+                                               '延安':[109.47,36.6],
+                                               '太原':[112.53,37.87],
+                                               '清远':[113.01,23.7],
+                                               '中山':[113.38,22.52],
+                                               '昆明':[102.73,25.04],
+                                               '寿光':[118.73,36.86],
+                                               '盘锦':[122.070714,41.119997],
+                                               '长治':[113.08,36.18],
+                                               '深圳':[114.07,22.62],
+                                               '珠海':[113.52,22.3],
+                                               '宿迁':[118.3,33.96],
+                                               '咸阳':[108.72,34.36],
+                                               '铜川':[109.11,35.09],
+                                               '平度':[119.97,36.77],
+                                               '佛山':[113.11,23.05],
+                                               '海口':[110.35,20.02],
+                                               '江门':[113.06,22.61],
+                                               '章丘':[117.53,36.72],
+                                               '肇庆':[112.44,23.05],
+                                               '大连':[121.62,38.92],
+                                               '临汾':[111.5,36.08],
+                                               '吴江':[120.63,31.16],
+                                               '石嘴山':[106.39,39.04],
+                                               '沈阳':[123.38,41.8],
+                                               '苏州':[120.62,31.32],
+                                               '茂名':[110.88,21.68],
+                                               '嘉兴':[120.76,30.77],
+                                               '长春':[125.35,43.88],
+                                               '胶州':[120.03336,36.264622],
+                                               '银川':[106.27,38.47],
+                                               '张家港':[120.555821,31.875428],
+                                               '三门峡':[111.19,34.76],
+                                               '锦州':[121.15,41.13],
+                                               '南昌':[115.89,28.68],
+                                               '柳州':[109.4,24.33],
+                                               '三亚':[109.511909,18.252847],
+                                               '自贡':[104.778442,29.33903],
+                                               '吉林':[126.57,43.87],
+                                               '阳江':[111.95,21.85],
+                                               '泸州':[105.39,28.91],
+                                               '西宁':[101.74,36.56],
+                                               '宜宾':[104.56,29.77],
+                                               '呼和浩特':[111.65,40.82],
+                                               '成都':[104.06,30.67],
+                                               '大同':[113.3,40.12],
+                                               '镇江':[119.44,32.2],
+                                               '桂林':[110.28,25.29],
+                                               '张家界':[110.479191,29.117096],
+                                               '宜兴':[119.82,31.36],
+                                               '北海':[109.12,21.49],
+                                               '西安':[108.95,34.27],
+                                               '金坛':[119.56,31.74],
+                                               '东营':[118.49,37.46],
+                                               '牡丹江':[129.58,44.6],
+                                               '遵义':[106.9,27.7],
+                                               '绍兴':[120.58,30.01],
+                                               '扬州':[119.42,32.39],
+                                               '常州':[119.95,31.79],
+                                               '潍坊':[119.1,36.62],
+                                               '重庆':[106.54,29.59],
+                                               '台州':[121.420757,28.656386],
+                                               '南京':[118.78,32.04],
+                                               '滨州':[118.03,37.36],
+                                               '贵阳':[106.71,26.57],
+                                               '无锡':[120.29,31.59],
+                                               '本溪':[123.73,41.3],
+                                               '克拉玛依':[84.77,45.59],
+                                               '渭南':[109.5,34.52],
+                                               '马鞍山':[118.48,31.56],
+                                               '宝鸡':[107.15,34.38],
+                                               '焦作':[113.21,35.24],
+                                               '句容':[119.16,31.95],
+                                               '北京':[116.46,39.92],
+                                               '徐州':[117.2,34.26],
+                                               '衡水':[115.72,37.72],
+                                               '包头':[110,40.58],
+                                               '绵阳':[104.73,31.48],
+                                               '乌鲁木齐':[87.68,43.77],
+                                               '枣庄':[117.57,34.86],
+                                               '杭州':[120.19,30.26],
+                                               '淄博':[118.05,36.78],
+                                               '鞍山':[122.85,41.12],
+                                               '溧阳':[119.48,31.43],
+                                               '库尔勒':[86.06,41.68],
+                                               '安阳':[114.35,36.1],
+                                               '开封':[114.35,34.79],
+                                               '济南':[117,36.65],
+                                               '德阳':[104.37,31.13],
+                                               '温州':[120.65,28.01],
+                                               '九江':[115.97,29.71],
+                                               '邯郸':[114.47,36.6],
+                                               '临安':[119.72,30.23],
+                                               '兰州':[103.73,36.03],
+                                               '沧州':[116.83,38.33],
+                                               '临沂':[118.35,35.05],
+                                               '南充':[106.110698,30.837793],
+                                               '天津':[117.2,39.13],
+                                               '富阳':[119.95,30.07],
+                                               '泰安':[117.13,36.18],
+                                               '诸暨':[120.23,29.71],
+                                               '郑州':[113.65,34.76],
+                                               '哈尔滨':[126.63,45.75],
+                                               '聊城':[115.97,36.45],
+                                               '芜湖':[118.38,31.33],
+                                               '唐山':[118.02,39.63],
+                                               '平顶山':[113.29,33.75],
+                                               '邢台':[114.48,37.05],
+                                               '德州':[116.29,37.45],
+                                               '济宁':[116.59,35.38],
+                                               '荆州':[112.239741,30.335165],
+                                               '宜昌':[111.3,30.7],
+                                               '义乌':[120.06,29.32],
+                                               '丽水':[119.92,28.45],
+                                               '洛阳':[112.44,34.7],
+                                               '秦皇岛':[119.57,39.95],
+                                               '株洲':[113.16,27.83],
+                                               '石家庄':[114.48,38.03],
+                                               '莱芜':[117.67,36.19],
+                                               '常德':[111.69,29.05],
+                                               '保定':[115.48,38.85],
+                                               '湘潭':[112.91,27.87],
+                                               '金华':[119.64,29.12],
+                                               '岳阳':[113.09,29.37],
+                                               '长沙':[113,28.21],
+                                               '衢州':[118.88,28.97],
+                                               '廊坊':[116.7,39.53],
+                                               '菏泽':[115.480656,35.23375],
+                                               '合肥':[117.27,31.86],
+                                               '武汉':[114.31,30.52],
+                                               '大庆':[125.03,46.58]
+                                            };
                                             option = {
-
-                                                tooltip: {
+                                            tooltip: {
                                                     trigger: 'item'
-                                                },
-                                                legend: {
-                                                    orient: 'vertical',
-                                                    left: 'left',
-
-                                                },
-                                                visualMap: {
-                                                    min: 0,
-                                                    max: 150,
-                                                    left: 'left',
-                                                    top: 'bottom',
-                                                    text: ['高','低'],           // 文本，默认为数值文本
-                                                    calculable: true
                                                 },
                                                 toolbox: {
                                                     show: true,
                                                     orient: 'vertical',
                                                     left: 'right',
                                                     top: 'center',
-                                                    feature: {
-                                                        dataView: {readOnly: false},
-                                                        restore: {},
-                                                        saveAsImage: {}
+                                                    feature : {
+                                                        dataView : {show: true, readOnly: false},
+                                                        saveAsImage : {show: true}
                                                     }
                                                 },
-                                                series: [
+                                                visualMap: {
+                                                    min: 0,
+                                                    max: max_data,
+                                                    left: 'left',
+                                                    top: 'bottom',
+                                                    text: ['High','Low'],
+                                                    seriesIndex: [1],
+                                                    inRange: {
+                                                        color: ['#e0ffff', '#006edd']
+                                                    },
+                                                    calculable : true
+                                                },
+                                                geo: {
+                                                    map: 'china',
+                                                    roam: true,
+                                                    label: {
+                                                        normal: {
+                                                            show: false,
+                                                            textStyle: {
+                                                                color: 'rgba(0,0,0,0.4)'
+                                                            }
+                                                        }
+                                                    },
+                                                    itemStyle: {
+                                                        normal:{
+                                                            borderColor: 'rgba(0, 0, 0, 0.2)'
+                                                        },
+                                                        emphasis:{
+                                                            areaColor: null,
+                                                            shadowOffsetX: 0,
+                                                            shadowOffsetY: 0,
+                                                            shadowBlur: 20,
+                                                            borderWidth: 0,
+                                                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                                        }
+                                                    }
+                                                },
+                                                series : [
+                                                   {
+                                                       type: 'scatter',
+                                                       coordinateSystem: 'geo',
+                                                       symbolSize: 20,
+                                                       symbolRotate: 35,
+                                                       label: {
+                                                           normal: {
+                                                               formatter: '{b}',
+                                                               position: 'right',
+                                                               show: false
+                                                           },
+                                                           emphasis: {
+                                                               show: true
+                                                           }
+                                                       },
+                                                       itemStyle: {
+                                                           normal: {
+                                                                color: '#F06C00'
+                                                           }
+                                                       }
+                                                    },
                                                     {
                                                         name: car,
                                                         type: 'map',
-                                                        mapType: 'china',
-                                                        roam: false,
-                                                        label: {
-                                                            normal: {
-                                                                show: true
-                                                            },
-                                                            emphasis: {
-                                                                show: true
-                                                            }
-                                                        },
+                                                        geoIndex: 0,
                                                         data:test_list
-                                                    },
-
-
+                                                    }
                                                 ]
-                                            };
+                                            };;
                                                 drawMarkersMap.setOption(option);
                                             }
+
 
 
 
@@ -371,7 +573,9 @@
                             </div>
 
                         </div>
-                        <!--chart_02-->
+                        <!--/chart_map-->
+
+                        <!--chart_owners-->
                         <div class="col-md-5 col-sm-5 col-xs-12">
                             <!--<div class="row x_title">-->
                             <div class="col-md-11">
@@ -380,7 +584,7 @@
                             </div>
 
                             <div class="col-md-12 col-sm-12 col-xs-6">
-                                <div id="line_1_data" style="width: 100%;height:500px;">
+                                <div id="line_1_data" style="width: 100%;height:500%;">
                                     <script type="text/javascript">
                                 function drawTrendlines(test_list){
                                 var dom = document.getElementById("container");
@@ -499,6 +703,7 @@
 
 
 
+
                                     </script>
 
                                 </div>
@@ -506,8 +711,7 @@
 
 
                         </div>
-
-                        <!--</div>-->
+                        <!--/chart_owners-->
 
                         <div class="clearfix"></div>
                     </div>
@@ -521,11 +725,15 @@
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="dashboard_graph">
-                        <div class="x_title">
-                            <h2>Purpose of Vehicle Purchasing
-                                <!--<small>Sessions</small>-->
-                            </h2>
-                            <div id="line_2_purpose" style="width: 100%;height:500%;">
+                        <div class="col-md-9">
+                                <h2>Purpose of Vehicle Purchasing
+                                    <!--<small>车主区域分布</small>-->
+                                </h2>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <!--chart_purpose-->
+                            <div id="line_2_purpose" style="width: 90%;height:500%;">
                                 <script type="text/javascript">
                             function drawStacked(test_list){
                             var dom = document.getElementById("container");
@@ -616,283 +824,288 @@
 
 
 
+
                                 </script>
                             </div>
-                        </div>
+                            <!--/chart_purpose-->
+                        <div class="clearfix"></div>
                     </div>
                 </div>
             </div>
+            <br/>
             <!--/purpose 行 -->
 
             <!-- 新图表行（3图）-->
-            <div class="row">
+            <div>
+            <!--<div class="row">-->
 
 
-                <div class="col-md-4 col-sm-4 col-xs-12">
-                    <div class="x_panel tile fixed_height_320">
-                        <div class="x_title">
-                            <h2>App Versions</h2>
-                            <ul class="nav navbar-right panel_toolbox">
-                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                </li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                       aria-expanded="false"><i
-                                            class="fa fa-wrench"></i></a>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li><a href="#">Settings 1</a>
-                                        </li>
-                                        <li><a href="#">Settings 2</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                </li>
-                            </ul>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="x_content">
-                            <h4>App Usage across versions</h4>
-                            <div class="widget_summary">
-                                <div class="w_left w_25">
-                                    <span>0.1.5.2</span>
-                                </div>
-                                <div class="w_center w_55">
-                                    <div class="progress">
-                                        <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60"
-                                             aria-valuemin="0" aria-
-                                             valuemax="100" style="width: 66%;">
-                                            <span class="sr-only">60% Complete</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="w_right w_20">
-                                    <span>123k</span>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
+                <!--<div class="col-md-4 col-sm-4 col-xs-12">-->
+                    <!--<div class="x_panel tile fixed_height_320">-->
+                        <!--<div class="x_title">-->
+                            <!--<h2>App Versions</h2>-->
+                            <!--<ul class="nav navbar-right panel_toolbox">-->
+                                <!--<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>-->
+                                <!--</li>-->
+                                <!--<li class="dropdown">-->
+                                    <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"-->
+                                       <!--aria-expanded="false"><i-->
+                                            <!--class="fa fa-wrench"></i></a>-->
+                                    <!--<ul class="dropdown-menu" role="menu">-->
+                                        <!--<li><a href="#">Settings 1</a>-->
+                                        <!--</li>-->
+                                        <!--<li><a href="#">Settings 2</a>-->
+                                        <!--</li>-->
+                                    <!--</ul>-->
+                                <!--</li>-->
+                                <!--<li><a class="close-link"><i class="fa fa-close"></i></a>-->
+                                <!--</li>-->
+                            <!--</ul>-->
+                            <!--<div class="clearfix"></div>-->
+                        <!--</div>-->
+                        <!--<div class="x_content">-->
+                            <!--<h4>App Usage across versions</h4>-->
+                            <!--<div class="widget_summary">-->
+                                <!--<div class="w_left w_25">-->
+                                    <!--<span>0.1.5.2</span>-->
+                                <!--</div>-->
+                                <!--<div class="w_center w_55">-->
+                                    <!--<div class="progress">-->
+                                        <!--<div class="progress-bar bg-green" role="progressbar" aria-valuenow="60"-->
+                                             <!--aria-valuemin="0" aria- -->
+                                             <!--valuemax="100" style="width: 66%;">-->
+                                            <!--<span class="sr-only">60% Complete</span>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="w_right w_20">-->
+                                    <!--<span>123k</span>-->
+                                <!--</div>-->
+                                <!--<div class="clearfix"></div>-->
+                            <!--</div>-->
 
-                            <div class="widget_summary">
-                                <div class="w_left w_25">
-                                    <span>0.1.5.3</span>
-                                </div>
-                                <div class="w_center w_55">
-                                    <div class="progress">
-                                        <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60"
-                                             aria-valuemin="0" aria-
-                                             valuemax="100" style="width: 45%;">
-                                            <span class="sr-only">60% Complete</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="w_right w_20">
-                                    <span>53k</span>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="widget_summary">
-                                <div class="w_left w_25">
-                                    <span>0.1.5.4</span>
-                                </div>
-                                <div class="w_center w_55">
-                                    <div class="progress">
-                                        <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60"
-                                             aria-valuemin="0" aria-
-                                             valuemax="100" style="width: 25%;">
-                                            <span class="sr-only">60% Complete</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="w_right w_20">
-                                    <span>23k</span>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="widget_summary">
-                                <div class="w_left w_25">
-                                    <span>0.1.5.5</span>
-                                </div>
-                                <div class="w_center w_55">
-                                    <div class="progress">
-                                        <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60"
-                                             aria-valuemin="0" aria-
-                                             valuemax="100" style="width: 5%;">
-                                            <span class="sr-only">60% Complete</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="w_right w_20">
-                                    <span>3k</span>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="widget_summary">
-                                <div class="w_left w_25">
-                                    <span>0.1.5.6</span>
-                                </div>
-                                <div class="w_center w_55">
-                                    <div class="progress">
-                                        <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60"
-                                             aria-valuemin="0" aria-
-                                             valuemax="100" style="width: 2%;">
-                                            <span class="sr-only">60% Complete</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="w_right w_20">
-                                    <span>1k</span>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
+                            <!--<div class="widget_summary">-->
+                                <!--<div class="w_left w_25">-->
+                                    <!--<span>0.1.5.3</span>-->
+                                <!--</div>-->
+                                <!--<div class="w_center w_55">-->
+                                    <!--<div class="progress">-->
+                                        <!--<div class="progress-bar bg-green" role="progressbar" aria-valuenow="60"-->
+                                             <!--aria-valuemin="0" aria- -->
+                                             <!--valuemax="100" style="width: 45%;">-->
+                                            <!--<span class="sr-only">60% Complete</span>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="w_right w_20">-->
+                                    <!--<span>53k</span>-->
+                                <!--</div>-->
+                                <!--<div class="clearfix"></div>-->
+                            <!--</div>-->
+                            <!--<div class="widget_summary">-->
+                                <!--<div class="w_left w_25">-->
+                                    <!--<span>0.1.5.4</span>-->
+                                <!--</div>-->
+                                <!--<div class="w_center w_55">-->
+                                    <!--<div class="progress">-->
+                                        <!--<div class="progress-bar bg-green" role="progressbar" aria-valuenow="60"-->
+                                             <!--aria-valuemin="0" aria- -->
+                                             <!--valuemax="100" style="width: 25%;">-->
+                                            <!--<span class="sr-only">60% Complete</span>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="w_right w_20">-->
+                                    <!--<span>23k</span>-->
+                                <!--</div>-->
+                                <!--<div class="clearfix"></div>-->
+                            <!--</div>-->
+                            <!--<div class="widget_summary">-->
+                                <!--<div class="w_left w_25">-->
+                                    <!--<span>0.1.5.5</span>-->
+                                <!--</div>-->
+                                <!--<div class="w_center w_55">-->
+                                    <!--<div class="progress">-->
+                                        <!--<div class="progress-bar bg-green" role="progressbar" aria-valuenow="60"-->
+                                             <!--aria-valuemin="0" aria- -->
+                                             <!--valuemax="100" style="width: 5%;">-->
+                                            <!--<span class="sr-only">60% Complete</span>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="w_right w_20">-->
+                                    <!--<span>3k</span>-->
+                                <!--</div>-->
+                                <!--<div class="clearfix"></div>-->
+                            <!--</div>-->
+                            <!--<div class="widget_summary">-->
+                                <!--<div class="w_left w_25">-->
+                                    <!--<span>0.1.5.6</span>-->
+                                <!--</div>-->
+                                <!--<div class="w_center w_55">-->
+                                    <!--<div class="progress">-->
+                                        <!--<div class="progress-bar bg-green" role="progressbar" aria-valuenow="60"-->
+                                             <!--aria-valuemin="0" aria- -->
+                                             <!--valuemax="100" style="width: 2%;">-->
+                                            <!--<span class="sr-only">60% Complete</span>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="w_right w_20">-->
+                                    <!--<span>1k</span>-->
+                                <!--</div>-->
+                                <!--<div class="clearfix"></div>-->
+                            <!--</div>-->
 
-                        </div>
-                    </div>
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <!--<div class="col-md-4 col-sm-4 col-xs-12">-->
+                    <!--<div class="x_panel tile fixed_height_320 overflow_hidden">-->
+                        <!--<div class="x_title">-->
+                            <!--<h2>Device Usage</h2>-->
+                            <!--<ul class="nav navbar-right panel_toolbox">-->
+                                <!--<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>-->
+                                <!--</li>-->
+                                <!--<li class="dropdown">-->
+                                    <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"-->
+                                       <!--aria-expanded="false"><i-->
+                                            <!--class="fa fa-wrench"></i></a>-->
+                                    <!--<ul class="dropdown-menu" role="menu">-->
+                                        <!--<li><a href="#">Settings 1</a>-->
+                                        <!--</li>-->
+                                        <!--<li><a href="#">Settings 2</a>-->
+                                        <!--</li>-->
+                                    <!--</ul>-->
+                                <!--</li>-->
+                                <!--<li><a class="close-link"><i class="fa fa-close"></i></a>-->
+                                <!--</li>-->
+                            <!--</ul>-->
+                            <!--<div class="clearfix"></div>-->
+                        <!--</div>-->
+                        <!--<div class="x_content">-->
+                            <!--<table class="" style="width:100%">-->
+                                <!--<tr>-->
+                                    <!--<th style="width:37%;">-->
+                                        <!--<p>Top 5</p>-->
+                                    <!--</th>-->
+                                    <!--<th>-->
+                                        <!--<div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">-->
+                                            <!--<p class="">Device</p>-->
+                                        <!--</div>-->
+                                        <!--<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">-->
+                                            <!--<p class="">Progress</p>-->
+                                        <!--</div>-->
+                                    <!--</th>-->
+                                <!--</tr>-->
+                                <!--<tr>-->
+                                    <!--<td>-->
+                                        <!--<canvas class="canvasDoughnut" height="140" width="140"-->
+                                                <!--style="margin: 15px 10px 10px 0"></canvas>-->
+                                    <!--</td>-->
+                                    <!--<td>-->
+                                        <!--<table class="tile_info">-->
+                                            <!--<tr>-->
+                                                <!--<td>-->
+                                                    <!--<p><i class="fa fa-square blue"></i>IOS </p>-->
+                                                <!--</td>-->
+                                                <!--<td>30%</td>-->
+                                            <!--</tr>-->
+                                            <!--<tr>-->
+                                                <!--<td>-->
+                                                    <!--<p><i class="fa fa-square green"></i>Android </p>-->
+                                                <!--</td>-->
+                                                <!--<td>10%</td>-->
+                                            <!--</tr>-->
+                                            <!--<tr>-->
+                                                <!--<td>-->
+                                                    <!--<p><i class="fa fa-square purple"></i>Blackberry </p>-->
+                                                <!--</td>-->
+                                                <!--<td>20%</td>-->
+                                            <!--</tr>-->
+                                            <!--<tr>-->
+                                                <!--<td>-->
+                                                    <!--<p><i class="fa fa-square aero"></i>Symbian </p>-->
+                                                <!--</td>-->
+                                                <!--<td>15%</td>-->
+                                            <!--</tr>-->
+                                            <!--<tr>-->
+                                                <!--<td>-->
+                                                    <!--<p><i class="fa fa-square red"></i>Others </p>-->
+                                                <!--</td>-->
+                                                <!--<td>30%</td>-->
+                                            <!--</tr>-->
+                                        <!--</table>-->
+                                    <!--</td>-->
+                                <!--</tr>-->
+                            <!--</table>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+
+                <!--<div class="col-md-4 col-sm-4 col-xs-12">-->
+                    <!--<div class="x_panel tile fixed_height_320">-->
+                        <!--<div class="x_title">-->
+                            <!--<h2>Quick Settings</h2>-->
+                            <!--<ul class="nav navbar-right panel_toolbox">-->
+                                <!--<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>-->
+                                <!--</li>-->
+                                <!--<li class="dropdown">-->
+                                    <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"-->
+                                       <!--aria-expanded="false"><i-->
+                                            <!--class="fa fa-wrench"></i></a>-->
+                                    <!--<ul class="dropdown-menu" role="menu">-->
+                                        <!--<li><a href="#">Settings 1</a>-->
+                                        <!--</li>-->
+                                        <!--<li><a href="#">Settings 2</a>-->
+                                        <!--</li>-->
+                                    <!--</ul>-->
+                                <!--</li>-->
+                                <!--<li><a class="close-link"><i class="fa fa-close"></i></a>-->
+                                <!--</li>-->
+                            <!--</ul>-->
+                            <!--<div class="clearfix"></div>-->
+                        <!--</div>-->
+                        <!--<div class="x_content">-->
+                            <!--<div class="dashboard-widget-content">-->
+                                <!--<ul class="quick-list">-->
+                                    <!--<li><i class="fa fa-calendar-o"></i><a href="#">Settings</a>-->
+                                    <!--</li>-->
+                                    <!--<li><i class="fa fa-bars"></i><a href="#">Subscription</a>-->
+                                    <!--</li>-->
+                                    <!--<li><i class="fa fa-bar-chart"></i><a href="#">Auto Renewal</a></li>-->
+                                    <!--<li><i class="fa fa-line-chart"></i><a href="#">Achievements</a>-->
+                                    <!--</li>-->
+                                    <!--<li><i class="fa fa-bar-chart"></i><a href="#">Auto Renewal</a></li>-->
+                                    <!--<li><i class="fa fa-line-chart"></i><a href="#">Achievements</a>-->
+                                    <!--</li>-->
+                                    <!--<li><i class="fa fa-area-chart"></i><a href="#">Logout</a>-->
+                                    <!--</li>-->
+                                <!--</ul>-->
+
+                                <!--<div class="sidebar-widget">-->
+                                    <!--<h4>Profile Completion</h4>-->
+                                    <!--<canvas width="150" height="80" id="chart_gauge_01" class="" style="width: 160px; height:-->
+<!--100px;"></canvas>-->
+                                    <!--<div class="goal-wrapper">-->
+                                        <!--<span id="gauge-text" class="gauge-value pull-left">0</span>-->
+                                        <!--<span class="gauge-value pull-left">%</span>-->
+                                        <!--<span id="goal-text" class="goal-value pull-right">100%</span>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+            <!--</div>-->
                 </div>
-
-                <div class="col-md-4 col-sm-4 col-xs-12">
-                    <div class="x_panel tile fixed_height_320 overflow_hidden">
-                        <div class="x_title">
-                            <h2>Device Usage</h2>
-                            <ul class="nav navbar-right panel_toolbox">
-                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                </li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                       aria-expanded="false"><i
-                                            class="fa fa-wrench"></i></a>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li><a href="#">Settings 1</a>
-                                        </li>
-                                        <li><a href="#">Settings 2</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                </li>
-                            </ul>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="x_content">
-                            <table class="" style="width:100%">
-                                <tr>
-                                    <th style="width:37%;">
-                                        <p>Top 5</p>
-                                    </th>
-                                    <th>
-                                        <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
-                                            <p class="">Device</p>
-                                        </div>
-                                        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
-                                            <p class="">Progress</p>
-                                        </div>
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <canvas class="canvasDoughnut" height="140" width="140"
-                                                style="margin: 15px 10px 10px 0"></canvas>
-                                    </td>
-                                    <td>
-                                        <table class="tile_info">
-                                            <tr>
-                                                <td>
-                                                    <p><i class="fa fa-square blue"></i>IOS </p>
-                                                </td>
-                                                <td>30%</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <p><i class="fa fa-square green"></i>Android </p>
-                                                </td>
-                                                <td>10%</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <p><i class="fa fa-square purple"></i>Blackberry </p>
-                                                </td>
-                                                <td>20%</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <p><i class="fa fa-square aero"></i>Symbian </p>
-                                                </td>
-                                                <td>15%</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <p><i class="fa fa-square red"></i>Others </p>
-                                                </td>
-                                                <td>30%</td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-md-4 col-sm-4 col-xs-12">
-                    <div class="x_panel tile fixed_height_320">
-                        <div class="x_title">
-                            <h2>Quick Settings</h2>
-                            <ul class="nav navbar-right panel_toolbox">
-                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                </li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                       aria-expanded="false"><i
-                                            class="fa fa-wrench"></i></a>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li><a href="#">Settings 1</a>
-                                        </li>
-                                        <li><a href="#">Settings 2</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                </li>
-                            </ul>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="x_content">
-                            <div class="dashboard-widget-content">
-                                <ul class="quick-list">
-                                    <li><i class="fa fa-calendar-o"></i><a href="#">Settings</a>
-                                    </li>
-                                    <li><i class="fa fa-bars"></i><a href="#">Subscription</a>
-                                    </li>
-                                    <li><i class="fa fa-bar-chart"></i><a href="#">Auto Renewal</a></li>
-                                    <li><i class="fa fa-line-chart"></i><a href="#">Achievements</a>
-                                    </li>
-                                    <li><i class="fa fa-bar-chart"></i><a href="#">Auto Renewal</a></li>
-                                    <li><i class="fa fa-line-chart"></i><a href="#">Achievements</a>
-                                    </li>
-                                    <li><i class="fa fa-area-chart"></i><a href="#">Logout</a>
-                                    </li>
-                                </ul>
-
-                                <div class="sidebar-widget">
-                                    <h4>Profile Completion</h4>
-                                    <canvas width="150" height="80" id="chart_gauge_01" class="" style="width: 160px; height:
-100px;"></canvas>
-                                    <div class="goal-wrapper">
-                                        <span id="gauge-text" class="gauge-value pull-left">0</span>
-                                        <span class="gauge-value pull-left">%</span>
-                                        <span id="goal-text" class="goal-value pull-right">100%</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
             <!--/新图表行（3图）-->
 
 
-
+            <!-- 一 二级指标行 -->
             <div class="row">
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     <div class="x_panel">
@@ -902,7 +1115,7 @@
 
                         <!--chart_05_lv1-->
 
-                        <div id="line_3_lv1" style="width: 100%;height:400%;">
+                        <div id="line_3_lv1" style="width: 100%;height:500%;">
                             <script type="text/javascript">
 
                                 function drawLv1(test_list){
@@ -1114,6 +1327,7 @@
 
 
 
+
                             </script>
                         </div>
                     </div>
@@ -1143,7 +1357,7 @@
 
                         </div>
 
-                    <script type="text/javascript">
+                        <script type="text/javascript">
                   $("#sel1").change(function(){
                     var car = $("#sel1").val();
                     var dim = $("#selDim").val();
@@ -1175,7 +1389,8 @@
                 $.getJSON('{% url 'carEchartPage' %}',{'a':json_array1}, function(ret){
                     drawLv2(ret.page_2_lv2);
                 });
-                </script>
+
+                        </script>
 
                         <!--chart_06_lv2-->
 
@@ -1265,12 +1480,15 @@
                             drawLv2.setOption(option, true);
 
                             }
+
                             </script>
                         </div>
                     </div>
 
                 </div>
             </div>
+            <br/>
+            <!-- 一二级指标行 -->
 
         </div>
         <!-- end of weather widget -->
@@ -1340,6 +1558,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
 ga('create', 'UA-23581568-13', 'auto');
 ga('send', 'pageview');
+
 
 
 
