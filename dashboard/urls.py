@@ -8,7 +8,7 @@ urlpatterns = [
     url(r'^auto_page', 'dashboard.views.carOwnerChartPage', name='carEchart'),
     url(r'^auto/$', 'dashboard.views.carOwnerChart', name='carEchartPage'),
     # people dashboard page
-    url(r'^people_page', 'dashboard.views.peopleChartPage', name='carEchart'),
-    url(r'^people/$', 'dashboard.views.peopleChart', name='carEchartPage'),
+    url(r'^people_page', 'dashboard.views.peopleChartPage', name='peopleEchart'),
+    url(r'^people/$', 'dashboard.views.peopleChart', name='peopleEchartPage'),
 
 ]

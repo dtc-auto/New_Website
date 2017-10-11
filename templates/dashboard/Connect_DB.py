@@ -9,6 +9,7 @@ password = "asdf1234"
 
 
 def getCarOwner(para):
+    a = para
     # sql = """SELECT w.Brand, m.province_pinyin, COUNT(m.province_pinyin) AS no
     #          FROM DW_AutoHome_WOM AS w INNER JOIN
     #          DM_VW_region AS r ON w.City = r.City INNER JOIN
@@ -154,7 +155,7 @@ def getLevel2Attributes(paraList):
         subResult = [index,manyiCount,meiganjueCount,bumanyiCount]
         result.append(subResult)
     return result[:10]
-getLevel2Attributes("凯美瑞,空间")
+# getLevel2Attributes("凯美瑞,空间")
 
 def getPurpose(para):
     sql = """select *
@@ -188,3 +189,64 @@ def getPurpose(para):
             result[i_list][i_] = float('%.3f'% result[i_list][i_])
     return result
 # getPurpose('凯美瑞')
+
+
+# people_page  0:age, 1:gender, 2:region, 3:city leve
+def people_get_pie(company):
+    # 大众静态数据
+    dit_VW = [
+        # age
+        [{'value': 9, 'name': '<=25'},
+         {'value': 27, 'name': '26-30'},
+         {'value': 27, 'name': '31-35'},
+         {'value': 23, 'name': '36-40'},
+         {'value': 14, 'name': '>40'}],
+        # gender
+        [{'value': 9, 'name': 'Male'},
+         {'value': 91, 'name': 'Female'}],
+        # region
+        [{'value': 9, 'name': 'Northeast'},
+         {'value': 24, 'name': 'North'},
+         {'value': 24, 'name': 'East'},
+         {'value': 24, 'name': 'South'},
+         {'value': 10, 'name': 'Central'},
+         {'value': 9, 'name': 'West'}],
+        # city leve
+        [{'value': 46, 'name': 'Tier1'},
+         {'value': 22, 'name': 'Tier2'},
+         {'value': 20, 'name': 'Tier3'},
+         {'value': 4, 'name': 'Tier4'},
+         {'value': 6, 'name': 'Tier5'},
+         {'value': 2, 'name': 'Tier6'}]
+        ]
+    # 宝马静态数据
+    dit_BMW = [
+        # age
+        [{'value': 12, 'name': '<=25'},
+         {'value': 38, 'name': '26-30'},
+         {'value': 44, 'name': '31-35'},
+         {'value': 0, 'name': '36-40'},
+         {'value': 6, 'name': '>40'}],
+        # gender
+        [{'value': 57, 'name': 'Male'},
+         {'value': 43, 'name': 'Female'}],
+        # region
+        [{'value': 8, 'name': 'Northeast'},
+         {'value': 29, 'name': 'North'},
+         {'value': 18, 'name': 'East'},
+         {'value': 16, 'name': 'South'},
+         {'value': 14, 'name': 'Central'},
+         {'value': 15, 'name': 'West'}],
+        # city leve
+        [{'value': 42, 'name': 'Tier1'},
+         {'value': 15, 'name': 'Tier2'},
+         {'value': 11, 'name': 'Tier3'},
+         {'value': 10, 'name': 'Tier4'},
+         {'value': 10, 'name': 'Tier5'},
+         {'value': 12, 'name': 'Tier6'}]
+        ]
+    if company == 'VW':
+        return dit_VW
+
+    if company == 'BMW':
+        return dit_BMW
