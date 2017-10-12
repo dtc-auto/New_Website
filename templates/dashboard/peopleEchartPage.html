@@ -218,7 +218,7 @@
             <!--/接收数据库返回信息-->
 
             <!-- 图表行-->
-            <!-- regional 行 -->
+            <!-- pie 行 -->
             <div class="row">
                 <!-- age 图框-->
                 <div class="col-md-3 col-sm-3 col-xs-12">
@@ -523,13 +523,11 @@
                     </div>
                 </div>
                 <!--/city level 图框-->
-
-
             </div>
             <br/>
-            <!--/regional 行 -->
+            <!--/pie 行 -->
 
-            <!-- purpose 行 -->
+            <!-- Path 行 -->
             <div class="row">
                 <!-- purpose 图框 -->
                 <div class="col-md-12 col-sm-12 col-xs-12">
@@ -644,244 +642,8 @@
                 <!--/purpose 图框 -->
             </div>
             <br/>
-            <!--/purpose 行 -->
+            <!--/Path 行 -->
 
-            <!-- 一二级指标行 -->
-            <div class="row">
-                <!-- 一级指标图框-->
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    <div class="x_panel">
-                        <!-- 标题-->
-                        <div class="col-md-6">
-                            <h2>Level-1 Index Evaluation</h2>
-                        </div>
-                        <!--/标题-->
-                        <!-- chart_lv1-->
-                        <div id="line_3_lv1" style="width: 100%;height:300%;">
-                            <script type="text/javascript">
-
-                                function drawLv1(test_list){
-                                var dom = document.getElementById("container");
-                                var drawLv1 = echarts.init(document.getElementById('line_3_lv1'));
-                                var app = {};
-                                option = null;
-
-                                <!--为实现动态进行得分赋值-->
-                                var sxAxis=[]=test_list[0];
-                                var aseries=[]=test_list[1];
-                                var bseries=[]=test_list[2];
-                                var cseries=[]=test_list[3];
-                                var dseries=[]=test_list[4];
-                                var eseries=[]=test_list[5];
-                                var fseries=[]=test_list[6];
-                                var gseries=[]=test_list[7];
-                                var hseries=[]=test_list[8];
-
-                                var posList = [
-                                    'left', 'right', 'top', 'bottom',
-                                    'inside',
-                                    'insideTop', 'insideLeft', 'insideRight', 'insideBottom',
-                                    'insideTopLeft', 'insideTopRight', 'insideBottomLeft', 'insideBottomRight'
-                                ];
-
-                                app.configParameters = {
-                                    rotate: {
-                                        min: -90,
-                                        max: 90
-                                    },
-                                    align: {
-                                        options: {
-                                            left: 'left',
-                                            center: 'center',
-                                            right: 'right'
-                                        }
-                                    },
-                                    verticalAlign: {
-                                        options: {
-                                            top: 'top',
-                                            middle: 'middle',
-                                            bottom: 'bottom'
-                                        }
-                                    },
-                                    position: {
-                                        options: echarts.util.reduce(posList, function (map, pos) {
-                                            map[pos] = pos;
-                                            return map;
-                                        }, {})
-                                    },
-                                    distance: {
-                                        min: 0,
-                                        max: 100
-                                    }
-                                };
-
-                                app.config = {
-                                    rotate: 90,
-                                    align: 'left',
-                                    verticalAlign: 'middle',
-                                    position: 'insideBottom',
-                                    distance: 15,
-                                    onChange: function () {
-                                        var labelOption = {
-                                            normal: {
-                                                rotate: app.config.rotate,
-                                                align: app.config.align,
-                                                verticalAlign: app.config.verticalAlign,
-                                                position: app.config.position,
-                                                distance: app.config.distance
-                                            }
-                                        };
-                                        drawLv1.setOption({
-                                            series: [{
-                                                label: labelOption
-                                            }, {
-                                                label: labelOption
-                                            }, {
-                                                label: labelOption
-                                            }, {
-                                                label: labelOption
-                                            }]
-                                        });
-                                    }
-                                };
-
-
-                                var labelOption = {
-                                    normal: {
-                                        show: false,
-                                        position: app.config.position,
-                                        distance: app.config.distance,
-                                        align: app.config.align,
-                                        verticalAlign: app.config.verticalAlign,
-                                        rotate: app.config.rotate,
-                                        formatter: '{c}  {name|{a}}',
-                                        fontSize: 16,
-                                        rich: {
-                                            name: {
-                                                textBorderColor: '#fff'
-                                            }
-                                        }
-                                    }
-                                };
-
-                                option = {
-                                    color: ['#003366', '#006699', '#4cabce', '#e5323e', '#319ae5', '#e5c131', '#ad96b5', '#0c5259'],
-                                    tooltip: {
-                                        trigger: 'axis',
-                                        axisPointer: {
-                                            type: 'shadow'
-                                        }
-                                    },
-                                    legend: {
-                                        <!--注释掉图例-->
-                                        data: [sxAxis[0],sxAxis[1],sxAxis[2],sxAxis[3],sxAxis[4],sxAxis[5],sxAxis[6],sxAxis[7]]
-                                    },
-                                    toolbox: {
-                                        show: true,
-                                        orient: 'vertical',
-                                        left: 'right',
-                                        top: 'center',
-                                        feature: {
-                                            mark: {show: true},
-                                            dataView: {show: true, readOnly: false},
-                                            magicType: {show: true, type: ['line', 'bar']},
-                                            restore: {show: true},
-                                            saveAsImage: {show: true}
-                                        }
-                                    },
-                                    calculable: true,
-                                    xAxis: [
-                                        {
-                                            type: 'category',
-                                            axisTick: {show: false},
-                                            data: ['Comfort','Controllability','Cost performance', 'Exterior', 'Fuel Consumption', 'Interior', 'Power', 'Space'],
-                                            axisLabel:{
-                                              rotate:-20, //刻度旋转45度角
-                                              interval:0
-                                            }
-                                        }
-                                    ],
-                                    yAxis: [
-                                        {
-                                            type: 'value',
-                                            min: 3,
-                                            max: 5
-                                        }
-                                    ],
-
-
-                                    series: [
-                                        {
-                                            name: sxAxis[0],
-                                            type: 'bar',
-                                            barGap: 0,
-                                            label: labelOption,
-                                            data: aseries
-                                        },
-                                        {
-                                            name: sxAxis[1],
-                                            type: 'bar',
-                                            label: labelOption,
-                                            data: bseries
-                                        },
-                                        {
-                                            name: sxAxis[2],
-                                            type: 'bar',
-                                            label: labelOption,
-                                            data: cseries
-                                        },
-                                        {
-                                            name: sxAxis[3],
-                                            type: 'bar',
-                                            label: labelOption,
-                                            data: dseries
-                                        },
-                                        {
-                                            name: sxAxis[4],
-                                            type: 'bar',
-                                            label: labelOption,
-                                            data: eseries
-                                        },
-                                        {
-                                            name: sxAxis[5],
-                                            type: 'bar',
-                                            label: labelOption,
-                                            data: fseries
-                                        },
-                                        {
-                                            name: sxAxis[6],
-                                            type: 'bar',
-                                            label: labelOption,
-                                            data: gseries
-                                        },
-                                        {
-                                            name: sxAxis[7],
-                                            type: 'bar',
-                                            label: labelOption,
-                                            data: hseries
-                                        }
-                                    ]
-                                };
-
-                                drawLv1.setOption(option);
-                                }
-
-
-
-
-
-
-                            </script>
-                        </div>
-                        <!--/chart_lv1-->
-                    </div>
-                </div>
-                <!--/一级指标图框-->
-
-
-            </div>
-            <br/>
-            <!--/一二级指标行 -->
 
             <!--/图表行-->
 
