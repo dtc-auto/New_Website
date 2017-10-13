@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from django.http import HttpResponse
 from django.shortcuts import render
-from templates.dashboard.Connect_DB import getCarOwner, getColumnChart_p1, getLevel1Attributes, getLevel2Attributes, getPurpose, people_get_pie
+from templates.dashboard.Connect_DB import getCarOwner, getColumnChart_p1, getLevel1Attributes, getLevel2Attributes, getPurpose, people_get_pie, people_get_path
 import json
 
 # index page
@@ -46,6 +46,12 @@ def carOwnerChart(request):
 # get people page data
 def peopleChart(request):
     target = request.GET.get('a', '')
+
+    # 当 select path 时进入 people_get_path
+    if len(target) > 5:
+        path = people_get_path(target)
+        dict = {'path': path}
+        return HttpResponse(json.dumps(dict), content_type='application/json')
 
     pie_data = people_get_pie(target)
     dict = {'people_get_pie': pie_data,
