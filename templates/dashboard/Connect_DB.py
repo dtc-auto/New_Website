@@ -275,10 +275,10 @@ def people_get_path(company):
     targetList = df['target'].tolist()
     # 去重
     allName = list(set(sourceList+targetList))
-    # 添加nodes:[{"name": "allName[0]", "value": 1, "category": 4},]
+    # 添加nodes:[{"name": "allName[0]",itemStyle:{normal:{color:'green'}},]
     for i in range(0, len(allName)):
         name_ = allName[i]
-        dit_ = {'name': name_}
+        dit_ = {'name': name_ , 'itemStyle':{'normal':{'color':'rgb(18,39,105)'}}}
         path_data["nodes"].append(dit_)
     # 添加links
     for i in range(0, len(sourceList)):
