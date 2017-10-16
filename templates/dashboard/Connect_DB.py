@@ -260,14 +260,15 @@ def people_get_path(company):
     if company == 'BMW':
         sql = """select father_node as source, id as target
             from [BDCI].[dbo].[DW_Weibo_RepostPath]
-            where root = 3643901141023649
+            where root = 3908444761689053
             """
-    # 3890290613886669/
+    # 3890290613886669、  3908444761689053：300
     else:
         sql = """select father_node as source, id as target
             from [BDCI].[dbo].[DW_Weibo_RepostPath]
-            where root = 3908011552343259
+            where root = 3867692458956092
             """
+    # 3908011552343259、  3909125471922420：500、  3867692458956092：300
     conn = pymssql.connect(server, user, password, "BDCI")
     df = pd.read_sql_query(sql, conn)
     sourceList = df['source'].tolist()
@@ -279,29 +280,13 @@ def people_get_path(company):
         name_ = allName[i]
         dit_ = {'name': name_}
         path_data["nodes"].append(dit_)
+    # 添加links
     for i in range(0, len(sourceList)):
         dit_ = {
             "source": sourceList[i],
             "target": targetList[i]
         }
         path_data["links"].append(dit_)
-
-    '''
-    path_data = {
-        "nodes": [
-            {"name":'4039569499940276'},
-            {"name":'4039975153140455'},
-            {"name":'123456'},
-            {"name":'12'}
-        ],
-        "links": [
-            {"source": '4039569499940276', "target":'4039975153140455'},
-            {"source": '4039975153140455', "target":'123456'},
-            {"source": '123456', "target":'12'}
-        ],
-        "type": "force",
-    }
-    '''
 
     return path_data
 

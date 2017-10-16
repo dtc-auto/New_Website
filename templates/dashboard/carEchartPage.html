@@ -624,6 +624,7 @@
                                                     position: 'insideRight'
                                                 }
                                             },
+                                            barWidth : 18,
                                             data: [test_list[1][1], test_list[2][1], test_list[3][1], test_list[4][1], test_list[5][1],test_list[6][1], test_list[7][1], test_list[8][1]]
                                         },
                                         {
@@ -956,7 +957,25 @@
                                     },
                                     legend: {
                                         <!--注释掉图例-->
-                                        data: [sxAxis[0],sxAxis[1],sxAxis[2],sxAxis[3],sxAxis[4],sxAxis[5],sxAxis[6],sxAxis[7]]
+                                        data: [
+                                            sxAxis[0],
+                                            sxAxis[1],
+                                            sxAxis[2],
+                                            sxAxis[3],
+                                            sxAxis[4],
+                                            sxAxis[5],
+                                            sxAxis[6],
+                                            sxAxis[7]
+                                        ],
+                                        <!--设置默认隐藏图例-->
+                                        selected: {
+                                            "雅阁" : false,
+                                            "迈锐宝" : false,
+                                            "迈锐宝XL" : false,
+                                            "迈腾" : false,
+                                            "蒙迪欧" : false,
+                                            "名图" : false
+                                        }
                                     },
                                     toolbox: {
                                         show: true,
@@ -995,50 +1014,50 @@
                                     series: [
                                         {
                                             name: sxAxis[0],
-                                            type: 'bar',
+                                            type: 'line',
                                             barGap: 0,
                                             label: labelOption,
                                             data: aseries
                                         },
                                         {
                                             name: sxAxis[1],
-                                            type: 'bar',
+                                            type: 'line',
                                             label: labelOption,
                                             data: bseries
                                         },
                                         {
                                             name: sxAxis[2],
-                                            type: 'bar',
+                                            type: 'line',
                                             label: labelOption,
                                             data: cseries
                                         },
                                         {
                                             name: sxAxis[3],
-                                            type: 'bar',
+                                            type: 'line',
                                             label: labelOption,
                                             data: dseries
                                         },
                                         {
                                             name: sxAxis[4],
-                                            type: 'bar',
+                                            type: 'line',
                                             label: labelOption,
                                             data: eseries
                                         },
                                         {
                                             name: sxAxis[5],
-                                            type: 'bar',
+                                            type: 'line',
                                             label: labelOption,
                                             data: fseries
                                         },
                                         {
                                             name: sxAxis[6],
-                                            type: 'bar',
+                                            type: 'line',
                                             label: labelOption,
                                             data: gseries
                                         },
                                         {
                                             name: sxAxis[7],
-                                            type: 'bar',
+                                            type: 'line',
                                             label: labelOption,
                                             data: hseries
                                         }

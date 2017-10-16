@@ -222,7 +222,7 @@
 
             </script>
             <!--/接收数据库返回信息-->
-
+            <div>Basic Information of brand influencers</div>
             <!-- 图表行-->
             <!-- pie 行 -->
             <div class="row">
@@ -547,7 +547,7 @@
                         </div>
                         <!--/标题-->
                         <!--chart_path-->
-                        <div id="line_2_purpose" style="width: 100%;height:800%;">
+                        <div id="line_2_purpose" style="width: 100%;height:500%;">
                             <script type="text/javascript">
                             var dom = document.getElementById("line_2_purpose");
                             var myChart = echarts.init(dom);
@@ -559,9 +559,7 @@
                                 myChart.hideLoading();
 
                                 option = {
-                                    legend: {
-                                        data: ['HTMLElement', 'WebGL', 'SVG', 'CSS', 'Other']
-                                    },
+
                                     series: [{
                                         type: 'graph',
                                         layout: 'force',
