@@ -202,6 +202,9 @@
                         drawPieRegion(ret.people_get_pie);
                         drawPieCityLevel(ret.people_get_pie);
                     })
+                    $.getJSON('{% url 'peopleEchartPage' %}',{'path':company}, function(ret){
+                        drawPath(ret.path)
+                    })
                 });
               });
                  var company = $("#sel1").val();
@@ -211,7 +214,7 @@
                         drawPieRegion(ret.people_get_pie);
                         drawPieCityLevel(ret.people_get_pie);
                     })
-                    $.getJSON('{% url 'peopleEchartPage' %}',{'a':'people_path'}, function(ret){
+                    $.getJSON('{% url 'peopleEchartPage' %}',{'path':company}, function(ret){
                         drawPath(ret.path)
                     })
 
@@ -544,53 +547,50 @@
                         </div>
                         <!--/标题-->
                         <!--chart_path-->
-                        <div id="line_2_purpose" style="width: 100%;height:600%;">
+                        <div id="line_2_purpose" style="width: 100%;height:800%;">
                             <script type="text/javascript">
-var dom = document.getElementById("line_2_purpose");
-var myChart = echarts.init(dom);
-var app = {};
-option = null;
-myChart.showLoading();
+                            var dom = document.getElementById("line_2_purpose");
+                            var myChart = echarts.init(dom);
+                            var app = {};
+                            option = null;
+                            myChart.showLoading();
 
-function drawPath(webkitDep){
-    myChart.hideLoading();
+                            function drawPath(webkitDep){
+                                myChart.hideLoading();
 
-    option = {
-        legend: {
-            data: ['HTMLElement', 'WebGL', 'SVG', 'CSS', 'Other']
-        },
-        series: [{
-            type: 'graph',
-            layout: 'force',
-            animation: false,
-            label: {
-                normal: {
-                    position: 'right',
-                    formatter: '{b}'
-                }
-            },
-            draggable: true,
-            data: webkitDep.nodes.map(function (node, idx) {
-                node.id = idx;
-                return node;
-            }),
-            categories: webkitDep.categories,
-            force: {
-                // initLayout: 'circular'
-                // repulsion: 20,
-                edgeLength: 5,
-                repulsion: 20,
-                gravity: 0.2
-            },
-            edges: webkitDep.links
-        }]
-    };
+                                option = {
+                                    legend: {
+                                        data: ['HTMLElement', 'WebGL', 'SVG', 'CSS', 'Other']
+                                    },
+                                    series: [{
+                                        type: 'graph',
+                                        layout: 'force',
+                                        animation: false,
+                                        label: {
+                                            normal: {
+                                                position: 'right',
+                                                formatter: '{b}'
+                                            }
+                                        },
+                                        draggable: false,
+                                        data: webkitDep.nodes,
+                                        <!--categories: webkitDep.categories,-->
+                                        force: {
+                                            // initLayout: 'circular'
+                                            // repulsion: 20,
+                                            edgeLength: 50,
+                                            repulsion: 20,
+                                            gravity: 0.2
+                                        },
+                                        links: webkitDep.links
+                                    }]
+                                };
 
-    myChart.setOption(option);
-}
-if (option && typeof option === "object") {
-    myChart.setOption(option, true);
-}
+                                myChart.setOption(option);
+                            }
+                            if (option && typeof option === "object") {
+                                myChart.setOption(option, true);
+                            }
 
                             </script>
                         </div>

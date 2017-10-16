@@ -46,10 +46,11 @@ def carOwnerChart(request):
 # get people page data
 def peopleChart(request):
     target = request.GET.get('a', '')
+    path = request.GET.get('path', '')
 
     # 当 select path 时进入 people_get_path
-    if len(target) > 5:
-        path = people_get_path(target)
+    if len(path) > 0:
+        path = people_get_path(path)
         dict = {'path': path}
         return HttpResponse(json.dumps(dict), content_type='application/json')
 
