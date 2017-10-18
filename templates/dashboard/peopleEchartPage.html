@@ -43,7 +43,7 @@
                     <a href="/" class="site_title">
                         <!--侧栏顶部图标-->
                         <!--<i class="fa fa-paw"></i> -->
-                        <span>Detecon Big data</span></a>
+                        <span>Back Home</span></a>
                 </div>
 
                 <div class="clearfix"></div>
@@ -56,8 +56,8 @@
                     </div>
                     <!--/用户头像-->
                     <div class="profile_info">
-                        <span>Detecon</span>
-                        <h2>Big data</h2>
+                        <!--<span>Detecon</span>-->
+                        <!--<h2>Big data</h2>-->
                     </div>
                 </div>
                 <!-- /menu profile quick info -->
@@ -67,7 +67,7 @@
                 <!-- sidebar menu -->
                 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                     <div class="menu_section">
-                        <h3>Case</h3>
+                        <!--<h3>Case</h3>-->
                         <ul class="nav side-menu">
                             <!--侧栏菜单-->
                             <li><a><i class="fa fa-bar-chart-o"></i> Business Case <span
@@ -127,27 +127,27 @@
                     </div>
 
                     <!-- 用户栏下拉列表-->
-                    <ul class="nav navbar-nav navbar-right ">
-                        <li class="">
-                            <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
-                               aria-expanded="false">
-                                <!--<img src="images/img.jpg" alt="">-->
-                                Detecon
-                                <span class=" fa fa-angle-down"></span>
-                            </a>
-                            <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                <li><a href="javascript:;"> Profile</a></li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="badge bg-red pull-right">50%</span>
-                                        <span>Settings</span>
-                                    </a>
-                                </li>
-                                <li><a href="javascript:;">Help</a></li>
-                                <li><a href=""><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+                    <!--<ul class="nav navbar-nav navbar-right ">-->
+                        <!--<li class="">-->
+                            <!--<a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"-->
+                               <!--aria-expanded="false">-->
+                                <!--&lt;!&ndash;<img src="images/img.jpg" alt="">&ndash;&gt;-->
+                                <!--Detecon-->
+                                <!--<span class=" fa fa-angle-down"></span>-->
+                            <!--</a>-->
+                            <!--<ul class="dropdown-menu dropdown-usermenu pull-right">-->
+                                <!--<li><a href="javascript:;"> Profile</a></li>-->
+                                <!--<li>-->
+                                    <!--<a href="javascript:;">-->
+                                        <!--<span class="badge bg-red pull-right">50%</span>-->
+                                        <!--<span>Settings</span>-->
+                                    <!--</a>-->
+                                <!--</li>-->
+                                <!--<li><a href="javascript:;">Help</a></li>-->
+                                <!--<li><a href=""><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>-->
+                            <!--</ul>-->
+                        <!--</li>-->
+                    <!--</ul>-->
                     <!--/用户栏下拉列表-->
 
                 </nav>
@@ -222,9 +222,10 @@
 
             </script>
             <!--/接收数据库返回信息-->
-            <div>Basic Information of brand influencers</div>
+
             <!-- 图表行-->
             <!-- pie 行 -->
+            <div>Basic information of brand influencers</div>
             <div class="row">
                 <!-- age 图框-->
                 <div class="col-md-3 col-sm-3 col-xs-12">
@@ -534,20 +535,21 @@
             <!--/pie 行 -->
 
             <!-- Path 行 -->
+            <div>Path Analysis</div>
             <div class="row">
                 <!-- path 图框 -->
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <!-- 标题-->
                         <div class="col-md-9">
-                            <h2>Path Analysis
+                            <h2>Forward Path
                                 <!--<small>传播路径分析</small>-->
                             </h2>
                             <div class="clearfix"></div>
                         </div>
                         <!--/标题-->
                         <!--chart_path-->
-                        <div id="line_2_purpose" style="width: 100%;height:500%;">
+                        <div id="line_2_purpose" style="width: 100%;height:1000%;">
                             <script type="text/javascript">
                             var dom = document.getElementById("line_2_purpose");
                             var myChart = echarts.init(dom);
@@ -570,7 +572,7 @@
                                                 formatter: '{b}'
                                             }
                                         },
-                                        draggable: false,
+                                        draggable: true,
                                         data: webkitDep.nodes,
 
                                         force: {

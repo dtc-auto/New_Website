@@ -52,6 +52,7 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'New_Website.urls'
+WSGI_APPLICATION = 'New_Website.wsgi.application'
 
 TEMPLATES = [
     {
@@ -102,4 +103,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = 'C:/inetpub/wwwroot/Django_web/Django_web/static/'
+STATIC_ROOT = 'C:/inetpub/wwwroot/New_Website/dashboard/static/'
