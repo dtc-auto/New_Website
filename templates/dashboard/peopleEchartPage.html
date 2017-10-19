@@ -567,7 +567,7 @@
                         </div>
                         <!--/标题-->
                         <!--chart_path-->
-                        <div id="line_2_purpose" style="width: 100%;height:1000%;">
+                        <div id="line_2_purpose" style="width: 100%;height:850%;">
                             <script type="text/javascript">
                             var dom = document.getElementById("line_2_purpose");
                             var myChart = echarts.init(dom);
@@ -592,13 +592,13 @@
                                         },
                                         draggable: true,
                                         data: webkitDep.nodes,
-
+                                        roam: true,
                                         force: {
                                             // initLayout: 'circular'
                                             // repulsion: 20,
-                                            edgeLength: 50,
-                                            repulsion: 20,
-                                            gravity: 0.2
+                                            edgeLength: 30,
+                                            repulsion: 17,
+                                            gravity: 0.3
                                         },
                                         links: webkitDep.links,
 
