@@ -1,14 +1,14 @@
 from django.conf.urls import url
 from . import views
-
+from dashboard.views import carOwnerChartPage, carOwnerChart, peopleChartPage, peopleChart
 urlpatterns = [
     # index
     url(r'^$', views.index, name='index'),
     # car dashboard page
-    url(r'^auto_page', 'dashboard.views.carOwnerChartPage', name='carEchart'),
-    url(r'^auto/$', 'dashboard.views.carOwnerChart', name='carEchartPage'),
+    url(r'^auto_page', carOwnerChartPage, name='carEchart'),
+    url(r'^auto/$', carOwnerChart, name='carEchartPage'),
     # people dashboard page
-    url(r'^people_page', 'dashboard.views.peopleChartPage', name='peopleEchart'),
-    url(r'^people/$', 'dashboard.views.peopleChart', name='peopleEchartPage'),
+    url(r'^people_page', peopleChartPage, name='peopleEchart'),
+    url(r'^people/$', peopleChart, name='peopleEchartPage'),
 
 ]
