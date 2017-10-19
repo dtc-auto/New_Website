@@ -557,11 +557,12 @@
                         <!-- 标题-->
                         <div class="col-md-9">
                             <h2>Forward Path<br>传播路径</h2>
-                                <br> <br>
+                                <br>
                                 <span class="count_top" style="color:red"><i class="fa fa-circle fa-lg"></i></span>
                                  Source of media communication/媒体传播源头
-
-                                <!--<small>root node:red</small>-->
+                                <br>
+                                <span class="count_top" style="color:#122769"><i class="fa fa-circle fa-lg"></i></span>
+                                 Individual communication/传播个体
 
                             <div class="clearfix"></div>
                         </div>
@@ -589,15 +590,16 @@
                                                 formatter: '{b}'
                                             }
                                         },
-                                        draggable: true,
+                                        draggable: false,
                                         data: webkitDep.nodes,
                                         roam: true,
                                         force: {
                                             // initLayout: 'circular'
                                             // repulsion: 20,
                                             edgeLength: 30,
-                                            repulsion: 17,
-                                            gravity: 0.3
+                                            repulsion: 20,
+                                            gravity: 0.2,
+                                            <!--layoutAnimation:false-->
                                         },
                                         links: webkitDep.links,
 
