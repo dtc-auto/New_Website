@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 {% load staticfiles %}
 
-<html lang="en">
+<html lang="en" xmlns:color="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -225,7 +225,14 @@
 
             <!-- 图表行-->
             <!-- pie 行 -->
-            <div>Basic information of brand influencers</div>
+            <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                <h3>Basic information of brand influencers/品牌影响力分布</h3>
+                </div>
+            </div>
+            </div>
+
             <div class="row">
                 <!-- age 图框-->
                 <div class="col-md-3 col-sm-3 col-xs-12">
@@ -233,7 +240,7 @@
 
                         <!-- 标题-->
                         <div class="col-md-3">
-                                <h2>Age
+                                <h2>Age<br>年龄
                                     <!--<small>车主区域分布</small>-->
                                 </h2>
                                 <div class="clearfix"></div>
@@ -309,7 +316,7 @@
 
                         <!-- 标题-->
                         <div class="col-md-3">
-                                <h2>Gender
+                                <h2>Gender<br>性别
                                     <!--<small>车主区域分布</small>-->
                                 </h2>
                                 <div class="clearfix"></div>
@@ -385,7 +392,7 @@
 
                         <!-- 标题-->
                         <div class="col-md-3">
-                                <h2>Region
+                                <h2>Region<br>区域
                                     <!--<small>车主区域分布</small>-->
                                 </h2>
                                 <div class="clearfix"></div>
@@ -460,8 +467,8 @@
                     <div class="x_panel">
 
                         <!-- 标题-->
-                        <div class="col-md-3">
-                                <h2>CityLevel
+                        <div class="col-md-5">
+                                <h2>CityLevel<br>城市等级
                                     <!--<small>车主区域分布</small>-->
                                 </h2>
                                 <div class="clearfix"></div>
@@ -535,16 +542,25 @@
             <!--/pie 行 -->
 
             <!-- Path 行 -->
-            <div>Forward Path Analysis </div>
+            <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                <h3>Forward Path Analysis/传播路径分析</h3>
+                </div>
+            </div>
+            </div>
+
             <div class="row">
                 <!-- path 图框 -->
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <!-- 标题-->
                         <div class="col-md-9">
-                            <h2>Forward Path
+                            <h2>Forward Path<br>传播路径
                                 <br> <br> <br>
-                                Red:Starting point
+                                <span class="count_top" style="color:red"><i class="fa fa-circle fa-lg"></i></span>
+                                 Source of media communication/媒体传播源头
+
                                 <!--<small>root node:red</small>-->
                             </h2>
                             <div class="clearfix"></div>
