@@ -258,14 +258,14 @@ def people_get_path(company):
         "type": "force",
     }
     if company == 'BMW':
-        sql = """select father_node as source, id as target
+        sql = """select father_node as source, id as target, user_name as name
             from [BDCI].[dbo].[DW_Weibo_RepostPath]
             where root = 3718567394161044
             """
         root_name = '3718567394161044'
     # 3890290613886669、  3908444761689053：300
     else:
-        sql = """select father_node as source, id as target
+        sql = """select father_node as source, id as target, user_name as name
             from [BDCI].[dbo].[DW_Weibo_RepostPath]
             where root = 3898167562657684
             """
@@ -275,12 +275,23 @@ def people_get_path(company):
     df = pd.read_sql_query(sql, conn)
     sourceList = df['source'].tolist()
     targetList = df['target'].tolist()
+    nameList = df['name'].tolist()
+    dic_number_id = dict(zip(targetList, nameList))
+    dic_number_id[root_name] = company
+    # 将数字name替换为中文
+    def change_ch(targetList):
+        for i in range(0, len(targetList)):
+            for key in dic_number_id.keys():
+                if key == targetList[i]:
+                    targetList[i]=dic_number_id[key]
+    change_ch(sourceList)
+    change_ch(targetList)
     # 去重
     allName = list(set(sourceList+targetList))
     # 添加nodes:[{"name": "allName[0]",itemStyle:{normal:{color:'green'}},]
     for i in range(0, len(allName)):
         name_ = allName[i]
-        if name_ == root_name:
+        if name_ == company:
             dit_ = {'name': name_, 'itemStyle': {'normal': {'color': 'rgb(255,0,0)'}}}
             path_data["nodes"].append(dit_)
         else:
@@ -297,4 +308,4 @@ def people_get_path(company):
 
     return path_data
 
-people_get_path(company=1)
+people_get_path('BMW')
