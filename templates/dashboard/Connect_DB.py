@@ -144,6 +144,7 @@ def getLevel2Attributes(paraList):
         manyiCount = 0
         meiganjueCount = 0
         bumanyiCount = 0
+        sum_list = []
         attitudeList = df.loc[df['keyindex'] == index]['Attitude'].tolist()
         for attitude in attitudeList:
             if attitude == '1':
@@ -154,7 +155,13 @@ def getLevel2Attributes(paraList):
                 bumanyiCount+=1
         subResult = [index,manyiCount,meiganjueCount,bumanyiCount]
         result.append(subResult)
-    return result[:10]
+    result_return = result[:10]
+    # 返回值排序（未完成）
+    # for key in range(1, len(result_return)):
+    #
+    #     sum_ = result_return[key][1]+result_return[key][2]+result_return[key][3]
+    #     sum_list.append(sum_)
+    return result_return
 # getLevel2Attributes("凯美瑞,空间")
 
 def getPurpose(para):
@@ -308,4 +315,4 @@ def people_get_path(company):
 
     return path_data
 
-people_get_path('BMW')
+# people_get_path('BMW')
