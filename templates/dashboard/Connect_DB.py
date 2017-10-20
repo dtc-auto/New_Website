@@ -67,7 +67,7 @@ def getColumnChart_p1():
     # 保留3位小数
     for i_list in range(1, len(result)):
         for i_ in range(1, len(result[i_list])):
-            print(result[i_list])
+            # print(result[i_list])
             result[i_list][i_] = float('%.3f'% result[i_list][i_])
     return result
 # getColumnChart_p1()
@@ -106,7 +106,7 @@ def getLevel1Attributes(paraList):
     # 保留两位小数
     for i_list in range(1, len(result)):
         for i_ in range(0, len(result[i_list])):
-            print(result[i_list])
+            # print(result[i_list])
             result[i_list][i_] = float('%.2f'% result[i_list][i_])
     return result
 # getLevel1Attributes("凯美瑞,帕萨特,雅阁,迈锐宝,迈锐宝XL,迈腾,蒙迪欧,名图")
@@ -116,29 +116,34 @@ def getLevel2Attributes(paraList):
     list2 = list1.replace('"','')
     list3 = list2.split(',')
     conn = pymssql.connect(server, user, password, "BDCI")
-    sql = """SELECT  Brand
-             ,Dimension
-             ,keyindex
-             ,KeyModifier
-             ,SentenceAttitude
-             ,case when SentenceAttitude >= 1 then '1'
-             when SentenceAttitude = 0 then '0'
-             when SentenceAttitude <= -1 then '-1' end  as Attitude
-             ,frequency
-             FROM DM_AutoHome_WOM_SecondLevelIndex_Noun_Modifier_Attitude_Frequency
-             WHERE updateflag=0 
-             """
+    sql = """use bdci
+            SELECT  
+             Brand
+            ,Dimension
+            ,keyindex
+            ,KeyModifier
+            ,SentenceAttitude
+            ,case when SentenceAttitude >= 1 then '1'
+            when SentenceAttitude = 0 then '0'
+            when SentenceAttitude <= -1 then '-1' end  
+            as 
+             Attitude
+            ,frequency
+            FROM DM_AutoHome_WOM_SecondLevelIndex_Noun_Modifier_Attitude_Frequency
+            WHERE updateflag=0 and keyindex!='老板键' 
+            order by keyindex desc 
+            """
     df = pd.read_sql_query(sql, conn)
     #brand = u'帕萨特'
     #dimension = u'操控'
     brand = list3[0]
     dimension = list3[1]
-    df = df.loc[df['Brand']== brand]
-    df = df.loc[df['Dimension']== dimension]
+    df = df.loc[df['Brand'] == brand]
+    df = df.loc[df['Dimension'] == dimension]
     indexList = df['keyindex'].tolist()
     indexList = list(set(indexList))
     result = []
-    title = ['index','满意','没感觉','不满意']
+    title = ['index', '满意', '没感觉', '不满意']
     result.append(title)
     for index in indexList:
         manyiCount = 0
@@ -148,25 +153,37 @@ def getLevel2Attributes(paraList):
         attitudeList = df.loc[df['keyindex'] == index]['Attitude'].tolist()
         for attitude in attitudeList:
             if attitude == '1':
-                manyiCount+=1
+                manyiCount += 1
             elif attitude == '0':
-                meiganjueCount+=1
+                meiganjueCount += 1
             else:
-                bumanyiCount+=1
-        subResult = [index,manyiCount,meiganjueCount,bumanyiCount]
+                bumanyiCount += 1
+        subResult = [index, manyiCount, meiganjueCount, bumanyiCount]
         result.append(subResult)
     result_return = result[:10]
     # 返回值排序（未完成）
-    # for key in range(1, len(result_return)):
-    #
-    #     sum_ = result_return[key][1]+result_return[key][2]+result_return[key][3]
-    #     sum_list.append(sum_)
+    for key in range(1, len(result_return)):
+        sum_ = result_return[key][1]+result_return[key][2]+result_return[key][3]
+        sum_list.append(sum_)
+
     return result_return
 # getLevel2Attributes("凯美瑞,空间")
 
 def getPurpose(para):
-    sql = """select *
-             from DM_AutoHoome_Purpose
+    sql = """
+        SELECT 
+         [ForCrossCountry]
+        ,[ForRacing]
+        ,[ForCarry]
+        ,[ForBusiness]
+        ,[ForGirls]
+        ,[ForLongDistance]
+        ,[ForChild] 
+        ,[ForShopping]
+        ,[ForSelfDriving]
+        ,[ForWork]
+        ,[Brand]
+  FROM [BDCI].[dbo].[DM_AutoHoome_Purpose]
           """
     conn = pymssql.connect(server, user, password, "BDCI")
     df = pd.read_sql_query(sql, conn)
@@ -192,7 +209,7 @@ def getPurpose(para):
     #add average data
     for i_list in range(1, len(result)):
         for i_ in range(1, len(result[i_list])):
-            print(result[i_list])
+            # print(result[i_list])
             result[i_list][i_] = float('%.3f'% result[i_list][i_])
     return result
 # getPurpose('凯美瑞')

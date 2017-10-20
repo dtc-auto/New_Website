@@ -808,10 +808,10 @@
                                     {
 
                                         type : 'category',
-                                        data : [test_list[1][0],test_list[2][0],test_list[3][0],test_list[4][0],test_list[5][0],test_list[6][0],test_list[7][0],test_list
-                            [8][0],test_list[9][0],test_list[10][0]],
+                                        data : ['越野','赛车','运货','商务','交友','跑长途','接送小孩','购物','自驾游','上下班'],
+                                        <!--data : [test_list[1][0],test_list[2][0],test_list[3][0],test_list[4][0],test_list[5][0],test_list[6][0],test_list[7][0],test_list[8][0],test_list[9][0],test_list[10][0]],-->
                                         axisLabel:{
-                                          rotate:-30, //刻度旋转45度角
+                                          rotate:-35, //刻度旋转45度角
                                           interval:0
                                         }
 
@@ -1011,7 +1011,7 @@
                                         }
                                     },
                                     legend: {
-                                        <!--注释掉图例-->
+                                        <!--图例-->
                                         data: [
                                             sxAxis[0],
                                             sxAxis[1],
@@ -1050,7 +1050,8 @@
                                         {
                                             type: 'category',
                                             axisTick: {show: false},
-                                            data: ['Comfort','Controllability','Cost performance', 'Exterior', 'Fuel Consumption', 'Interior', 'Power', 'Space'],
+                                            data: ['舒适度','操纵','性价比', '外观', '油耗', '内饰', '动力', '空间'],
+                                            <!--data: ['Comfort','Controllability','Cost performance', 'Exterior', 'Fuel Consumption', 'Interior', 'Power', 'Space'],-->
                                             axisLabel:{
                                               rotate:-20, //刻度旋转45度角
                                               interval:0
@@ -1172,6 +1173,7 @@
                                     var emotion = test_list[0]
 
                                     option = {
+
                                         tooltip : {
                                             trigger: 'axis',
                                             axisPointer : {            // 坐标轴指示器，坐标轴触发有效
