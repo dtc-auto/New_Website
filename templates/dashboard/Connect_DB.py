@@ -267,9 +267,9 @@ def people_get_path(company):
     else:
         sql = """select father_node as source, id as target
             from [BDCI].[dbo].[DW_Weibo_RepostPath]
-            where root = 3910952511077913
+            where root = 3898167562657684
             """
-        root_name = '3910952511077913'
+        root_name = '3898167562657684'
     # 3908011552343259、  3909125471922420：500、  3867692458956092：300
     conn = pymssql.connect(server, user, password, "BDCI")
     df = pd.read_sql_query(sql, conn)

@@ -66,19 +66,15 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right ml-auto">
 
-                <li>
+                <li class="dropdown">
                     <a class="nav-link js-scroll-trigger active"  data-toggle="dropdown" href="#" style="color:#999999">
                         Business Case
                         <i class="fa fa-fw fa-caret-down"></i>
                     </a>
-
                     <ul class="dropdown-menu nav"  role="menu" style="color:#999999" >
                         <li><a href="auto_page.html" style="color:#999999">Product Index Analysis <br> 产品指标分析</a></li>
                         <li><a href="people_page.html" style="color:#999999">Forward Path Analysis <br> 传播路径分析</a></li>
                     </ul>
-
-
-
                 </li>
 
                 <li>
@@ -184,5 +180,8 @@
 <script src="{% static 'js/creative.min.js' %}"></script>
 
 </body>
-
+    <script>
+$('li.dropdown').mouseover(function() {
+     $(this).addClass('open');    }).mouseout(function() {        $(this).removeClass('open');    });
+</script>
 </html>
