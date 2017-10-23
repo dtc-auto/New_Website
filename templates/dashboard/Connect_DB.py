@@ -141,7 +141,9 @@ def getLevel2Attributes(paraList):
     df = df.loc[df['Brand'] == brand]
     df = df.loc[df['Dimension'] == dimension]
     indexList = df['keyindex'].tolist()
-    indexList = list(set(indexList))
+    indexList_de_weight = list(set(indexList))  # 列表去重（乱序）
+    indexList_de_weight.sort(key=indexList.index)  # 恢复列表次序
+    indexList = indexList_de_weight
     result = []
     title = ['index', '满意', '没感觉', '不满意']
     result.append(title)
@@ -160,14 +162,31 @@ def getLevel2Attributes(paraList):
                 bumanyiCount += 1
         subResult = [index, manyiCount, meiganjueCount, bumanyiCount]
         result.append(subResult)
-    result_return = result[:10]
+    result_return = result[0:10]
     # 返回值排序（未完成）
     for key in range(1, len(result_return)):
         sum_ = result_return[key][1]+result_return[key][2]+result_return[key][3]
         sum_list.append(sum_)
 
-    return result_return
-# getLevel2Attributes("凯美瑞,空间")
+    dit_order = dict(zip(indexList[:10], sum_list))
+    dit_order = sorted(dit_order.items(), key=lambda d: d[1])
+    order_list = []
+    for tup in dit_order:
+        order_list.append(tup[0])  # 得到list顺序
+    # result_return = sorted(result_return[1:], key=order_list.index)
+    retuen_list_ = []
+    retuen_list = []
+    for key in range(0, len(order_list)):
+        for value in result_return:
+            if order_list[key] == value[0]:
+                retuen_list_=[order_list[key]]
+                retuen_list_.append(value[1])
+                retuen_list_.append(value[2])
+                retuen_list_.append(value[3])
+                retuen_list.append(retuen_list_)
+    retuen_list = [title] + retuen_list
+    return retuen_list
+getLevel2Attributes("凯美瑞,空间")
 
 def getPurpose(para):
     sql = """
