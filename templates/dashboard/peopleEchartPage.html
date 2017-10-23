@@ -581,6 +581,7 @@
                                 option = {
                                     <!--鼠标移动 提示标签-->
                                     tooltip : {},
+
                                     series: [{
                                         type: 'graph',
                                         layout: 'force',
@@ -606,6 +607,11 @@
                                             <!--layoutAnimation:false-->
                                         },
                                         links: webkitDep.links,
+                                        lineStyle : {
+                                            normal : {
+                                                width : 1.5,
+                                            },
+                                        },
                                     }]
                                 };
 

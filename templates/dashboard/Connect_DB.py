@@ -9,14 +9,6 @@ password = "asdf1234"
 
 
 def getCarOwner(para):
-    a = para
-    # sql = """SELECT w.Brand, m.province_pinyin, COUNT(m.province_pinyin) AS no
-    #          FROM DW_AutoHome_WOM AS w INNER JOIN
-    #          DM_VW_region AS r ON w.City = r.City INNER JOIN
-    #          DM_AutoHome_Map AS m ON m.province = r.Province
-    #          GROUP BY w.Brand, m.province_pinyin
-    #          ORDER BY no desc
-    #          """
     sql = '''SELECT w.Brand, m.province, COUNT(m.province) AS no
              FROM DW_AutoHome_WOM AS w INNER JOIN
              DM_VW_region AS r ON w.City = r.City INNER JOIN
@@ -163,7 +155,7 @@ def getLevel2Attributes(paraList):
         subResult = [index, manyiCount, meiganjueCount, bumanyiCount]
         result.append(subResult)
     result_return = result[0:10]
-    # 返回值排序（未完成）
+    # 返回值排序
     for key in range(1, len(result_return)):
         sum_ = result_return[key][1]+result_return[key][2]+result_return[key][3]
         sum_list.append(sum_)
