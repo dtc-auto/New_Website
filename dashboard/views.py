@@ -1,9 +1,36 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.http import HttpResponse,HttpResponseRedirect
+from django.shortcuts import render, render_to_response
 from templates.dashboard.Connect_DB import getCarOwner, getColumnChart_p1, getLevel1Attributes, getLevel2Attributes, getPurpose, people_get_pie, people_get_path
 import json
+from django import forms
+from django.shortcuts import render,render_to_response
+from New_Website.settings import username, password
+
+class UserForm(forms.Form):
+    username = forms.CharField(label='username', max_length=50)
+    password = forms.CharField(label='password', widget=forms.PasswordInput())
+
+
+def login(request):
+    if request.method == "POST":
+        uf = UserForm(request.POST)
+        if uf.is_valid():
+            # 获取表单用户密码
+            username_ = uf.cleaned_data['username']
+            password_ = uf.cleaned_data['password']
+            # 获取的表单数据与数据库进行比较
+
+            if username == username_ and password == password_:
+                return render_to_response('dashboard/carEchartPage.html')
+            else:
+                return HttpResponse("用户名或密码错误,请重新输入")
+    else:
+        uf = UserForm()
+    return render_to_response("dashboard/login.html",{'uf':uf})
+
+
 
 # index page
 def index(request):

@@ -26,7 +26,8 @@ SECRET_KEY = 'xwg!o#50=bpiv9u$g)ze+xpm(($4uy2x%k&i701*%ux2#t8rdy'
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
+username = 'guest'
+password = 'detecon'
 
 # Application definition
 
@@ -43,7 +44,7 @@ INSTALLED_APPS = (
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',

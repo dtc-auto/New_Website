@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from . import views
-from dashboard.views import carOwnerChartPage, carOwnerChart, peopleChartPage, peopleChart
+from dashboard.views import carOwnerChartPage, carOwnerChart, peopleChartPage, peopleChart, login
 urlpatterns = [
     # index
     url(r'^$', views.index, name='index'),
@@ -10,5 +10,7 @@ urlpatterns = [
     # people dashboard page
     url(r'^people_page', peopleChartPage, name='peopleEchart'),
     url(r'^people/$', peopleChart, name='peopleEchartPage'),
+    # login
+    url(r'^login', login, name='login'),
 
 ]
