@@ -35,7 +35,7 @@
 </style>
 <body>
 <h2>Login</h2>
-<form action="{% url 'login' %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+<form action="{% url 'my_login' %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
    {% csrf_token %}
    <input type="text" name="username" id="username" placeholder="用户名" >
     <br><br>

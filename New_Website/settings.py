@@ -26,8 +26,8 @@ SECRET_KEY = 'xwg!o#50=bpiv9u$g)ze+xpm(($4uy2x%k&i701*%ux2#t8rdy'
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-username = 'guest'
-password = 'detecon'
+
+
 
 # Application definition
 
@@ -105,3 +105,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = 'C:/inetpub/wwwroot/New_Website/dashboard/static/'
+
+username = 'guest'
+password = 'detecon'
+
+# 设置登录之后跳转
+LOGIN_URL = '/login/'
+

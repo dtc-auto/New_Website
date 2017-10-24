@@ -1,48 +1,62 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.http import HttpResponse,HttpResponseRedirect
-from django.shortcuts import render, render_to_response
+from django.template import RequestContext
 from templates.dashboard.Connect_DB import getCarOwner, getColumnChart_p1, getLevel1Attributes, getLevel2Attributes, getPurpose, people_get_pie, people_get_path
 import json
 from django import forms
+from dashboard.models import User
 from django.shortcuts import render,render_to_response
-from New_Website.settings import username, password
+# from New_Website.settings import username, password
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
 
 class UserForm(forms.Form):
     username = forms.CharField(label='username', max_length=50)
     password = forms.CharField(label='password', widget=forms.PasswordInput())
 
 
-def login(request):
-    if request.method == "POST":
-        uf = UserForm(request.POST)
-        if uf.is_valid():
-            # 获取表单用户密码
-            username_ = uf.cleaned_data['username']
-            password_ = uf.cleaned_data['password']
-            # 获取的表单数据与数据库进行比较
+def my_login(request):
+    if request.method == 'POST':
+        userform = UserForm(request.POST)
+        if userform.is_valid():
+            username = userform.cleaned_data['username']
+            password = userform.cleaned_data['password']
 
-            if username == username_ and password == password_:
-                return render_to_response('dashboard/carEchartPage.html')
+            user = authenticate(username=username, password=password)
+
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return render_to_response('dashboard/index.html', {'userform': userform})
             else:
-                return HttpResponse("用户名或密码错误,请重新输入")
+                return HttpResponse('wrong username or password, please re-input')
     else:
-        uf = UserForm()
-    return render_to_response("dashboard/login.html",{'uf':uf})
+        userform = UserForm()
+        return render_to_response('dashboard/login.html',{'userform':userform})
 
+# @login_required
+# def my_logout(request):
+#     request = render_to_response('dashboard/login.html')
+#     #清除cookie里保存的username
+#     logout(request)
+#     return request
 
 
 # index page
 def index(request):
     return render(request, 'dashboard/index.html')
 # car dashboard page
+@login_required
 def carOwnerChartPage(request):
     return render(request, 'dashboard/carEchartPage.html')
 # people dashboard page
+@login_required
 def peopleChartPage(request):
     return render(request, 'dashboard/peopleEChartPage.html')
 
 # get car page data
+# @login_required
 def carOwnerChart(request):
     # page 对应原页面 page 1-4
     target = request.GET.get('a', '')
@@ -71,6 +85,7 @@ def carOwnerChart(request):
             'page_4_purpose': page_4_purpose}
     return HttpResponse(json.dumps(dict), content_type='application/json')
 # get people page data
+# @login_required
 def peopleChart(request):
     target = request.GET.get('a', '')
     path = request.GET.get('path', '')
