@@ -5,6 +5,7 @@ from django.template import RequestContext
 from templates.dashboard.Connect_DB import getCarOwner, getColumnChart_p1, getLevel1Attributes, getLevel2Attributes, getPurpose, people_get_pie, people_get_path
 import json
 from django import forms
+from django.shortcuts import redirect
 from dashboard.models import User
 from django.shortcuts import render,render_to_response
 # from New_Website.settings import username, password
@@ -16,7 +17,8 @@ class UserForm(forms.Form):
     password = forms.CharField(label='password', widget=forms.PasswordInput())
 
 
-def  my_login(request):
+def my_login(request):
+    # next__ = request.get[next]
     if request.method == 'POST':
         userform = UserForm(request.POST)
         if userform.is_valid():
@@ -27,6 +29,7 @@ def  my_login(request):
                 if user.is_active:
                     login(request, user)
                     return render_to_response('dashboard/index.html', {'userform': userform})
+                    # return render_to_response(next__, {'userform': userform})
                 else:
                     return HttpResponse('wrong username or password, please re-input')
             else:
