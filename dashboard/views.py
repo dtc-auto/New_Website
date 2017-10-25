@@ -16,21 +16,23 @@ class UserForm(forms.Form):
     password = forms.CharField(label='password', widget=forms.PasswordInput())
 
 
-def my_login(request):
+def  my_login(request):
     if request.method == 'POST':
         userform = UserForm(request.POST)
         if userform.is_valid():
             username = userform.cleaned_data['username']
             password = userform.cleaned_data['password']
-
             user = authenticate(username=username, password=password)
-
             if user is not None:
                 if user.is_active:
                     login(request, user)
                     return render_to_response('dashboard/index.html', {'userform': userform})
+                else:
+                    return HttpResponse('wrong username or password, please re-input')
             else:
                 return HttpResponse('wrong username or password, please re-input')
+        else:
+            return HttpResponse('wrong username or password, please re-input')
     else:
         userform = UserForm()
         return render_to_response('dashboard/login.html',{'userform':userform})
