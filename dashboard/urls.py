@@ -15,7 +15,8 @@ urlpatterns = [
     # people dashboard page
     url(r'^people_page', peopleChartPage, name='peopleEchart'),
     url(r'^people/$', peopleChart, name='peopleEchartPage'),
-
+    # LTP dashborad page
+    url(r'^LTP_page', name='peopleEchart'),
 ]
 
 

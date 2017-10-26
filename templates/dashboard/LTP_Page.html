@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html lang="en" xmlns:color="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Detecon Big data </title>
+    <!-- echart-->
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts-all-3.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+    <!-- Bootstrap -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="{% static 'vendor/nprogress/nprogress.css' %}" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="{% static 'vendor/iCheck/skins/flat/green.css' %}" rel="stylesheet">
+    <!-- bootstrap-progressbar -->
+    <link href="{% static 'vendor/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="{% static 'polygon/custom.min.css' %}" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+</head>
+
+<body class="nav-md">
+
+<div class="container body">
+    <div class="main_container">
+        <div class="col-md-3 left_col">
+            <div class="left_col scroll-view">
+                <div class="navbar nav_title" style="border: 0;">
+                    <a href="/" class="site_title">
+                        <!--侧栏顶部图标-->
+                        <!--<i class="fa fa-paw"></i> -->
+                        <span>Back Home</span></a>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <!-- menu profile quick info -->
+                <div class="profile clearfix">
+                    <!-- 用户头像-->
+                    <div class="profile_pic">
+                        <!--<img src="images/img.jpg" alt="..." class="img-circle profile_img">-->
+                    </div>
+                    <!--/用户头像-->
+                    <div class="profile_info">
+                        <!--<span>Detecon</span>-->
+                        <!--<h2>Big data</h2>-->
+                    </div>
+                </div>
+                <!-- /menu profile quick info -->
+
+                <br/>
+
+                <!-- sidebar menu -->
+                <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                    <div class="menu_section">
+                        <!--<h3>Case</h3>-->
+                        <ul class="nav side-menu">
+                            <!--侧栏菜单-->
+                            <li><a><i class="fa fa-bar-chart-o"></i> Business Case <span
+                                    class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="auto_page.html">Product Index Analysis <br> 产品指标分析</a></li>
+                                    <li><a href="people_page.html">Forward Path Analysis <br> 传播路径分析</a></li>
+                                    <li><a href="LTP_page.html">Forward Path Analysis <br> 分词展示</a></li>
+                                </ul>
+                            </li>
+
+
+                        </ul>
+                    </div>
+
+
+                </div>
+                <!-- /sidebar menu -->
+
+            </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav ">
+            <!-- 右上角用户栏-->
+            <div class="nav_menu ">
+
+                <nav>
+                    <div class="nav toggle ">
+                        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                    </div>
+
+                    <!-- 用户栏下拉列表-->
+                    <!--<ul class="nav navbar-nav navbar-right ">-->
+                        <!--<li class="">-->
+                            <!--<a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"-->
+                               <!--aria-expanded="false">-->
+                                <!--&lt;!&ndash;<img src="images/img.jpg" alt="">&ndash;&gt;-->
+                                <!--Detecon-->
+                                <!--<span class=" fa fa-angle-down"></span>-->
+                            <!--</a>-->
+                            <!--<ul class="dropdown-menu dropdown-usermenu pull-right">-->
+                                <!--<li><a href="javascript:;"> Profile</a></li>-->
+                                <!--<li>-->
+                                    <!--<a href="javascript:;">-->
+                                        <!--<span class="badge bg-red pull-right">50%</span>-->
+                                        <!--<span>Settings</span>-->
+                                    <!--</a>-->
+                                <!--</li>-->
+                                <!--<li><a href="javascript:;">Help</a></li>-->
+                                <!--<li><a href=""><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>-->
+                            <!--</ul>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                    <!--/用户栏下拉列表-->
+
+                </nav>
+
+            </div>
+            <!--/右上角用户栏-->
+        </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+            <!-- top tiles -->
+            <div class="row tile_count">
+
+
+                <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+                    <span class="count_top"><i class="fa fa-user"></i> Total Users</span>
+                    <div class="count">30510</div>
+                </div>
+
+                <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+                    <span class="count_top"><i class="fa fa-commenting-o "></i> Total Connect</span>
+                    <div class="count ">377933</div>
+                </div>
+
+
+            </div>
+            <!-- /top tiles -->
+
+            <!--select tiles-->
+            <div class="col-lg-13 ">
+                <form method="get">
+                    <div class="form-group ">
+                        <!--<h4><label for="sel1">Select Brand</label></h4>-->
+                        <select class="form-control" id="sel1">
+                            <option selected="selected">VW</option>
+                            <option>BMW</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <!-- /select tiles-->
+
+
+
+
+
+        </div>
+        <!-- end of weather widget -->
+
+    </div>
+</div>
+
+
+<!-- footer content  -->
+<footer>
+    <div class="pull-right">
+    Detecon Big Data - <a href="/">Home</a>
+    </div>
+    <div class="clearfix"></div>
+</footer>
+<!-- /footer content -->
+
+
+<!-- jQuery -->
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap -->
+<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!-- FastClick -->
+<script src="{% static 'vendor/fastclick/lib/fastclick.js' %}"></script>
+<!-- NProgress -->
+<script src="{% static 'vendor/nprogress/nprogress.js' %}"></script>
+<!-- bootstrap-progressbar -->
+<script src="{% static 'vendor/bootstrap-progressbar/bootstrap-progressbar.min.js' %}"></script>
+<!-- iCheck -->
+<script src="{% static 'vendor/icheck/icheck.min.js' %}"></script>
+<!-- Skycons -->
+<script src="{% static 'vendor/skycons/skycons.js' %}"></script>
+<!-- JQVMap -->
+<script src="{% static 'vendor/jqvmap/dist/jquery.vmap.js' %}"></script>
+<script src="{% static 'vendor/jqvmap/dist/maps/jquery.vmap.world.js' %}"></script>
+<script src="{% static 'vendor/jqvmap/examples/js/jquery.vmap.sampledata.js' %}"></script>
+<!-- Custom Theme Scripts -->
+<script src="{% static 'polygon/custom.min.js' %}"></script>
+
+</body>
+</html>
