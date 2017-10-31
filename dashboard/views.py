@@ -117,6 +117,14 @@ def LTPChart(request):
           "&pattern=pos" \
           "&format=plain".format(text)
     result = urllib.request.urlopen(url) # POST method
-    content = result.read().strip().decode('utf-8').replace(" ", "     ")
-    # print(content)
-    return HttpResponse(json.dumps(content), content_type='application/json')
+    content = result.read().strip().decode('utf-8')
+    content_list = content.split()
+    return_text = ''
+    for i in range(0,len(content_list)):
+        if '__' in content_list[i]:
+            word = content_list[i].replace("__", "_ _").replace(" _", "(")
+        else:
+            word = content_list[i].replace("_", "(")
+        word += ')  '
+        return_text += word
+    return HttpResponse(json.dumps(return_text), content_type='application/json')
