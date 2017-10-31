@@ -114,9 +114,9 @@ def LTPChart(request):
     url = "https://api.ltp-cloud.com/analysis/?" \
           "api_key=C1H4c7k3j9LIApERArIRNF7ARHKRIPdqWI9xhMue&" \
           "text={0}" \
-          "&pattern=ws" \
+          "&pattern=pos" \
           "&format=plain".format(text)
     result = urllib.request.urlopen(url) # POST method
-    content = result.read().strip().decode('utf-8').replace(" ", " / ")
+    content = result.read().strip().decode('utf-8').replace(" ", "     ")
     # print(content)
     return HttpResponse(json.dumps(content), content_type='application/json')
