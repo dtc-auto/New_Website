@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from django.http import HttpResponse,HttpResponseRedirect
-from django.template import RequestContext
+from django.http import HttpResponse
+import urllib.request
+import urllib.parse
+import urllib
 from templates.dashboard.Connect_DB import getCarOwner, getColumnChart_p1, getLevel1Attributes, getLevel2Attributes, getPurpose, people_get_pie, people_get_path
 import json
 from django import forms
-from django.shortcuts import redirect
-from dashboard.models import User
 from django.shortcuts import render,render_to_response
-# from New_Website.settings import username, password
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 
@@ -59,6 +58,9 @@ def carOwnerChartPage(request):
 @login_required
 def peopleChartPage(request):
     return render(request, 'dashboard/peopleEChartPage.html')
+@login_required
+def LTPChartPage(request):
+    return render(request, 'dashboard/LTP_Page.html')
 
 # get car page data
 # @login_required
@@ -106,4 +108,14 @@ def peopleChart(request):
             }
     return HttpResponse(json.dumps(dict), content_type='application/json')
 
-
+def LTPChart(text):
+    text = urllib.parse.quote(text.encode('utf8'))
+    url = "https://api.ltp-cloud.com/analysis/?" \
+          "api_key=C1H4c7k3j9LIApERArIRNF7ARHKRIPdqWI9xhMue&" \
+          "text={0}" \
+          "&pattern=ws" \
+          "&format=plain".format(text)
+    result = urllib.request.urlopen(url) # POST method
+    content = result.read().strip().decode('utf-8')
+    # print(content)
+    return HttpResponse(json.dumps(content), content_type='application/json')
