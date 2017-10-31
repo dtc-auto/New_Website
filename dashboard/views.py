@@ -117,6 +117,6 @@ def LTPChart(request):
           "&pattern=ws" \
           "&format=plain".format(text)
     result = urllib.request.urlopen(url) # POST method
-    content = result.read().strip().decode('utf-8')
+    content = result.read().strip().decode('utf-8').replace(" ", " / ")
     # print(content)
     return HttpResponse(json.dumps(content), content_type='application/json')
