@@ -108,7 +108,8 @@ def peopleChart(request):
             }
     return HttpResponse(json.dumps(dict), content_type='application/json')
 
-def LTPChart(text):
+def LTPChart(request):
+    text = request.GET.get('a', '')
     text = urllib.parse.quote(text.encode('utf8'))
     url = "https://api.ltp-cloud.com/analysis/?" \
           "api_key=C1H4c7k3j9LIApERArIRNF7ARHKRIPdqWI9xhMue&" \
