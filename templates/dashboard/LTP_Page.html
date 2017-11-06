@@ -144,9 +144,13 @@
                     </div>
                 </div>
                 <br><br>
-                <h2> Analytical results/解析结果</h2>
+                <h2> Segmentation results/分词解析</h2>
                 <div class="span10">
-                    <textarea spellcheck="false"  class="form-control" rows=4 id="outputText"></textarea>
+                    <textarea spellcheck="false"  class="form-control" rows=4 id="outputTextWord"></textarea>
+                </div>
+                <h2> Part of speech/词性解析</h2>
+                <div class="span10">
+                    <textarea spellcheck="false"  class="form-control" rows=4 id="outputTextPart"></textarea>
                 </div>
             </div>
 
@@ -157,7 +161,8 @@
                 $("input[id^='analysis']").click(function(){
                  var text = $("#inputText").val();
                     $.getJSON('{% url 'LTPPage' %}',{'a':text}, function(ret){
-                        $("#outputText").val(ret);
+                        $("#outputTextPart").val(ret.pos);
+                        $("#outputTextWord").val(ret.ws);
                      });
                   });
              });
