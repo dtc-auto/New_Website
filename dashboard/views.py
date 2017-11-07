@@ -108,6 +108,7 @@ def peopleChart(request):
             }
     return HttpResponse(json.dumps(dict), content_type='application/json')
 
+# get LTP
 def LTPChart(request):
     text = request.GET.get('a', '')
     text = urllib.parse.quote(text.encode('utf8'))
@@ -117,26 +118,26 @@ def LTPChart(request):
           "text={0}" \
           "&pattern=pos" \
           "&format=plain".format(text)
+    result_pos = urllib.request.urlopen(url_pos)  # POST method
+    content_pos = result_pos.read().strip().decode('utf-8')
+    content_pos_list = content_pos.split()
+    return_text_pos = ''
+    for i in range(0,len(content_pos_list)):
+        if '__' in content_pos_list[i]:
+            word = content_pos_list[i].replace("__", "_ _").replace(" _", "(")
+        else:
+            word = content_pos_list[i].replace("_", "(")
+        word += ')  '
+        return_text_pos += word
+
     # 分词url
     url_ws = "https://api.ltp-cloud.com/analysis/?" \
           "api_key=C1H4c7k3j9LIApERArIRNF7ARHKRIPdqWI9xhMue&" \
           "text={0}" \
           "&pattern=ws" \
           "&format=plain".format(text)
-
-    result_pos = urllib.request.urlopen(url_pos)  # POST method
     result_ws = urllib.request.urlopen(url_ws)  # POST method
-    content_pos = result_pos.read().strip().decode('utf-8')
-    content_ws = result_ws.read().strip().decode('utf-8')
-    content_ws_list = content_ws.split()
-    content_list = content_pos.split()
-    return_text = ''
-    for i in range(0,len(content_list)):
-        if '__' in content_list[i]:
-            word = content_list[i].replace("__", "_ _").replace(" _", "(")
-        else:
-            word = content_list[i].replace("_", "(")
-        word += ')  '
-        return_text += word
-    r_dtc = {'pos': return_text, 'ws': content_ws_list}
+    content_ws = result_ws.read().strip().decode('utf-8').replace(" ", "    ")
+    return_text_ws = content_ws
+    r_dtc = {'pos': return_text_pos, 'ws': return_text_ws}
     return HttpResponse(json.dumps(r_dtc), content_type='application/json')
