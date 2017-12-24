@@ -3,7 +3,7 @@ from __future__ import unicode_literals,division
 import pymssql
 import pandas as pd
 
-server = "sqldev02\sql"
+server = "127.0.0.1"
 user = "dtc"
 password = "asdf1234"
 
@@ -342,5 +342,3 @@ def people_get_path(company):
         path_data["links"].append(dit_)
 
     return path_data
-
-# people_get_path('BMW')

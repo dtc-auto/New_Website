@@ -1,6 +1,6 @@
 from django.conf.urls import *
 from . import views
-from dashboard.views import carOwnerChartPage, carOwnerChart, peopleChartPage, peopleChart, my_login, LTPChartPage, LTPChart
+from dashboard.views import carOwnerChartPage, carOwnerChart, peopleChartPage, peopleChart, my_login, LTPChartPage, LTPChart, CPChartPage, CPChart
 urlpatterns = [
     # index
     url(r'^$', views.index, name='index'),
@@ -18,6 +18,9 @@ urlpatterns = [
     # LTP dashborad page
     url(r'^LTP_page', LTPChartPage, name='LTPChart'),
     url(r'^LTP/$', LTPChart, name='LTPPage'),
+    # CP dashboard pag
+    url(r'^CP_page', CPChartPage, name='CPChart'),
+    url(r'^CP/$', CPChart, name='CP_Page'),
 ]
 
 

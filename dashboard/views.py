@@ -61,6 +61,9 @@ def peopleChartPage(request):
 @login_required
 def LTPChartPage(request):
     return render(request, 'dashboard/LTP_Page.html')
+@login_required
+def CPChart(request):
+    return render(request, 'dashboard/CP_Page.html')
 
 # get car page data
 # @login_required
@@ -141,3 +144,8 @@ def LTPChart(request):
     return_text_ws = content_ws
     r_dtc = {'pos': return_text_pos, 'ws': return_text_ws}
     return HttpResponse(json.dumps(r_dtc), content_type='application/json')
+
+# get CP
+# @login_required
+def CPChartPage(request):
+    return render(request, 'dashboard/CP_Page.html')

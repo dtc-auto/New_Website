@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html lang="en" xmlns:color="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Detecon Big data </title>
+    <!-- echart-->
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts-all-3.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+    <!-- Bootstrap -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="{% static 'vendor/nprogress/nprogress.css' %}" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="{% static 'vendor/iCheck/skins/flat/green.css' %}" rel="stylesheet">
+    <!-- bootstrap-progressbar -->
+    <link href="{% static 'vendor/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="{% static 'polygon/custom.min.css' %}" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+</head>
+
+<body class="nav-md">
+
+<div class="container body">
+    <div class="main_container">
+        <div class="col-md-3 left_col">
+            <div class="left_col scroll-view">
+                <div class="navbar nav_title" style="border: 0;">
+                    <a href="/" class="site_title">
+                        <!--侧栏顶部图标-->
+                        <!--<i class="fa fa-paw"></i> -->
+                        <span>Back Home</span></a>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <!-- menu profile quick info -->
+                <div class="profile clearfix">
+                    <!-- 用户头像-->
+                    <div class="profile_pic">
+                        <!--<img src="images/img.jpg" alt="..." class="img-circle profile_img">-->
+                    </div>
+                    <!--/用户头像-->
+                    <div class="profile_info">
+                        <!--<span>Detecon</span>-->
+                        <!--<h2>Big data</h2>-->
+                    </div>
+                </div>
+                <!-- /menu profile quick info -->
+
+                <br/>
+
+                <!-- sidebar menu -->
+                <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                    <div class="menu_section">
+                        <!--<h3>Case</h3>-->
+                        <ul class="nav side-menu">
+                            <!--侧栏菜单-->
+                            <li><a><i class="fa fa-bar-chart-o"></i> Business Case <span
+                                    class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="auto_page.html">Product Index Analysis <br> 产品指标分析</a></li>
+                                    <li><a href="people_page.html">Forward Path Analysis <br> 传播路径分析</a></li>
+                                    <li><a href="LTP_page.html">Natural Language Processing<br> 自然语言处理</a></li>
+                                    <li><a href="CP_page.html" >Costomer Partition <br> 客户群体划分</a></li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </div>
+
+
+                </div>
+                <!-- /sidebar menu -->
+
+            </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav ">
+            <!-- 右上角用户栏-->
+            <div class="nav_menu ">
+
+                <nav>
+                    <div class="nav toggle ">
+                        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                    </div>
+
+                </nav>
+
+            </div>
+            <!--/右上角用户栏-->
+        </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+            <!-- top tiles -->
+            <div class="row tile_count">
+
+
+                <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+                    <span class="count_top"><i class="fa fa-user"></i> Total Users/总用户数</span>
+                    <div class="count">136716</div>
+                </div>
+
+                <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+                    <span class="count_top"><i class="fa fa-commenting-o "></i> Evaluation Dimension/评价维度</span>
+                    <div class="count " style=" width:100px; height:100px; margin:0 auto; ">64</div>
+                </div>
+
+
+            </div>
+            <!-- /top tiles -->
+
+            <!--接收数据库返回信息-->
+            <script type="text/javascript">
+                $(document).ready(function(){
+                  $("#sel1").change(function(){
+                    var company = $("#sel1").val();
+                    $.getJSON('{% url 'peopleEchartPage' %}',{'a':company}, function(ret){
+                        drawPieAge(ret.people_get_pie);
+                        drawPieGender(ret.people_get_pie);
+                        drawPieRegion(ret.people_get_pie);
+                        drawPieCityLevel(ret.people_get_pie);
+                    })
+                    $.getJSON('{% url 'peopleEchartPage' %}',{'path':company}, function(ret){
+                        drawPath(ret.path)
+                    })
+                });
+              });
+                 var company = $("#sel1").val();
+                    $.getJSON('{% url 'peopleEchartPage' %}',{'a':company}, function(ret){
+                        drawPieAge(ret.people_get_pie);
+                        drawPieGender(ret.people_get_pie);
+                        drawPieRegion(ret.people_get_pie);
+                        drawPieCityLevel(ret.people_get_pie);
+                    })
+                    $.getJSON('{% url 'peopleEchartPage' %}',{'path':company}, function(ret){
+                        drawPath(ret.path)
+                    })
+
+
+
+            </script>
+            <!--/接收数据库返回信息-->
+
+            <!-- 图表行-->
+
+
+            <!-- plot 行 -->
+            <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                <h3>Precision Marketing/精准营销</h3>
+                </div>
+            </div>
+            </div>
+
+            <div class="row">
+                <!-- plot 图框 -->
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <!-- 标题-->
+                        <div class="col-md-9">
+                            <h2>Cluster Analysis<br>聚类分析</h2>
+
+
+                            <div class="clearfix"></div>
+                        </div>
+                        <!--/标题-->
+                        <!--CP_chart-->
+                        <div id="line_2_purpose" style="width: 100%;height:850%;">
+                            <script type="text/javascript">
+                            var dom = document.getElementById("line_2_purpose");
+                            var myChart = echarts.init(dom);
+                            var app = {};
+                            option = null;
+                            myChart.showLoading();
+
+                            function drawPath(webkitDep){
+                                myChart.hideLoading();
+                                option = {
+    <!--title: {-->
+        <!--text: '大规模散点图'-->
+    <!--},-->
+    tooltip : {
+        trigger: 'axis',
+        showDelay : 0,
+        axisPointer:{
+            show: true,
+            type : 'cross',
+            lineStyle: {
+                type : 'dashed',
+                width : 1
+            }
+        },
+        zlevel: 1
+    },
+    legend: {
+        <!--data:['sin']-->
+    },
+    toolbox: {
+        show : true,
+        feature : {
+            mark : {show: true},
+            dataZoom : {show: true},
+            dataView : {show: true, readOnly: false},
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    xAxis : [
+        {
+            type : 'value',
+            scale:true
+        }
+    ],
+    yAxis : [
+        {
+            type : 'value',
+            scale:true
+        }
+    ],
+    series : [
+
+        {
+            name:'cos',
+            type:'scatter',
+            large: true,
+            symbolSize: 2,
+            data: (function () {
+                var d = [];
+                var len = 20000;
+                var x = 0;
+                while (len--) {
+                    x = (Math.random() * 10).toFixed(3) - 0;
+                    d.push([
+                        x,
+                        //Math.random() * 10
+                        (Math.cos(x) - x * (len % 2 ? 0.1 : -0.1) * Math.random()).toFixed(3) - 0
+                    ]);
+                }
+                //console.log(d)
+                return d;
+            })()
+        }
+    ]
+};
+
+                                myChart.setOption(option);
+                            }
+                            if (option && typeof option === "object") {
+                                myChart.setOption(option, true);
+                            }
+
+                            </script>
+                        </div>
+                        <!--/chart_path-->
+                    </div>
+                </div>
+                <!--/path 图框 -->
+            </div>
+            <br/>
+            <!--/Path 行 -->
+
+
+            <!--/图表行-->
+
+        </div>
+        <!-- end of weather widget -->
+
+    </div>
+</div>
+
+
+<!-- footer content  -->
+<footer>
+    <div class="pull-right">
+    Detecon Big Data - <a href="/">Home</a>
+    </div>
+    <div class="clearfix"></div>
+</footer>
+<!-- /footer content -->
+
+
+<!-- jQuery -->
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap -->
+<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!-- FastClick -->
+<script src="{% static 'vendor/fastclick/lib/fastclick.js' %}"></script>
+<!-- NProgress -->
+<script src="{% static 'vendor/nprogress/nprogress.js' %}"></script>
+<!-- bootstrap-progressbar -->
+<script src="{% static 'vendor/bootstrap-progressbar/bootstrap-progressbar.min.js' %}"></script>
+<!-- iCheck -->
+<script src="{% static 'vendor/icheck/icheck.min.js' %}"></script>
+<!-- Skycons -->
+<script src="{% static 'vendor/skycons/skycons.js' %}"></script>
+<!-- JQVMap -->
+<script src="{% static 'vendor/jqvmap/dist/jquery.vmap.js' %}"></script>
+<script src="{% static 'vendor/jqvmap/dist/maps/jquery.vmap.world.js' %}"></script>
+<script src="{% static 'vendor/jqvmap/examples/js/jquery.vmap.sampledata.js' %}"></script>
+<!-- Custom Theme Scripts -->
+<script src="{% static 'polygon/custom.min.js' %}"></script>
+
+</body>
+</html>
