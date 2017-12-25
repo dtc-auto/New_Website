@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.http import HttpResponse
+import csv
 import urllib.request
 import urllib.parse
 import urllib
-from templates.dashboard.Connect_DB import getCarOwner, getColumnChart_p1, getLevel1Attributes, getLevel2Attributes, getPurpose, people_get_pie, people_get_path
+from templates.dashboard.Connect_DB \
+    import getCarOwner, getColumnChart_p1, getLevel1Attributes, getLevel2Attributes, getPurpose, people_get_pie, people_get_path, CP_get_cluster
 import json
 from django import forms
 from django.shortcuts import render,render_to_response
@@ -62,7 +64,7 @@ def peopleChartPage(request):
 def LTPChartPage(request):
     return render(request, 'dashboard/LTP_Page.html')
 @login_required
-def CPChart(request):
+def CPChartPage(request):
     return render(request, 'dashboard/CP_Page.html')
 
 # get car page data
@@ -147,5 +149,9 @@ def LTPChart(request):
 
 # get CP
 # @login_required
-def CPChartPage(request):
-    return render(request, 'dashboard/CP_Page.html')
+def CPChart(request):
+    # r_dtc = pd.read_csv('../dashboard/static/plot.csv', usecols=['value', 'slevel'], encoding="gb2312")
+    data_cluster = CP_get_cluster()
+    dict_ = {'cluster': data_cluster}
+    return HttpResponse(json.dumps(dict_), content_type='application/json')
+

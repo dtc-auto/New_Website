@@ -342,3 +342,21 @@ def people_get_path(company):
         path_data["links"].append(dit_)
 
     return path_data
+
+# CP_page
+def CP_get_cluster():
+    sql = """select value, slevel
+                from [BDCI].[dbo].[Source_Weibo_Cluster]
+                """
+    conn = pymssql.connect(server, user, password, "BDCI")
+    df = pd.read_sql_query(sql, conn)
+    x = df['value'].tolist()
+    y = df['slevel'].tolist()
+    cluster_data = []
+    for i in range(len(x)):
+        x_ = round(float(x[i])*10, 2)
+        y_ = round(float(y[i])*10, 2)
+        if 0 < x_ <= 10 and 0 < y_ <= 10:
+            ele = [x_, y_]
+            cluster_data.append(ele)
+    return cluster_data

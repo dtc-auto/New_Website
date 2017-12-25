@@ -130,29 +130,12 @@
             <!--接收数据库返回信息-->
             <script type="text/javascript">
                 $(document).ready(function(){
-                  $("#sel1").change(function(){
-                    var company = $("#sel1").val();
-                    $.getJSON('{% url 'peopleEchartPage' %}',{'a':company}, function(ret){
-                        drawPieAge(ret.people_get_pie);
-                        drawPieGender(ret.people_get_pie);
-                        drawPieRegion(ret.people_get_pie);
-                        drawPieCityLevel(ret.people_get_pie);
+                        $.getJSON('{% url 'CPEchartPage' %}', function(ret){
+                        drawPLot(ret.cluster)
+
                     })
-                    $.getJSON('{% url 'peopleEchartPage' %}',{'path':company}, function(ret){
-                        drawPath(ret.path)
-                    })
-                });
               });
-                 var company = $("#sel1").val();
-                    $.getJSON('{% url 'peopleEchartPage' %}',{'a':company}, function(ret){
-                        drawPieAge(ret.people_get_pie);
-                        drawPieGender(ret.people_get_pie);
-                        drawPieRegion(ret.people_get_pie);
-                        drawPieCityLevel(ret.people_get_pie);
-                    })
-                    $.getJSON('{% url 'peopleEchartPage' %}',{'path':company}, function(ret){
-                        drawPath(ret.path)
-                    })
+
 
 
 
@@ -192,15 +175,31 @@
                             option = null;
                             myChart.showLoading();
 
-                            function drawPath(webkitDep){
+                            function drawPLot(data_cluster){
                                 myChart.hideLoading();
                                 option = {
-    <!--title: {-->
-        <!--text: '大规模散点图'-->
-    <!--},-->
+
+    grid: {
+        left: '3%',
+        right: '7%',
+        bottom: '3%',
+        containLabel: true
+    },
     tooltip : {
-        trigger: 'axis',
+        // trigger: 'axis',
         showDelay : 0,
+        formatter : function (params) {
+            if (params.value.length > 1) {
+                return params.seriesName + ' :<br/>'
+                + params.value[0] + '价值观 '
+                + params.value[1] + '社会阶层';
+            }
+            else {
+                return params.seriesName + ' :<br/>'
+                + params.name + ' : '
+                + params.value + '社会阶层 ';
+            }
+        },
         axisPointer:{
             show: true,
             type : 'cross',
@@ -208,56 +207,72 @@
                 type : 'dashed',
                 width : 1
             }
-        },
-        zlevel: 1
-    },
-    legend: {
-        <!--data:['sin']-->
+        }
     },
     toolbox: {
-        show : true,
-        feature : {
-            mark : {show: true},
-            dataZoom : {show: true},
-            dataView : {show: true, readOnly: false},
-            restore : {show: true},
-            saveAsImage : {show: true}
+        feature: {
+            dataZoom: {},
+            brush: {
+                type: ['rect', 'polygon', 'clear']
+            }
         }
+    },
+    brush: {
+    },
+    legend: {
+        data: ['用户'],
+        left: 'center'
     },
     xAxis : [
         {
             type : 'value',
-            scale:true
+            name: '社会阶层',
+            scale:true,
+            axisLabel : {
+                formatter: '{value}'
+            },
+            splitLine: {
+                show: false
+            }
         }
     ],
     yAxis : [
         {
             type : 'value',
-            scale:true
+            name: '价值观',
+            scale:true,
+            axisLabel : {
+                formatter: '{value}'
+            },
+            splitLine: {
+                show: false
+            }
         }
     ],
     series : [
 
         {
-            name:'cos',
+            name:'用户',
             type:'scatter',
-            large: true,
-            symbolSize: 2,
-            data: (function () {
-                var d = [];
-                var len = 20000;
-                var x = 0;
-                while (len--) {
-                    x = (Math.random() * 10).toFixed(3) - 0;
-                    d.push([
-                        x,
-                        //Math.random() * 10
-                        (Math.cos(x) - x * (len % 2 ? 0.1 : -0.1) * Math.random()).toFixed(3) - 0
-                    ]);
-                }
-                //console.log(d)
-                return d;
-            })()
+            data: data_cluster,
+            markArea: {
+                silent: true,
+                itemStyle: {
+                    normal: {
+                        color: 'transparent',
+                        borderWidth: 1,
+                        borderType: 'dashed'
+                    }
+                },
+                data: [[{
+                    name: '分布区间',
+                    xAxis: 'min',
+                    yAxis: 'min'
+                }, {
+                    xAxis: 'max',
+                    yAxis: 'max'
+                }]]
+            },
         }
     ]
 };

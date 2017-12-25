@@ -20,7 +20,7 @@ urlpatterns = [
     url(r'^LTP/$', LTPChart, name='LTPPage'),
     # CP dashboard pag
     url(r'^CP_page', CPChartPage, name='CPChart'),
-    url(r'^CP/$', CPChart, name='CP_Page'),
+    url(r'^CP/$', CPChart, name='CPEchartPage'),
 ]
 
 
