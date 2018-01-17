@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Detecon Big data </title>
+
+
+    <!-- Bootstrap -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="{% static 'vendor/nprogress/nprogress.css' %}" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="{% static 'vendor/iCheck/skins/flat/green.css' %}" rel="stylesheet">
+    <!-- bootstrap-progressbar -->
+    <link href="{% static 'vendor/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="{% static 'polygon/custom.min.css' %}" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <!--CX-->
+    <link href="http://file.chexun.com/css/common/base.css" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/auto/pzcs.css' %}" rel="stylesheet">
+    <script type="text/javascript" src="http://file.chexun.com/scripts/auto/auto.js"></script>
+    <script type="text/javascript" src="http://file.chexun.com/script_auto/pzcs.js"></script>
+    <script type="text/javascript" src="http://file.chexun.com/script_auto/library.js"></script>
+    <script type="text/javascript" src="{% static 'js/v4/carParameter-2.1.js' %}"></script>
+
+</head>
+
+<body class="nav-md">
+
+<div class="container body">
+    <div class="main_container">
+        <div class="col-md-3 left_col">
+            <div class="left_col scroll-view">
+                <div class="navbar nav_title" style="border: 0;">
+                    <a href="/" class="site_title">
+                        <span>Back Home</span></a>
+                </div>
+
+                <!--<div class="clearfix"></div>-->
+
+                <!-- menu profile quick info -->
+                <div class="profile clearfix">
+                    <!-- 用户头像-->
+                    <div class="profile_pic">
+                        <!--<img src="images/img.jpg" alt="..." class="img-circle profile_img">-->
+                    </div>
+                    <!--/用户头像-->
+                    <div class="profile_info">
+                        <!--<span>Detecon</span>-->
+                        <!--<h2>Big data</h2>-->
+                    </div>
+                </div>
+                <!-- /menu profile quick info -->
+
+                <br/>
+
+                <!-- sidebar menu -->
+                <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                    <div class="menu_section">
+                        <!--<h3>Case</h3>-->
+                        <ul class="nav side-menu">
+                            <!--侧栏菜单-->
+                            <li><a><i class="fa fa-bar-chart-o"></i> Business Case <span
+                                    class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="auto_page.html">Product Index Analysis <br> 产品指标分析</a></li>
+                                    <li><a href="people_page.html">Forward Path Analysis <br> 传播路径分析</a></li>
+                                    <li><a href="LTP_page.html">Natural Language Processing<br> 自然语言处理</a></li>
+                                    <li><a href="CP_page.html">Costomer Partition <br> 客户群体划分</a></li>
+                                    <li><a href="Config_page.html">Main Model Parameters Display <br> 主流车型参数展示</a></li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </div>
+
+
+                </div>
+                <!-- /sidebar menu -->
+
+            </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav ">
+            <!-- 右上角用户栏-->
+            <div class="nav_menu ">
+
+                <nav>
+                    <div class="nav toggle ">
+                        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                    </div>
+
+                </nav>
+
+            </div>
+            <!--/右上角用户栏-->
+        </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+            <!-- top tiles -->
+            <div class="row tile_count">
+                <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+                    <span class="count_top"><i class="fa fa-user"></i> Total Brand/总品牌数</span>
+                    <div class="count" style=" width:100px; height:100px; margin:0 auto; ">169</div>
+                </div>
+
+                <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+                    <span class="count_top"><i class="fa fa-commenting-o "></i> Total Auto Models/总车型数</span>
+                    <div class="count ">24998</div>
+                </div>
+            </div>
+            <!-- /top tiles -->
+
+            <!--<div class="wrap">-->
+
+            <div class="container">
+                <div class="blank10"></div>
+
+
+                <!--addCarParameter-->
+
+                <script type="text/javascript">
+	var _brandJson = {"D":[{"id":23,"name":"大众"},{"id":24,"name":"东南"},{"id":25,"name":"东风"},{"id":26,"name":"大发"},{"id":27,"name":"道奇"},{"id":561,"name":"大迪"},{"id":569,"name":"东风风神"},{"id":1090,"name":"DS"},{"id":100220,"name":"达契亚"},{"id":100381,"name":"东风风度"},{"id":100780,"name":"东风风行"}],"F":[{"id":29,"name":"福特"},{"id":30,"name":"丰田"},{"id":31,"name":"菲亚特"},{"id":32,"name":"福田"},{"id":33,"name":"福迪"},{"id":589,"name":"法拉利"},{"id":100160,"name":"Fisker"},{"id":100480,"name":"福汽启腾"},{"id":100920,"name":"法拉第未来"}],"G":[{"id":46,"name":"广汽吉奥"},{"id":671,"name":"广汽"},{"id":1030,"name":"GMC"},{"id":1050,"name":"光冈"},{"id":1130,"name":"观致汽车"},{"id":100466,"name":"Gumpert"}],"A":[{"id":2,"name":"奥迪"},{"id":789,"name":"阿斯顿·马丁"},{"id":910,"name":"阿尔法罗密欧"},{"id":101020,"name":"ALPINA"},{"id":101180,"name":"ARCFOX"}],"B":[{"id":6,"name":"奔驰"},{"id":7,"name":"本田"},{"id":8,"name":"别克"},{"id":9,"name":"宝马"},{"id":10,"name":"标致"},{"id":11,"name":"比亚迪"},{"id":12,"name":"北汽制造"},{"id":14,"name":"保时捷"},{"id":508,"name":"奔腾"},{"id":709,"name":"宝骏"},{"id":809,"name":"宾利"},{"id":829,"name":"布加迪"},{"id":1150,"name":"北京汽车"},{"id":1151,"name":"北汽威旺"},{"id":100100,"name":"巴博斯"},{"id":100520,"name":"北汽幻速"},{"id":100600,"name":"北汽新能源"},{"id":100860,"name":"宝沃"},{"id":101000,"name":"比速汽车"}],"C":[{"id":18,"name":"昌河"},{"id":19,"name":"长安"},{"id":20,"name":"长城"},{"id":100542,"name":"长安欧尚"},{"id":100640,"name":"成功汽车"}],"L":[{"id":21,"name":"猎豹汽车"},{"id":55,"name":"力帆"},{"id":56,"name":"铃木"},{"id":57,"name":"陆风"},{"id":58,"name":"雷诺"},{"id":59,"name":"林肯"},{"id":60,"name":"路虎"},{"id":61,"name":"雷克萨斯"},{"id":64,"name":"路特斯"},{"id":609,"name":"兰博基尼"},{"id":891,"name":"劳斯莱斯"},{"id":930,"name":"理念"},{"id":970,"name":"劳伦士"},{"id":990,"name":"莲花汽车"},{"id":100680,"name":"陆地方舟"},{"id":100720,"name":"雷丁"},{"id":100840,"name":"LOCAL MOTORS"},{"id":101100,"name":"LYNK&CO"}],"M":[{"id":66,"name":"马自达"},{"id":67,"name":"MG"},{"id":70,"name":"MINI"},{"id":769,"name":"玛莎拉蒂"},{"id":849,"name":"迈巴赫"},{"id":100080,"name":"迈凯轮"},{"id":100320,"name":"摩根"}],"N":[{"id":909,"name":"纳智捷"},{"id":100420,"name":"Noble"}],"O":[{"id":72,"name":"欧宝"},{"id":73,"name":"讴歌"},{"id":100401,"name":"欧朗"}],"H":[{"id":37,"name":"海马"},{"id":38,"name":"红旗"},{"id":39,"name":"华普"},{"id":40,"name":"哈飞"},{"id":42,"name":"悍马"},{"id":468,"name":"华泰"},{"id":567,"name":"黄海"},{"id":649,"name":"汇众"},{"id":100180,"name":"哈弗"},{"id":100200,"name":"恒天"},{"id":100400,"name":"海格"},{"id":100465,"name":"Hennessey "},{"id":100700,"name":"华颂"},{"id":100940,"name":"华泰新能源"},{"id":100960,"name":"汉腾汽车"}],"I":[{"id":100464,"name":"Icona"}],"J":[{"id":44,"name":"Jeep"},{"id":45,"name":"吉利"},{"id":48,"name":"捷豹"},{"id":49,"name":"金杯"},{"id":50,"name":"江淮"},{"id":729,"name":"江铃"},{"id":100461,"name":"九龙"},{"id":100462,"name":"金龙"},{"id":100463,"name":"金旅"},{"id":100660,"name":"江铃集团轻汽"},{"id":100980,"name":"江铃集团新能源"}],"K":[{"id":52,"name":"凯迪拉克"},{"id":53,"name":"克莱斯勒"},{"id":562,"name":"开瑞"},{"id":869,"name":"柯尼塞克"},{"id":1070,"name":"凯佰赫"},{"id":100440,"name":"KTM"},{"id":100441,"name":"卡尔森"},{"id":100500,"name":"卡威"},{"id":100620,"name":"凯翼"},{"id":100800,"name":"康迪"}],"T":[{"id":100040,"name":"腾势"},{"id":100241,"name":"TESLA"},{"id":100242,"name":"特雷沃"},{"id":100243,"name":"特纳蒙塔纳"},{"id":100560,"name":"泰卡特"}],"W":[{"id":92,"name":"沃尔沃"},{"id":529,"name":"威麟"},{"id":889,"name":"威兹曼"},{"id":100240,"name":"沃克斯豪尔"},{"id":100360,"name":"五十铃"},{"id":100544,"name":"五菱汽车"},{"id":100820,"name":"威蒙积泰"},{"id":101040,"name":"WEY"},{"id":101060,"name":"威马汽车"},{"id":101080,"name":"蔚来"}],"Q":[{"id":75,"name":"起亚"},{"id":76,"name":"奇瑞"},{"id":100060,"name":"启辰"},{"id":100900,"name":"前途"},{"id":101160,"name":"奇点"}],"P":[{"id":892,"name":"帕加尼"},{"id":100280,"name":"PGO"}],"S":[{"id":81,"name":"三菱"},{"id":82,"name":"斯柯达"},{"id":83,"name":"斯巴鲁"},{"id":84,"name":"萨博"},{"id":85,"name":"双龙"},{"id":86,"name":"双环"},{"id":93,"name":"上汽通用五菱"},{"id":530,"name":"Smart"},{"id":890,"name":"世爵"},{"id":100120,"name":"上汽大通"},{"id":100300,"name":"Scion"},{"id":100361,"name":"思铭"},{"id":100362,"name":"SPIRRA"},{"id":100363,"name":"SSC"},{"id":100540,"name":"陕汽通家"},{"id":100541,"name":"绅宝"},{"id":101120,"name":"SWM斯威汽车"}],"R":[{"id":78,"name":"日产"},{"id":79,"name":"荣威"},{"id":428,"name":"瑞麒"},{"id":100380,"name":"如虎"}],"Y":[{"id":35,"name":"永源"},{"id":100,"name":"一汽"},{"id":101,"name":"英菲尼迪"},{"id":566,"name":"依维柯"},{"id":631,"name":"野马汽车"},{"id":100261,"name":"亚琛施纳泽"},{"id":100580,"name":"英致"},{"id":100740,"name":"御捷"},{"id":101200,"name":"云度新能源"}],"X":[{"id":95,"name":"现代"},{"id":96,"name":"雪佛兰"},{"id":97,"name":"雪铁龙"},{"id":98,"name":"夏利"},{"id":950,"name":"西雅特"},{"id":100561,"name":"新凯"}],"Z":[{"id":103,"name":"中华"},{"id":104,"name":"中兴"},{"id":105,"name":"众泰"},{"id":100260,"name":"ZENVO"},{"id":100340,"name":"之诺"},{"id":100760,"name":"知豆"}]};
+	var _companySeriesJson = [];
+	var _yearModelJson = [];
+	$(function() {
+		/*控制三个选车区域的隐藏显示*/
+		$(document).bind("click",function(e) {
+					var target = $(e.target);
+					if (target.closest("#brandDiv").length == 0
+							&& target.closest(".selectBrand b").length == 0) {
+						$("#brandDiv").hide();
+					}
+					if (target.closest("#seriesDiv").length == 0
+							&& target.closest(".selectCxi b").length == 0) {
+						$("#seriesDiv").hide();
+					}
+					if (target.closest("#modelDiv").length == 0
+							&& target.closest(".selectCmodels b").length == 0) {
+						$("#modelDiv").hide();
+					}
+				})
+		$(".selectBrand b").click(function() {
+			$("#brandDiv").toggle();
+		})
+		$(".selectCxi b").click(function() {
+			$("#seriesDiv").toggle();
+		})
+		$(".selectCmodels b").click(function() {
+			$("#modelDiv").toggle();
+		})
+		/* 字母 品牌点击事件*/
+		$("#letterList a").click(function() {
+			selectLetter($(this).attr("let"));
+		});
+
+		$(document).on("click", "#brandArea li a", function() {
+			var brandId = $(this).attr("let"), brandName = $(this).html();
+			selectBrand(brandId, brandName);
+		});
+
+
+		/*厂商车系点击事件*/
+		$(document).on("click", "#companyList1 a", function() {
+			selectCompany($(this).attr("let"));
+		});
+		$(document).on("click", "#seriesArea li a", function() {
+			var seriesId = $(this).attr("let"), seriesName = $(this).html();
+			selectSeries(seriesId, seriesName);
+		});
+
+		/*年款车型点击事件*/
+		$(document).on("click", "#yearList a", function() {
+			selectYear($(this).attr("let"));
+		});
+		$(document).on("click", "#modelArea li a", function() {
+			var modelId = $(this).attr("let"), modelName = $(this).html();
+			selectModel(modelId, modelName);
+		})
+		/*点击留红效果*/
+		$(document).on("click", "#letterList a", function() {
+			$("#letterList a.on").removeClass("on");
+			$(this).addClass("on");
+		});
+		$(document).on("click", "#companyList1 a", function() {
+			$("#companyList1 a.on").removeClass("on");
+			$(this).addClass("on");
+		});
+		$(document).on("click", "#yearList a", function() {
+			$("#yearList a.on").removeClass("on");
+			$(this).addClass("on");
+		});
+		$(document).on("click", "#brandArea li a", function() {
+			$("#brandArea li a").removeClass("on");
+			$(this).addClass("on");
+		});
+		$(document).on("click", "#seriesArea li a", function() {
+			$("#seriesArea li a").removeClass("on");
+			$(this).addClass("on");
+		});
+		$(document).on("click", "#modelArea li a", function() {
+			$("#modelArea li a").removeClass("on");
+			$(this).addClass("on");
+		});
+		/*根据当前车系的品牌字母，将改字母的品牌加上，然后改品牌变红*/
+		$(function(){
+			var letterBrandList = _brandJson["D"],
+			len = letterBrandList.length,
+			i =0,
+			html="";
+			for(;i<len;i++){
+				var cla="";
+				if(letterBrandList[i].id == 23)
+					cla= " class = 'on' ";
+				html += "<li><a href=\"javascript:void(0)\" "+cla+"let=\""
+					+ letterBrandList[i].id + "\">" + letterBrandList[i].name
+					+ "</a></li>";
+			};
+			$("#brandArea").html(html);
+		});
+
+	});
+	var selectLetter = function(let) {
+		var brandArray = _brandJson[let];
+		var len = brandArray.length, i = 0, html = "";
+		for (; i < len; i++) {
+			html += "<li><a href=\"javascript:void(0)\" let=\""
+					+ brandArray[i].id + "\">" + brandArray[i].name
+					+ "</a></li>";
+		}
+		$("#brandArea").html(html);
+	}
+	var selectBrand = function(brandId, brandName) {
+		$("#brandDiv").toggle();
+		$(".selectBrand b").html(brandName);
+		var para = "id=" + brandId, action = "{% url 'ConfigCompanyPage' %}";
+		$.ajax({
+			type : "get",
+			url : action,
+			data : para,
+			dataType : "json",
+			error : function() {
+			},
+			success : function(msg) {
+				setSeriesContent(msg);
+			}
+		});
+	}
+	var selectCompany = function(companyId) {
+		var i = 0, len = _companySeriesJson.length, companyJson, html = "";
+		for (; i < len; i++) {
+			if (_companySeriesJson[i].companyId == companyId) {
+				companyJson = _companySeriesJson[i];
+				break;
+			}
+		}
+		var seriesArray = companyJson.seriesList;
+		for (i = 0; i < seriesArray.length; i++) {
+			html += "<li><a href=\"javascript:void(0)\" let=\""
+					+ seriesArray[i].seriesId + "\">"
+					+ seriesArray[i].seriesName + "</a></li>";
+		}
+		$("#seriesArea").html(html);
+	}
+	var selectSeries = function(seriesId, seriesName) {
+		$("#seriesDiv").toggle();
+		$(".selectCxi b").html(seriesName);
+		var para = "id=" + seriesId, action = "{% url 'ConfigSeriesPage' %}";
+		$.ajax({
+			type : "get",
+			url : action,
+			data : para,
+			dataType : "json",
+			error : function() {
+			},
+			success : function(msg) {
+				setModelContent(msg);
+			}
+		});
+	}
+	var selectYear = function(yearId) {
+		var i = 0, len = _yearModelJson.length, yearJson, html = "";
+		for (; i < len; i++) {
+			if (_yearModelJson[i].yearId == yearId) {
+				yearJson = _yearModelJson[i];
+				break;
+			}
+		}
+		var modelArray = yearJson.modelList;
+		for (i = 0; i < modelArray.length; i++) {
+			html += "<li><a href=\"javascript:void(0)\" let=\""
+					+ modelArray[i].modelId + "\">" + modelArray[i].modelName
+					+ "</a></li>";
+		}
+		$("#modelArea").html(html);
+
+	}
+	var selectModel = function(modelId, modelName) {
+		if(addedCarList.join("-").indexOf(modelId) != -1){
+			alert("您已选此车型！");
+			return;
+		}
+		$("#modelDiv").toggle();
+		$(".selectCmodels b").html(modelName);
+		$(".selectCmodels b").attr("let",modelId);
+		//alert("已选择车型：" + modelId);//TODO
+		var para = "modelId=" + modelId, action = "{% url 'ConfigModlePage' %}";
+		$.ajax({
+			type : "get",
+			url : action,
+			data : para,
+			dataType : "text",
+			error : function() {
+			},
+			success : function(msg) {
+				addOneModelPara(msg, modelId);
+			}
+		});
+	}
+	var setSeriesContent = function(msg) {
+		_companySeriesJson = msg;
+		var i = 0, len = msg.length, companyHtml = "", seriesHtml = "";
+		for (; i < len; i++) {
+			if (i == 0) {
+				var seriesArray = msg[i].seriesList, len1 = seriesArray.length, j = 0;
+				for (; j < len1; j++) {
+					if(seriesArray[j].seriesId == 6708)
+						continue;
+					seriesHtml += "<li><a href=\"javascript:void(0)\" let=\""
+							+ seriesArray[j].seriesId + "\">"
+							+ seriesArray[j].seriesName + "</a></li>";
+				}
+				companyHtml += "<a href=\"javascript:void(0)\" class=\"on\" let=\""
+						+ msg[i].companyId
+						+ "\">"
+						+ msg[i].companyName
+						+ "</a>";
+			} else
+				companyHtml += "<a href=\"javascript:void(0)\" let=\""
+						+ msg[i].companyId + "\">" + msg[i].companyName
+						+ "</a>";
+		}
+		$("#companyList1").html(companyHtml);
+		$("#seriesArea").html(seriesHtml);
+		$("#seriesDiv").toggle();
+	}
+	var setModelContent = function(msg) {
+		_yearModelJson = msg;
+		var i = 0, len = msg.length, yearHtml = "", modelHtml = "";
+		for (; i < len; i++) {
+			if (i == 0) {
+				var modelArray = msg[i].modelList, len1 = modelArray.length, j = 0;
+				for (; j < len1; j++) {
+					modelHtml += "<li><a href=\"javascript:void(0)\" let=\""
+							+ modelArray[j].modelId + "\">"
+							+ modelArray[j].modelName + "</a></li>";
+				}
+				yearHtml += "<a href=\"javascript:void(0)\" class=\"on\" let=\""
+						+ msg[i].yearId + "\">" + msg[i].yearName + "</a>";
+			} else
+				yearHtml += "<a href=\"javascript:void(0)\" let=\""
+						+ msg[i].yearId + "\">" + msg[i].yearName + "</a>";
+		}
+		$("#yearList").html(yearHtml);
+		$("#modelArea").html(modelHtml);
+		$("#modelDiv").toggle();
+	}
+	var addOneModelPara = function(msg, modelId) {
+		var arr = msg.split("$$$$$$$$$$"), config1 = jQuery.parseJSON(arr[0]), option1 = jQuery.parseJSON(arr[1]);
+		addedCarList.unshift(modelId);
+		combineJson(config, config1, "param");
+		combineJson(option, option1, "config");
+		paramConfig('','');
+	}
+	var combineJson = function(obj, obj1, str) {
+		var typeItemsArray = obj.result[str + "typeitems"],
+		typeItemsArray1 = obj1.result[str+ "typeitems"],
+		len = typeItemsArray.length, i = 0;
+		for (; i < len; i++) {
+			var typeItemObj = typeItemsArray[i], typeItemObj1 = typeItemsArray1[i];
+			var itemsArray = typeItemObj[str + "items"],
+			itemsArray1 = typeItemObj1[str+ "items"],
+			len1 = itemsArray.length,
+			j = 0;
+			for (; j < len1; j++) {
+				var itemObj = itemsArray[j], itemObj1 = itemsArray1[j];
+				var valueItemArray = itemObj.valueitems, valueItemArray1 = itemObj1.valueitems;
+				var oneModelValue = valueItemArray1[0];
+				valueItemArray.unshift(oneModelValue);
+			}
+		}
+		//	config=obj;
+	}
+                </script>
+                <div class="blank10"></div>
+                <div class="pzbox">
+                    <!--添加对比车型开始-->
+                    <div class="addbox">
+                        <h3>添加对比车型:</h3>
+
+                        <div class="selectBrand">
+                            <b>选择品牌</b>
+                            <div class="showbox ppbox" id="brandDiv" style="display: none;">
+                                <div class="con">
+                                    <div class="lflist" id="letterList">
+
+                                        <a href="javascript:void(0)"
+
+                                           let="A">A</a>
+
+                                        <a href="javascript:void(0)"
+
+                                           let="B">B</a>
+
+                                        <a href="javascript:void(0)"
+
+                                           let="C">C</a>
+
+                                        <a href="javascript:void(0)"
+                                           class='on'
+                                           let="D">D</a>
+
+                                        <a href="javascript:void(0)"
+
+                                           let="F">F</a>
+
+                                        <a href="javascript:void(0)"
+
+                                           let="G">G</a>
+
+                                        <a href="javascript:void(0)"
+
+                                           let="H">H</a>
+
+                                        <a href="javascript:void(0)"
+
+                                           let="I">I</a>
+
+                                        <a href="javascript:void(0)"
+
+                                           let="J">J</a>
+
+                                        <a href="javascript:void(0)"
+
+                                           let="K">K</a>
+
+                                        <a href="javascript:void(0)"
+
+                                           let="L">L</a>
+
+                                        <a href="javascript:void(0)"
+
+                                           let="M">M</a>
+
+                                        <a href="javascript:void(0)"
+
+                                           let="N">N</a>
+
+                                        <a href="javascript:void(0)"
+
+                                           let="O">O</a>
+
+                                        <a href="javascript:void(0)"
+
+                                           let="P">P</a>
+
+                                        <a href="javascript:void(0)"
+
+                                           let="Q">Q</a>
+
+                                        <a href="javascript:void(0)"
+
+                                           let="R">R</a>
+
+                                        <a href="javascript:void(0)"
+
+                                           let="S">S</a>
+
+                                        <a href="javascript:void(0)"
+
+                                           let="T">T</a>
+
+                                        <a href="javascript:void(0)"
+
+                                           let="W">W</a>
+
+                                        <a href="javascript:void(0)"
+
+                                           let="X">X</a>
+
+                                        <a href="javascript:void(0)"
+
+                                           let="Y">Y</a>
+
+                                        <a href="javascript:void(0)"
+
+                                           let="Z">Z</a>
+
+                                    </div>
+                                    <ul class="rtlist" id="brandArea">
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="selectCxi">
+                            <b>选择车系</b>
+                            <div class="showbox cxbox" id="seriesDiv" style="display: none;">
+                                <div class="con">
+                                    <div class="lflist" id="companyList1"></div>
+                                    <ul class="rtlist" id="seriesArea">
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="selectCmodels">
+                            <b id="addModel">选择车型</b>
+                            <div class="showbox cxbox" id="modelDiv" style="display: none;">
+                                <div class="con">
+                                    <div class="lflist" id="yearList"></div>
+                                    <ul class="rtlist" id="modelArea">
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--添加对比车型结束-->
+                </div>
+                <!--添加选择栏-->
+                <div class="pzbox" id="content">
+
+                    <!--顶部操作区开始-->
+                    <div class="operation" id="config_nav" style="position: relative; left: 0px; top: 0px;"></div>
+
+                    	<div class="operation" id="config_nav_temp" style="display: none; z-index: 0; filter: alpha(opacity=0); opacity: 0;"></div>
+                    <!--顶部操作区结束-->
+                    <!--添加内容-->
+                    <div id="config_data" class="conbox">
+                        <div id="config_side" class="fdbox" style="display: none;"></div>
+                    </div>
+                    <!--添加内容结束-->
+                </div>
+
+                <div class="blank10"></div>
+            </div>
+
+            <!--end 底部-->
+            <!--END container-->
+        </div>
+        <script type="text/javascript" src="http://reg.chexun.com/js/md5.js"></script>
+        <div id="bg" class="bg" style="display: none;"></div>
+
+        <script type="text/javascript">
+var paraJson = [{"returncode":0,"message":"成功","result":{"seriesid":109462,"seriesName":"LITE","seriesEnglish":"lite","paramtypeitems":[{"typeId":1,"name":"基础参数","paramitems":[{"name":"车型名称","id":0,"valueitems":[]},{"name":"年代款","id":0,"valueitems":[]},{"name":"厂商指导价","id":0,"valueitems":[]},{"name":"全国经销商最低价","id":0,"valueitems":[]},{"name":"实测100-0制动（m）","id":3,"valueitems":[]},{"name":"官方0-100加速（s）","id":2,"valueitems":[]},{"name":"实测油耗（L）","id":4,"valueitems":[]},{"name":"最高车速（km/h）","id":1,"valueitems":[]},{"name":"工信部综合油耗（L）","id":5,"valueitems":[]},{"name":"排量(L)","id":22,"valueitems":[]},{"name":"长*宽*高(mm)","id":7,"valueitems":[]},{"name":"整车质保","id":6,"valueitems":[]},{"name":"车身结构","id":15,"valueitems":[]},{"name":"挡位个数","id":43,"valueitems":[]},{"name":"变速箱类型","id":44,"valueitems":[]}]},{"typeId":2,"name":"车身参数","paramitems":[{"name":"轴距(mm)","id":10,"valueitems":[]},{"name":"前轮距(mm)","id":11,"valueitems":[]},{"name":"后轮距(mm)","id":12,"valueitems":[]},{"name":"最小离地间隙(mm)","id":13,"valueitems":[]},{"name":"整备质量(Kg)","id":14,"valueitems":[]},{"name":"车门数(个)","id":16,"valueitems":[]},{"name":"座位数(个)","id":17,"valueitems":[]},{"name":"油箱容积(L)","id":18,"valueitems":[]},{"name":"行李箱容积(L)","id":19,"valueitems":[]},{"name":"前排宽度(mm)","id":100272,"valueitems":[]},{"name":"前排高度(mm)","id":100273,"valueitems":[]},{"name":"前排腿部空间最小值(mm)","id":100274,"valueitems":[]},{"name":"前排腿部空间最大值(mm)","id":100275,"valueitems":[]},{"name":"前排坐垫长度(mm)","id":100276,"valueitems":[]},{"name":"后排宽度(mm)","id":100277,"valueitems":[]},{"name":"后排高度(mm)","id":100278,"valueitems":[]},{"name":"后排腿部空间最小值(mm)","id":100279,"valueitems":[]},{"name":"后排腿部空间最大值(mm)","id":100280,"valueitems":[]},{"name":"后排坐垫长度(mm)","id":100281,"valueitems":[]},{"name":"后排中央地台高度(mm)","id":100282,"valueitems":[]},{"name":"后备箱开启后宽度(mm)","id":100283,"valueitems":[]},{"name":"后备箱开启后高度(mm)","id":100284,"valueitems":[]},{"name":"后备箱开启后纵向深度(mm)","id":100285,"valueitems":[]},{"name":"后备箱开启后放倒后排纵向深度(mm)","id":100286,"valueitems":[]}]},{"typeId":3,"name":"发动机参数","paramitems":[{"name":"发动机型号","id":20,"valueitems":[]},{"name":"汽缸容积(cc)","id":21,"valueitems":[]},{"name":"工作方式","id":23,"valueitems":[]},{"name":"汽缸排列形式","id":24,"valueitems":[]},{"name":"汽缸数(个)","id":25,"valueitems":[]},{"name":"每缸气门数(个)","id":26,"valueitems":[]},{"name":"压缩比","id":27,"valueitems":[]},{"name":"气门结构","id":28,"valueitems":[]},{"name":"缸径","id":29,"valueitems":[]},{"name":"冲程","id":30,"valueitems":[]},{"name":"最大马力(Ps)","id":31,"valueitems":[]},{"name":"最大功率(kW)","id":32,"valueitems":[]},{"name":"最大功率转速(rpm)","id":33,"valueitems":[]},{"name":"最大扭矩(N·m)","id":34,"valueitems":[]},{"name":"最大扭矩转速(rpm)","id":35,"valueitems":[]},{"name":"发动机特有技术","id":36,"valueitems":[]},{"name":"燃料形式","id":37,"valueitems":[]},{"name":"燃油标号","id":38,"valueitems":[]},{"name":"供油方式","id":39,"valueitems":[]},{"name":"缸盖材料","id":40,"valueitems":[]},{"name":"缸体材料","id":41,"valueitems":[]},{"name":"环保标准","id":42,"valueitems":[]}]},{"typeId":5,"name":"底盘转向参数","paramitems":[{"name":"驱动方式","id":45,"valueitems":[]},{"name":"前悬挂类型","id":46,"valueitems":[]},{"name":"后悬挂类型","id":47,"valueitems":[]},{"name":"车体结构","id":49,"valueitems":[]},{"name":"助力类型","id":48,"valueitems":[]},{"name":"四驱形式","id":100290,"valueitems":[]},{"name":"中央差速器结构","id":100291,"valueitems":[]}]},{"typeId":6,"name":"车轮制动参数","paramitems":[{"name":"前制动器类型","id":50,"valueitems":[]},{"name":"后制动器类型","id":51,"valueitems":[]},{"name":"驻车制动类型","id":52,"valueitems":[]},{"name":"前轮胎规格","id":53,"valueitems":[]},{"name":"后轮胎规格","id":54,"valueitems":[]},{"name":"备胎规格","id":55,"valueitems":[]}]}]}},{"returncode":0,"message":"成功","result":{"seriesid":109462,"configtypeitems":[{"typeId":7,"name":"安全装备","configitems":[{"name":"主/副驾驶座安全气囊","id":57,"valueitems":[]},{"name":"前/后排侧气囊","id":58,"valueitems":[]},{"name":"前/后排头部气囊(气帘)","id":60,"valueitems":[]},{"name":"膝部气囊","id":62,"valueitems":[]},{"name":"胎压监测装置","id":63,"valueitems":[]},{"name":"安全带未系提示","id":65,"valueitems":[]},{"name":"零胎压继续行驶","id":64,"valueitems":[]},{"name":"车内中控锁","id":67,"valueitems":[]},{"name":"发动机电子防盗","id":66,"valueitems":[]},{"name":"遥控钥匙","id":68,"valueitems":[]},{"name":"无钥匙启动系统","id":69,"valueitems":[]},{"name":"儿童安全座椅合","id":100292,"valueitems":[]}]},{"typeId":8,"name":"控制配置","configitems":[{"name":"制动防抱死系统(ABS)","id":70,"valueitems":[]},{"name":"制动力分配系统(EBD/CBC等)","id":71,"valueitems":[]},{"name":"制动辅助系统(EBA/BAS/BA等)","id":72,"valueitems":[]},{"name":"牵引力控制系统(ASR/TCS/TRC等)","id":73,"valueitems":[]},{"name":"车辆稳定控制系统(ESP/DSC/VSC等)","id":74,"valueitems":[]},{"name":"自动驻车/上坡辅助系统","id":75,"valueitems":[]},{"name":"陡坡缓降系统","id":76,"valueitems":[]},{"name":"可调悬挂","id":77,"valueitems":[]},{"name":"空气悬挂","id":78,"valueitems":[]},{"name":"主动转向系统","id":79,"valueitems":[]},{"name":"前桥限滑差速器/差速锁","id":100293,"valueitems":[]},{"name":"中央差速器锁止功能","id":100294,"valueitems":[]},{"name":"后桥限滑差速器/差速锁","id":100295,"valueitems":[]}]},{"typeId":9,"name":"外部配置","configitems":[{"name":"电动/手动天窗","id":80,"valueitems":[]},{"name":"全景/电动全景天窗","id":81,"valueitems":[]},{"name":"运动外观套件","id":82,"valueitems":[]},{"name":"铝合金轮毂","id":83,"valueitems":[]},{"name":"电动吸合门","id":84,"valueitems":[]}]},{"typeId":10,"name":"内部配置","configitems":[{"name":"真皮方向盘","id":85,"valueitems":[]},{"name":"方向盘调节","id":86,"valueitems":[]},{"name":"方向盘电动调节","id":88,"valueitems":[]},{"name":"多功能方向盘","id":89,"valueitems":[]},{"name":"方向盘换挡","id":90,"valueitems":[]},{"name":"定速巡航","id":91,"valueitems":[]},{"name":"倒车辅助/倒车雷达","id":92,"valueitems":[]},{"name":"可视倒车辅助","id":93,"valueitems":[]},{"name":"行车电脑显示屏","id":94,"valueitems":[]},{"name":"风挡投射显示系统(HUD)","id":95,"valueitems":[]}]},{"typeId":11,"name":"座椅配置","configitems":[{"name":"真皮/仿皮座椅","id":96,"valueitems":[]},{"name":"运动座椅","id":97,"valueitems":[]},{"name":"座椅高低调节","id":98,"valueitems":[]},{"name":"腰部支撑调节","id":99,"valueitems":[]},{"name":"肩部支撑调节","id":100,"valueitems":[]},{"name":"前排座椅电动调节","id":101,"valueitems":[]},{"name":"第二排靠背角度调节","id":102,"valueitems":[]},{"name":"第二排座椅前后调节","id":103,"valueitems":[]},{"name":"后排座椅电动调节","id":104,"valueitems":[]},{"name":"座椅记忆","id":105,"valueitems":[]},{"name":"前/后排座椅加热","id":106,"valueitems":[]},{"name":"座椅通风","id":108,"valueitems":[]},{"name":"座椅按摩","id":109,"valueitems":[]},{"name":"后排座椅放倒方式","id":110,"valueitems":[]},{"name":"第三排座椅","id":112,"valueitems":[]},{"name":"前/后座中央扶手","id":113,"valueitems":[]},{"name":"后排杯架","id":115,"valueitems":[]},{"name":"电动后备箱门","id":116,"valueitems":[]}]},{"typeId":12,"name":"多媒体配置","configitems":[{"name":"车载GPS导航系统","id":117,"valueitems":[]},{"name":"定位互动服务系统","id":118,"valueitems":[]},{"name":"中控台彩色显示屏","id":119,"valueitems":[]},{"name":"车辆交互系统(iDrive/MMI等)","id":120,"valueitems":[]},{"name":"内置硬盘存储空间","id":121,"valueitems":[]},{"name":"蓝牙/车载电话","id":122,"valueitems":[]},{"name":"车载电视","id":123,"valueitems":[]},{"name":"后排液晶屏","id":124,"valueitems":[]},{"name":"外接音源接口(AUX/USB/iPod等)","id":125,"valueitems":[]},{"name":"CD支持MP3/WMA","id":126,"valueitems":[]},{"name":"多媒体系统","id":127,"valueitems":[]},{"name":"2-3只扬声器","id":132,"valueitems":[]},{"name":"4-5只扬声器","id":133,"valueitems":[]},{"name":"6-7只扬声器","id":134,"valueitems":[]},{"name":"≥8只扬声器","id":135,"valueitems":[]}]},{"typeId":13,"name":"灯光配置","configitems":[{"name":"氙气大灯","id":136,"valueitems":[]},{"name":"日间行车灯","id":137,"valueitems":[]},{"name":"自动大灯","id":138,"valueitems":[]},{"name":"前雾灯","id":140,"valueitems":[]},{"name":"随动转向大灯/转向辅助灯","id":139,"valueitems":[]},{"name":"大灯高度自动/手动可调","id":141,"valueitems":[]},{"name":"大灯清洗装置","id":142,"valueitems":[]},{"name":"车内氛围灯","id":143,"valueitems":[]},{"name":"LED大灯(不用了)","id":100296,"valueitems":[]},{"name":"LED大灯","id":210240,"valueitems":[]}]},{"typeId":14,"name":"玻璃/后视镜","configitems":[{"name":"前/后电动车窗","id":144,"valueitems":[]},{"name":"车窗防夹手功能","id":146,"valueitems":[]},{"name":"防紫外线/隔热玻璃","id":147,"valueitems":[]},{"name":"外后视镜电动调节","id":148,"valueitems":[]},{"name":"外后视镜电加热","id":149,"valueitems":[]},{"name":"外后视镜电动折叠","id":151,"valueitems":[]},{"name":"外后视镜记忆功能","id":152,"valueitems":[]},{"name":"后视镜自动防眩目","id":150,"valueitems":[]},{"name":"后风挡遮阳帘","id":153,"valueitems":[]},{"name":"后排侧遮阳帘","id":154,"valueitems":[]},{"name":"遮阳板化妆镜","id":155,"valueitems":[]},{"name":"后风挡雨刷","id":156,"valueitems":[]},{"name":"自动雨刷","id":157,"valueitems":[]}]},{"typeId":15,"name":"空调/冰箱","configitems":[{"name":"空调控制方式","id":158,"valueitems":[]},{"name":"后排独立空调","id":160,"valueitems":[]},{"name":"后座出风口","id":161,"valueitems":[]},{"name":"温度分区控制","id":162,"valueitems":[]},{"name":"空气净化/花粉过滤","id":163,"valueitems":[]},{"name":"车载冰箱","id":164,"valueitems":[]}]},{"typeId":16,"name":"高科技配置","configitems":[{"name":"自适应巡航系统","id":171,"valueitems":[]},{"name":"车辆行驶并线辅助系统","id":166,"valueitems":[]},{"name":"主动刹车/安全系统","id":167,"valueitems":[]},{"name":"整体主动转向系统","id":168,"valueitems":[]},{"name":"自动泊车辅助系统","id":165,"valueitems":[]},{"name":"可视夜视系统","id":169,"valueitems":[]},{"name":"中控液晶屏分屏显示","id":170,"valueitems":[]},{"name":"车辆全景影像系统","id":172,"valueitems":[]}]},{"typeId":17,"name":"纯电动发动机参数","configitems":[{"name":"电池支持最高续航里程(km)","id":181,"valueitems":[]},{"name":"电池容量(kw/h)","id":182,"valueitems":[]},{"name":"电动机最大功率(kW)","id":186,"valueitems":[]},{"name":"电动机最大扭矩(N*m)","id":187,"valueitems":[]}]}]}}];
+var config = paraJson[0];
+var option = paraJson[1];
+var showPara = {"1":[3,2,4,1,5,22,7,8,9,6,15,43,44],"2":[10,11,12,13,14,16,17,18,19],"3":[20,21,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42],"5":[45,46,47,49,48,100290,100291],"6":[50,51,52,53,54,55],"7":[57,56,58,59,60,61,62,63,65,64,67,66,68,69,100292,217],"8":[70,71,72,73,74,75,76,77,78,79,100293,100294,100295],"9":[80,81,82,83,84],"10":[85,86,87,88,89,90,91,92,93,94,95],"11":[96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116],"12":[117,118,119,120,121,122,123,124,125,126,127,129,128,130,131,132,133,134,135],"13":[136,137,138,140,139,141,142,143,210240],"14":[144,145,146,147,148,149,151,152,150,153,154,155,156,157],"15":[158,159,160,161,162,163,164],"17":[173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192],"16":[171,166,167,168,165,169,170,172]};
+var isShowMali = 0;
+
+
+        </script>
+        <script type="text/javascript">
+
+$(function(){
+	$('.user').mouseover(function(){
+		$('.user dt').addClass('user-cur');
+		$('.user dd').show();
+	})
+	$('.user').mouseout(function(){
+		$('.user dt').removeClass('user-cur');
+		$('.user dd').hide();
+	})
+})
+
+function isContain( elem, arr){
+			 var len = arr.length,i=0;
+			 var flag = false;
+			 for(;i<len;i++){
+				 if(arr[i] == elem){
+					 flag = true;
+					 break;
+				}
+			}
+			 return flag;
+}
+	var paraItems = config.result.paramtypeitems[0].paramitems;
+	var engineParaItems = config.result.paramtypeitems[2].paramitems;//发动机参数
+	var pailiangList=[],biansuList=[],i=0,len=paraItems.length;
+	var horsePowerList=[];
+	var fuelTypeList=[];
+	for(;i<len;i++){
+		if(paraItems[i].id == 22){
+			var pailiangItem=paraItems[i].valueitems, j=0,len2 = pailiangItem.length;
+			for(;j<len2;j++){
+				var value = pailiangItem[j].value;
+				if(!isContain(value,pailiangList))
+					if(value.indexOf("-") == -1) pailiangList.push(value);
+			}
+		}
+		else if(paraItems[i].id == 44){
+			var biansuItem=paraItems[i].valueitems, j=0,len2 = biansuItem.length;
+			for(;j<len2;j++){
+				var value = biansuItem[j].value;
+				if(!isContain(value,biansuList))
+					if("-" != value) biansuList.push(value);
+			}
+		}
+		else
+			continue;
+
+	}
+	for(var k=0;k<engineParaItems.length;k++) {
+		if(isShowMali == 1 && engineParaItems[k].id == 31) {//最大马力
+			var horsePowerItem = engineParaItems[k].valueitems;
+			var hpItemLen = horsePowerItem.length;
+			for(var j = 0; j < hpItemLen; j++){
+				var value = horsePowerItem[j].value;
+				if(!isContain(value, horsePowerList))
+					if("-" != value) horsePowerList.push(value);
+			}
+		}
+
+		if(isShowMali == 2 && engineParaItems[k].id == 37) {//燃料形式
+			var fuelTypeItem = engineParaItems[k].valueitems;
+			var ftItemLen = fuelTypeItem.length;
+			for(var j = 0; j < ftItemLen; j++){
+				var value = fuelTypeItem[j].value;
+				if(!isContain(value, fuelTypeList))
+					if("-" != value) fuelTypeList.push(value);
+			}
+		}
+	}
+	var pailiangHtml="",biansuHtml="";
+	var horsePowerHtml = "";
+	var fuelTypeHtml = "";
+
+	pailiangList = pailiangList.sort(function(a,b){return a-b;});
+	biansuList = biansuList.sort();
+	horsePowerList = horsePowerList.sort();
+
+	for(var m =0;m<pailiangList.length;m++){
+		var value = pailiangList[m];
+		pailiangHtml += "<span><input type=\"checkbox\" name=\"pailiang\" id=\"checkbox\" value=\""+value+"\" /> "+value+"L</span>";
+	}
+	$("#pailiangList").html(pailiangHtml);
+	for(var m =0;m<biansuList.length;m++){
+		var value = biansuList[m];
+		biansuHtml += "<span><input type=\"checkbox\" name=\"transmission\" id=\"checkbox\" value=\""+value+"\" />"+value+"</span>";
+	}
+	$("#biansuList").html(biansuHtml);
+	//马力
+	if(isShowMali == 1) {
+		for(var m = 0;m < horsePowerList.length; m++){
+			var value = horsePowerList[m];
+			horsePowerHtml += "<span><input type=\"checkbox\" name=\"horsePower\" id=\"checkbox\" value=\""+value+"\" /> "+value+"Ps</span>";
+		}
+		$("#horsePowerList").html(horsePowerHtml);
+	}
+	//燃料形式（页面：类型）
+	if(isShowMali == 2) {
+		for(var m =0;m<fuelTypeList.length;m++){
+			var value = fuelTypeList[m];
+			var valueStr = "";
+			if(value == "纯电动") {
+				valueStr = "纯电动(EV)";
+			} else if(value == "油电混合") {
+				valueStr = "混合动力(HYBRID)";
+			} else if(value == "插电式混合动力") {
+				valueStr = "插电式混合动力(PHEV)";
+			} else if(value == "天然气") {
+				valueStr = "天然气(CNG)";
+			} else if(value == "氢能源") {
+				valueStr = "氢能源(H2)";
+			} else {
+				valueStr = value;
+			}
+			fuelTypeHtml += "<span><input type=\"checkbox\" name=\"fuelType\" id=\"checkbox\" value=\""+value+"\" /> "+valueStr+"</span>";
+		}
+		$("#fuelTypeList").html(fuelTypeHtml);
+		$(".type").css("display", "");
+	}
+
+
+	paramConfig(6708,128006);
+
+
+
+$(function(){
+	document.onkeydown = function(event) {
+		var ev = event ? event :(window.event ? window.event : null);
+		if (ev.keyCode==13 || ev.keyCode==108) {
+			if (document.activeElement.id == "uName" || document.activeElement.id == "password") {
+				validatUser();
+			} else if (document.activeElement.id == "sCarbrand" || document.activeElement.id == "sCarmodel") {
+				searchNewCar();
+			} else if (document.activeElement.id == "q") {
+				searchNews();
+			}
+		}
+	}
+});
+
+
+
+        </script>
+        <div style="display: none;">
+            <script type="text/javascript" src="http://file.chexun.com/scripts_index/analytics.js"></script>
+            <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?53c68a111baaa9986c92ea7f9518e59e";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+
+
+            </script>
+        </div>
+        <script>
+(function (G,D,s,c,p) {
+c={//�������
+UA:"UA-chexun-000001", //�ͻ���Ŀ���,��ϵͳ���
+NO_FLS:0,
+WITH_REF:1,
+URL:'http://file.chexun.com/scripts_index/iwt-min.js'//iwt.js��URLλ�ã���ͻ������й�JS�ļ���ֻ���޸Ĵ�ֵ
+};
+G._iwt?G._iwt.track(c,p):(G._iwtTQ=G._iwtTQ || []).push([c,p]),!G._iwtLoading && lo();
+function lo(t) {
+G._iwtLoading=1;s=D.createElement("script");s.src=c.URL;
+t=D.getElementsByTagName("script");t=t[t.length-1];
+t.parentNode.insertBefore(s,t);
+}
+})(this,document);
+
+
+        </script>
+
+
+        <!-- footer content  -->
+        <footer>
+            <div class="pull-right">
+                Detecon Big Data - <a href="/">Home</a>
+            </div>
+            <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+
+
+        <!-- jQuery -->
+        <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+        <!-- Bootstrap -->
+        <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+        <!-- FastClick -->
+        <script src="{% static 'vendor/fastclick/lib/fastclick.js' %}"></script>
+        <!-- NProgress -->
+        <script src="{% static 'vendor/nprogress/nprogress.js' %}"></script>
+        <!-- bootstrap-progressbar -->
+        <script src="{% static 'vendor/bootstrap-progressbar/bootstrap-progressbar.min.js' %}"></script>
+        <!-- iCheck -->
+        <script src="{% static 'vendor/icheck/icheck.min.js' %}"></script>
+        <!-- Skycons -->
+        <script src="{% static 'vendor/skycons/skycons.js' %}"></script>
+        <!-- JQVMap -->
+        <script src="{% static 'vendor/jqvmap/dist/jquery.vmap.js' %}"></script>
+        <script src="{% static 'vendor/jqvmap/dist/maps/jquery.vmap.world.js' %}"></script>
+        <script src="{% static 'vendor/jqvmap/examples/js/jquery.vmap.sampledata.js' %}"></script>
+        <!-- Custom Theme Scripts -->
+        <script src="{% static 'polygon/custom.min.js' %}"></script>
+
+</body>
+</html>

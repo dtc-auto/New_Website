@@ -1,6 +1,7 @@
 from django.conf.urls import *
 from . import views
-from dashboard.views import carOwnerChartPage, carOwnerChart, peopleChartPage, peopleChart, my_login, LTPChartPage, LTPChart, CPChartPage, CPChart
+from dashboard.views import carOwnerChartPage, carOwnerChart, peopleChartPage, peopleChart, my_login, LTPChartPage, LTPChart, \
+    CPChartPage, CPChart, ConfigChartPage, ConfigCompany, ConfigSeriesChart, ConfigModleChart
 urlpatterns = [
     # index
     url(r'^$', views.index, name='index'),
@@ -21,6 +22,11 @@ urlpatterns = [
     # CP dashboard pag
     url(r'^CP_page', CPChartPage, name='CPChart'),
     url(r'^CP/$', CPChart, name='CPEchartPage'),
+    # Config dashboard pag
+    url(r'^Config_page', ConfigChartPage, name='ConfigChart'),
+    url(r'^Config/$', ConfigCompany, name='ConfigCompanyPage'),
+    url(r'^Config_/$', ConfigSeriesChart, name='ConfigSeriesPage'),
+    url(r'^Confi/$', ConfigModleChart, name='ConfigModlePage'),
 ]
 
 

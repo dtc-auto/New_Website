@@ -2,8 +2,9 @@
 from __future__ import unicode_literals,division
 import pymssql
 import pandas as pd
+import urllib
 
-server = "127.0.0.1"
+server = "SQLDEV02\sql"
 user = "dtc"
 password = "asdf1234"
 
@@ -360,3 +361,10 @@ def CP_get_cluster():
             ele = [x_, y_]
             cluster_data.append(ele)
     return cluster_data
+
+# ConfigPage_page
+def Config_get_config(id_):
+    url_pos = "http://auto.chexun.com/singleModledata.do?modelId={0}".format(id_)
+    result_pos = urllib.request.urlopen(url_pos)  # POST method
+    content_pos = result_pos.read().strip().decode('utf-8')
+    return content_pos
