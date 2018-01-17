@@ -1004,10 +1004,6 @@ paramConfig = function(e, t) {
         r.setTime(r.getTime() + n * 24 * 60 * 60 * 1e3),
         document.cookie = e + "=" + escape(t) + ";expires=" + r.toGMTString()
     },
-    this.getCookie = function(e) {
-        document.domain = "chexun.com";
-        var t = document.cookie.match(new RegExp("(^| )" + e + "=([^;]*)(;|$)"));
-        return t != null ? unescape(t[2]) : null
-    },
+
     this.init()
 }
