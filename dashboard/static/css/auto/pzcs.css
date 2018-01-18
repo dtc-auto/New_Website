@@ -18,13 +18,14 @@
 .addbox{ background-color:#c1d9f3; height:36px; }
 .addbox h3{color:#000; font-weight:bold; line-height:36px; font-size:14px; float:left; padding:0 10px;}
 .addbox .selectBrand,.addbox .selectCxi,.addbox .selectCmodels{ float:left; height:28px; padding-top:7px; position:relative; z-index:109;}
-.addbox .selectBrand{width:158px; padding-right:10px;}
-.addbox .selectCxi{width:158px; padding-right:10px;}
-.addbox .selectCmodels{width:268px; padding-right:10px;}
+.addbox .selectBrand{width:162px; padding-right:10px;}
+.addbox .selectCxi{width:162px; padding-right:10px;}
+.addbox .selectCmodels{width:272px; padding-right:10px;}
 .addbox .selectBrand b,.addbox .selectCxi b,.addbox .selectCmodels b{
 	display:block;
 	height:21px;
 	border:1px solid #a0a0a0;
+/*去除倒三角：去除url(http://i0.chexun.net/images/auto/2017-03/arrow.gif)*/
 	background:url(http://i0.chexun.net/images/auto/2017-03/arrow.gif) no-repeat 138px 8px #fff;
 	cursor:pointer;
 	padding:0 20px 0 6px;
@@ -33,6 +34,7 @@
 	background-repeat:no-repeat;
 	color:#a3a3a3;
 }
+/*更改下拉框倒三角位置*/
 .addbox .selectCmodels b{background-position: 248px 8px}
 .addbox .showbox{ position:absolute; left:0px; top:29px;padding:13px 0; background-color:#fff; border:1px solid #a0a0a0; border-bottom:2px solid #0b47a0; z-index:1300}
 .addbox .lflist{padding:0 10px;float:left;}
@@ -58,7 +60,7 @@
 .cxbox .rtlist li a{ padding:0 5px;}
 .cxbox .rtlist a.on{color:#fff; text-decoration:none; background-color:#b30100;}
 /*瀵规瘮琛ㄦ牸*/
-.pzbox{width:1100px; margin:0 auto;_overflow:hidden;font-size:12px;font-family:"瀹嬩綋",Arial,Helvetica,sans-serif;}
+.pzbox{width:965px; margin:0 auto;_overflow:hidden;font-size:12px;font-family:"瀹嬩綋",Arial,Helvetica,sans-serif;}
 .tbcs th h3 b,em.ero,.ico_count,.switch_left,.switch_right,a.buycarico,a.btn_del,.icon16-left{ background:url(http://i0.chexun.net/images/auto/2017-03/csicon.png) no-repeat;}
 .pzbox a:link,.pzbox a:visited{ text-decoration:none;}
 .pzbox a:hover{ color:#0b47a0;}
