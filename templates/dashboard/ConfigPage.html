@@ -27,11 +27,11 @@
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 
     <!--CX-->
-    <link href="http://file.chexun.com/css/common/base.css" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/auto/base.css' %}" rel="stylesheet" type="text/css"/>
     <link href="{% static 'css/auto/pzcs.css' %}" rel="stylesheet">
-    <script type="text/javascript" src="http://file.chexun.com/scripts/auto/auto.js"></script>
-    <script type="text/javascript" src="http://file.chexun.com/script_auto/pzcs.js"></script>
-    <script type="text/javascript" src="http://file.chexun.com/script_auto/library.js"></script>
+    <script type="text/javascript" src="{% static 'js/car/auto.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/car/pzcs.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/car/library.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/v4/carParameter-2.1.js' %}"></script>
 
 </head>
@@ -564,7 +564,7 @@
             <!--end 底部-->
             <!--END container-->
         </div>
-        <script type="text/javascript" src="http://reg.chexun.com/js/md5.js"></script>
+        <script type="text/javascript" src="{% static 'js/car/md5.js' %}"></script>
         <div id="bg" class="bg" style="display: none;"></div>
 
         <script type="text/javascript">
@@ -573,11 +573,8 @@ var config = paraJson[0];
 var option = paraJson[1];
 var showPara = {"1":[3,2,4,1,5,22,7,8,9,6,15,43,44],"2":[10,11,12,13,14,16,17,18,19],"3":[20,21,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42],"5":[45,46,47,49,48,100290,100291],"6":[50,51,52,53,54,55],"7":[57,56,58,59,60,61,62,63,65,64,67,66,68,69,100292,217],"8":[70,71,72,73,74,75,76,77,78,79,100293,100294,100295],"9":[80,81,82,83,84],"10":[85,86,87,88,89,90,91,92,93,94,95],"11":[96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116],"12":[117,118,119,120,121,122,123,124,125,126,127,129,128,130,131,132,133,134,135],"13":[136,137,138,140,139,141,142,143,210240],"14":[144,145,146,147,148,149,151,152,150,153,154,155,156,157],"15":[158,159,160,161,162,163,164],"17":[173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192],"16":[171,166,167,168,165,169,170,172]};
 var isShowMali = 0;
-
-
         </script>
         <script type="text/javascript">
-
 $(function(){
 	$('.user').mouseover(function(){
 		$('.user dt').addClass('user-cur');
@@ -697,10 +694,7 @@ function isContain( elem, arr){
 		$(".type").css("display", "");
 	}
 
-
 	paramConfig(6708,128006);
-
-
 
 $(function(){
 	document.onkeydown = function(event) {
@@ -717,9 +711,8 @@ $(function(){
 	}
 });
 
-
-
         </script>
+</div>
 
 
         <!-- footer content  -->
@@ -730,7 +723,6 @@ $(function(){
             <div class="clearfix"></div>
         </footer>
         <!-- /footer content -->
-
 
         <!-- jQuery -->
         <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
