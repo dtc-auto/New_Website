@@ -52,7 +52,7 @@ table{
 	border-spacing: 0;
 }
 /* 閲嶇疆 HTML5 鍏冪礌 */
-article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{
+article,aside,details,figcaption,figure,header,hgroup,menu,nav,section,summary,time,mark,audio,video{
 	display: block;
 	margin: 0;
 	padding: 0;
