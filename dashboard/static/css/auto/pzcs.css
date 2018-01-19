@@ -51,7 +51,7 @@
 .ppbox .lflist a.on{color:#fff; text-decoration:none; background-color:#0b47a0;}
 .ppbox .rtlist li{width:85px; float:left; height:20px; line-height:20px; margin:1px 0 0 0; overflow:hidden;}
 .cxbox{width:305px; }
-.cxbox .lflist{width:100px; overflow:hidden; padding:0 15px; border-right:1px solid #ccc;}
+.cxbox .lflist{width:150px; overflow:hidden; padding:0 15px; border-right:1px solid #ccc;}
 .cxbox .rtlist{width:150px; padding-right:10px;}
 .cxbox .lflist a{ display:block;font-family:"寰蒋闆呴粦";color:#878787; font-size:14px; height:24px; line-height:24px; margin:1px 0 0 0; padding-left:8px;}
 .cxbox .lflist a:hover{ color:#fff; text-decoration:none; background-color:#0b47a0;}

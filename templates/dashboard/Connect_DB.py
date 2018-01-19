@@ -4,7 +4,7 @@ import pymssql
 import pandas as pd
 import urllib
 
-server = "SQLDEV02\sql"
+server = "127.0.0.1"
 user = "dtc"
 password = "asdf1234"
 
