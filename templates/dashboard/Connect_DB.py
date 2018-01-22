@@ -4,7 +4,7 @@ import pymssql
 import pandas as pd
 import urllib
 
-server = "127.0.0.1"
+server = "SQLDEV02\sql"
 user = "dtc"
 password = "asdf1234"
 
@@ -368,3 +368,56 @@ def Config_get_config(id_):
     result_pos = urllib.request.urlopen(url_pos)  # POST method
     content_pos = result_pos.read().strip().decode('utf-8')
     return content_pos
+
+
+# 一下方法暂时停用
+def Config_get_company(id_):
+    sql="""SELECT 
+     [SERIE_ID]
+    ,[SERIE_NAME_CN]
+    ,[COMPANY_ID]
+    ,[COMPANY_NAME_CN]
+    FROM 
+    [BDCI_CHEXUN].[stg].[CONFIG_KEY] where BRAND_ID="""+str(id_)+"""
+         """
+    conn = pymssql.connect(server, user, password, "BDCI")
+    df = pd.read_sql_query(sql, conn)
+    1
+
+# Config_get_company(23)
+
+def Config_get_config_local(id_):
+    sql = """SELECT 
+    [BDCI_CHEXUN].[stg].[CONFIGURATION_DETAILS].[PARA_NAME]
+    ,[PARA_VALUE]
+    ,[BDCI_CHEXUN].[stg].[CONFIG_ITEM].PARA_ID
+    ,[BDCI_CHEXUN].[stg].[CONFIG_ITEM].TYPE_NAME
+    FROM 
+    [BDCI_CHEXUN].[stg].[CONFIGURATION_DETAILS]
+    JOIN 
+    [BDCI_CHEXUN].[stg].[CONFIG_ITEM]
+    ON
+    [BDCI_CHEXUN].[stg].[CONFIGURATION_DETAILS].[PARA_NAME]=[BDCI_CHEXUN].[stg].[CONFIG_ITEM].[PARA_NAME]
+    WHERE 
+    [SPEC_ID]="""+str(id_)+"""
+    ORDER BY 
+    convert (int,PARA_ID)
+    """
+    conn = pymssql.connect(server, user, password, "BDCI")
+    df = pd.read_sql_query(sql, conn)
+    return df
+
+Config_get_config_local(108517)
+
+
+
+
+
+
+
+
+
+
+
+
+
