@@ -18,6 +18,7 @@ class UserForm(forms.Form):
     password = forms.CharField(label='password', widget=forms.PasswordInput())
 
 
+
 def my_login(request):
     # next__ = request.get[next]
     if request.method == 'POST':
