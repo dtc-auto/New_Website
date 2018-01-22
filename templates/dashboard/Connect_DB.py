@@ -370,7 +370,8 @@ def Config_get_config(id_):
     return content_pos
 
 
-# 一下方法暂时停用
+# 以下方法暂时停用
+# 选择框列表
 def Config_get_company(id_):
     sql="""SELECT 
      [SERIE_ID]
@@ -385,8 +386,8 @@ def Config_get_company(id_):
     1
 
 # Config_get_company(23)
-
-def Config_get_config_local(id_):
+# 数据字典
+def Config_get_config_local_dic(id_):
     sql = """SELECT 
     [BDCI_CHEXUN].[stg].[CONFIGURATION_DETAILS].[PARA_NAME]
     ,[PARA_VALUE]
@@ -406,6 +407,29 @@ def Config_get_config_local(id_):
     conn = pymssql.connect(server, user, password, "BDCI")
     df = pd.read_sql_query(sql, conn)
     return df
+
+def Config_get_config_local(id_):
+    sql = """SELECT 
+    [BDCI_CHEXUN].[stg].[CONFIGURATION_DETAILS].[PARA_NAME]
+    ,[PARA_VALUE]
+    FROM 
+    [BDCI_CHEXUN].[stg].[CONFIGURATION_DETAILS]
+    JOIN 
+    [BDCI_CHEXUN].[stg].[CONFIG_ITEM]
+    ON
+    [BDCI_CHEXUN].[stg].[CONFIGURATION_DETAILS].[PARA_NAME]=[BDCI_CHEXUN].[stg].[CONFIG_ITEM].[PARA_NAME]
+    WHERE 
+    [SPEC_ID]="""+str(id_)+"""
+    ORDER BY 
+    convert (int,PARA_ID)
+    """
+    conn = pymssql.connect(server, user, password, "BDCI")
+    df = pd.read_sql_query(sql, conn)
+    name = df['PARA_NAME'].tolist()
+    value = df['PARA_VALUE'].tolist()
+    dic = {'name': name, 'value': value}
+
+    return dic
 
 Config_get_config_local(108517)
 
