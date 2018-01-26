@@ -315,11 +315,12 @@
 
                                 $.getJSON('{% url 'ConfigModlePage' %}',{'modelId':modelId}, function(ret){
                                     createShowingTable(ret);
+                                    createShowingTable2(ret);
                                 });
 
 
                     }
-
+                    <!--品牌-->
                     var setSeriesContent = function(msg) {
                         _companySeriesJson = msg;
                         var i = 0, len = msg.length, companyHtml = "", seriesHtml = "";
@@ -401,7 +402,7 @@
                                 <div class="addbox">
                                     <h3>查找车型:</h3>
                                     <div class="selectBrand">
-                                        <b>选择品牌</b>
+                                        <h2>品牌：</h2><b>选择品牌</b>
                                         <div class="showbox ppbox" id="brandDiv" style="display: none;">
                                             <div class="con">
                                                 <div class="lflist" id="letterList">
@@ -506,7 +507,7 @@
                                     </div>
 
                                     <div class="selectCxi">
-                                        <b>选择车系</b>
+                                        <h2>车系：</h2><b>选择车系</b>
                                         <div class="showbox cxbox" id="seriesDiv" style="display: none;">
                                             <div class="con">
                                                 <div class="lflist" id="companyList1"></div>
@@ -517,7 +518,7 @@
                                     </div>
 
                                     <div class="selectCmodels">
-                                        <b id="addModel">选择车型</b>
+                                        <h2>车型：</h2><b id="addModel">选择车型</b>
                                         <div class="showbox cxbox" id="modelDiv" style="display: none;">
                                             <div class="con">
                                                 <div class="lflist" id="yearList"></div>
@@ -550,43 +551,145 @@
 
                     <div class="blank10"></div>
                     <div class="row">
-                                <div class="col-md-4 col-sm-4 col-xs-4">
+                                <div class="col-md-7 col-sm-7 col-xs-7">
                                     <div class="x_panel">
                                         <h3>详细配置</h3>
 
+        <div  style="float:left;" id="container2"></div>
+        <div  style="float:left;" id="container"></div>
 
-<div id="container"></div>
+
         <script type="text/javascript">
-function createShowingTable(data) {
-$('#container').empty();
-    var con = document.getElementById("container");
-            var table = document.createElement("table");
-            var thead = table.createTHead();
-            var tbody = table.createTBody();
-            var tr = document.createElement("tr");
-
-            for (var i = 0; i < 2; i++) {
-                th = document.createElement("th");
-
-                tr.appendChild(th);
-            }
-            thead.appendChild(tr);
-            for (var i = 0; i < 188; i++) {
+        function createShowingTable2(data) {
+                <!-- 清除原表-->
+                $('#container2').empty();
+                var con2 = document.getElementById("container2");
+                var table2 = document.createElement("table");
+                var thead = table2.createTHead();
+                var tbody = table2.createTBody();
                 var tr = document.createElement("tr");
+                var key = data.name[0]
+
+                if (key !== undefined){
+                th = document.createElement("th");
+                tr.appendChild(th);
+                thead.appendChild(tr);
+
+                for (var i = 0; i < 16; i++) {
+                    var tr = document.createElement("tr");
                     td = document.createElement("td");
+                    td.width=130;
+                    td.innerHTML = data.k[i]
+                    tr.setAttribute('align','center');
+                    if (data.k[i]=="基础参数")
+                        tr.setAttribute('height',300);
+                    if (data.k[i]=="车身参数")
+                        tr.setAttribute('height',480);
+                    if (data.k[i]=="发动机参数")
+                        tr.setAttribute('height',440);
+                    if (data.k[i]=="底盘转向参数")
+                        tr.setAttribute('height',140);
+                    if (data.k[i]=="地盘转向参数")
+                        tr.setAttribute('height',140);
+                    if (data.k[i]=="车轮制动参数")
+                        tr.setAttribute('height',120);
+                    if (data.k[i]=="安全装备")
+                        tr.setAttribute('height',240);
+                        if (data.k[i]=="控制配置")
+                        tr.setAttribute('height',260);
+                        if (data.k[i]=="外部配置")
+                        tr.setAttribute('height',100);
+                        if (data.k[i]=="内部配置")
+                        tr.setAttribute('height',200);
+                        if (data.k[i]=="座椅配置")
+                        tr.setAttribute('height',360);
+                        if (data.k[i]=="多媒体配置")
+                        tr.setAttribute('height',300);
+                        if (data.k[i]=="灯光配置")
+                        tr.setAttribute('height',180);
+                        if (data.k[i]=="玻璃/后视镜")
+                        tr.setAttribute('height',260);
+                        if (data.k[i]=="空调/冰箱")
+                        tr.setAttribute('height',120);
+                        if (data.k[i]=="高科技配置")
+                        tr.setAttribute('height',160);
+                        if (data.k[i]=="纯电动发动机参数")
+                        tr.setAttribute('height',80);
+
+                    <!--插入类-->
+                    tr.appendChild(td);
+
+                    tbody.appendChild(tr);
+                }
+                table2.border=1;
+                con2.appendChild(table2);
+        }
+
+}
+        </script>
+
+        <script type="text/javascript">
+        function createShowingTable(data) {
+                <!-- 清除原表-->
+                $('#container').empty();
+                var con = document.getElementById("container");
+                var table = document.createElement("table");
+                var thead = table.createTHead();
+                var tbody = table.createTBody();
+                var tr = document.createElement("tr");
+                var key = data.name[0]
+                if (key !== undefined){
+                for (var i = 0; i < 3; i++) {
+                    th = document.createElement("th");
+                    tr.appendChild(th);
+
+                }
+                thead.appendChild(tr);
+                for (var i = 0; i < 187; i++) {
+                    var tr = document.createElement("tr");
+                    td = document.createElement("td");
+                    td.width=130;
+
+                    <!--td.innerHTML = data.m[i]-->
+                    <!--tr.setAttribute('align','center');-->
+                    <!--td.rowspan="100"-->
+                    <!--tr.setAttribute('height',20);-->
+                    <!--&lt;!&ndash;插入类&ndash;&gt;-->
+                    <!--tr.appendChild(td);-->
+
+                    td = document.createElement("td");
+                    td.width=300;
                     td.innerHTML = data.name[i]
+                    tr.setAttribute('align','center');
+                    tr.setAttribute('height',20);
                     <!--插入名称-->
                     tr.appendChild(td);
 
                     td = document.createElement("td");
-                    td.innerHTML = data.value[i]
+                    td.width=250;
+                    td.innerHTML = data.value[i];
+                    tr.setAttribute('height',20);
                     <!--插入值-->
                     tr.appendChild(td);
 
+                    tbody.appendChild(tr);
+                }
+                table.border=1;
+                con.appendChild(table);
+        }
+        else{
+                th = document.createElement("th");
+                tr.appendChild(th);
+                thead.appendChild(tr);
+                var tr = document.createElement("tr");
+                td = document.createElement("td");
+                td.innerHTML = '暂无数据'
+                <!--插入名称-->
+                tr.appendChild(td);
                 tbody.appendChild(tr);
-            }
-            con.appendChild(table);
-            }
+                con.appendChild(table);
+        }
+}
         </script>
 </div>
                 </div>
