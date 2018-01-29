@@ -28,7 +28,7 @@
 
     <!--CX-->
     <!--<link href="{% static 'css/auto/base.css' %}" rel="stylesheet" type="text/css"/>-->
-    <!--<link href="{% static 'css/auto/pzcs.css' %}" rel="stylesheet">-->
+    <link href="{% static 'css/auto/pzcs.css' %}" rel="stylesheet">
     <script type="text/javascript" src="{% static 'js/car/auto.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/car/pzcs.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/car/library.js' %}"></script>
@@ -370,39 +370,26 @@
                         $("#modelDiv").toggle();
                     }
 
-                    var combineJson = function(obj, obj1, str) {
-                        var typeItemsArray = obj.result[str + "typeitems"],
-                        typeItemsArray1 = obj1.result[str+ "typeitems"],
-                        len = typeItemsArray.length, i = 0;
-                        for (; i < len; i++) {
-                            var typeItemObj = typeItemsArray[i], typeItemObj1 = typeItemsArray1[i];
-                            var itemsArray = typeItemObj[str + "items"],
-                            itemsArray1 = typeItemObj1[str+ "items"],
-                            len1 = itemsArray.length,
-                            j = 0;
-                            for (; j < len1; j++) {
-                                var itemObj = itemsArray[j], itemObj1 = itemsArray1[j];
-                                var valueItemArray = itemObj.valueitems, valueItemArray1 = itemObj1.valueitems;
-                                var oneModelValue = valueItemArray1[0];
-                                valueItemArray.unshift(oneModelValue);
-                            }
-                        }
-                        //	config=obj;
-                    }
+
 
 
 
             </script>
+                <a name="top"> </a>
                 <div class="row">
                     <div class="col-md-4 col-sm-4 col-xs-4">
                         <div class="x_panel">
+                        <h3>Car Model Inquery/查找车型</h3>
+                        </div>
+                        <div class="x_panel">
+
                             <div class="blank10"></div>
                             <div class="pzbox">
                                 <!--添加对比车型开始-->
                                 <div class="addbox">
-                                    <h3>查找车型:</h3>
                                     <div class="selectBrand">
-                                        <h2>品牌：</h2><b>选择品牌</b>
+                                        <h2>品牌：</h2>
+                                        <b>选择品牌</b>
                                         <div class="showbox ppbox" id="brandDiv" style="display: none;">
                                             <div class="con">
                                                 <div class="lflist" id="letterList">
@@ -507,7 +494,8 @@
                                     </div>
 
                                     <div class="selectCxi">
-                                        <h2>车系：</h2><b>选择车系</b>
+                                        <h2>车系：</h2>
+                                        <b>选择车系</b>
                                         <div class="showbox cxbox" id="seriesDiv" style="display: none;">
                                             <div class="con">
                                                 <div class="lflist" id="companyList1"></div>
@@ -518,7 +506,8 @@
                                     </div>
 
                                     <div class="selectCmodels">
-                                        <h2>车型：</h2><b id="addModel">选择车型</b>
+                                        <h2>车型：</h2>
+                                        <b id="addModel">选择车型</b>
                                         <div class="showbox cxbox" id="modelDiv" style="display: none;">
                                             <div class="con">
                                                 <div class="lflist" id="yearList"></div>
@@ -548,16 +537,16 @@
                         <!--添加内容结束-->
 
                     </div>
-
+                    <a name="test"> </a>
                     <div class="blank10"></div>
                     <div class="row">
                                 <div class="col-md-7 col-sm-7 col-xs-7">
                                     <div class="x_panel">
-                                        <h3>详细配置</h3>
+                                        <h3>Detailed Configuration/详细配置</h3>
+
 
         <div  style="float:left;" id="container2"></div>
         <div  style="float:left;" id="container"></div>
-
 
         <script type="text/javascript">
         function createShowingTable2(data) {
@@ -578,9 +567,11 @@
                 for (var i = 0; i < 16; i++) {
                     var tr = document.createElement("tr");
                     td = document.createElement("td");
-                    td.width=130;
+                    td.width=25;
                     td.innerHTML = data.k[i]
                     tr.setAttribute('align','center');
+                    tr.setAttribute('writing','rl')
+
                     if (data.k[i]=="基础参数")
                         tr.setAttribute('height',300);
                     if (data.k[i]=="车身参数")
@@ -622,6 +613,8 @@
                     tbody.appendChild(tr);
                 }
                 table2.border=1;
+
+
                 con2.appendChild(table2);
         }
 
@@ -666,7 +659,7 @@
                     tr.appendChild(td);
 
                     td = document.createElement("td");
-                    td.width=250;
+                    td.width=350;
                     td.innerHTML = data.value[i];
                     tr.setAttribute('height',20);
                     <!--插入值-->
@@ -674,8 +667,19 @@
 
                     tbody.appendChild(tr);
                 }
+                <!--=================================================-->
+                var tr = document.createElement("tr");
+                td = document.createElement("td");
+                td.innerHTML = '<a href=#test>返回顶部</a> '
+                tr.setAttribute('align','center');
+                tr.setAttribute('height',68);
+                <!--插入类-->
+                tr.appendChild(td);
+                tbody.appendChild(tr);
+
                 table.border=1;
                 con.appendChild(table);
+
         }
         else{
                 th = document.createElement("th");
@@ -690,6 +694,10 @@
                 con.appendChild(table);
         }
 }
+
+
+
+
         </script>
 </div>
                 </div>

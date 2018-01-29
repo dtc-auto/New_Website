@@ -416,7 +416,7 @@ def Config_get_company(id_):
         company_dic["companyName"] = dic_company[company_id]
         for series_id in SERIE_ID:
             if company_id == dic_key_id[series_id]:
-                print(company_id, dic_key_id[series_id], series_id)
+                # print(company_id, dic_key_id[series_id], series_id)
                 series_dic = {
                     "seriesId": "",
                     "seriesName": ""
@@ -600,33 +600,17 @@ def Config_get_config_local(id_):
 ]
     dic_use = dict(zip(name, value))
     list_value = []
+    re_list_m = []
+    list_name = []
+    k = []
 
     for name_ in list_order:
         for name__ in dic_use.keys():
             if name_ == name__:
                 list_value.append(dic_use[name_])
-    list_name = []
+
     for key in dic_template.keys():
         list_name = list_name+dic_template[key]
-    dic = {"order": list_order, "value": list_value, "name": list_name}
-    _dic = {}
-    re_list_name = []
-    re_list_value = []
-    re_dic = {}
-    i_ = 0
-    for name_ in list_order:
-        for name__ in list_name:
-            if name_ == name__:
-                _dic[name_] = list_value[i_]
-                i_ = i_+1
-            if name_ not in list_name:
-                _dic[name_] = "以下参数为 %s " % name_
-    for re_name in _dic.keys():
-        re_list_name.append(re_name)
-        re_list_value.append(_dic[re_name])
-    re_dic = {"name": re_list_name, "value": re_list_value}
-
-    re_list_m = []
 
     for i in list_order:
         if i in list_name:
@@ -638,7 +622,6 @@ def Config_get_config_local(id_):
         if re_list_m[i] is not "":
             del re_list_m[i+1]
 
-    k = []
     for key in dic_template.keys():
         k.append(key)
 
