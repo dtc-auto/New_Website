@@ -10,12 +10,21 @@ password = "asdf1234"
 
 
 def getCarOwner(para):
-    sql = '''SELECT w.Brand, m.province, COUNT(m.province) AS no
-             FROM DW_AutoHome_WOM AS w INNER JOIN
-             DM_VW_region AS r ON w.City = r.City INNER JOIN
-             DM_AutoHome_Map AS m ON m.province = r.Province
-             GROUP BY w.Brand, m.province
-             ORDER BY no desc'''
+    sql = '''
+        SELECT 
+             w.Brand
+            ,m.province
+            ,COUNT(m.province) AS no
+        FROM 
+            DW_AutoHome_WOM AS w INNER JOIN
+            DM_VW_region AS r ON w.City = r.City INNER JOIN
+            DM_AutoHome_Map AS m ON m.province = r.Province
+        GROUP BY 
+              w.Brand
+             ,m.province
+        ORDER BY 
+            no desc
+        '''
     conn = pymssql.connect(server, user, password, "BDCI")
     df = pd.read_sql_query(sql, conn)
     brand = u'帕萨特'
@@ -37,12 +46,19 @@ def getCarOwner(para):
 # a,b = getCarOwner(u'凯美瑞')
 
 def getColumnChart_p1():
-    sql = """SELECT w.brand,r.Region,count(w.brand) as no
-                 FROM BDCI.dbo.DW_AutoHome_WOM AS w INNER JOIN
-                 BDCI.dbo.DM_VW_region AS r ON w.City = r.City
-                 group by w.brand,r.Region
-                 order by w.brand
-                 """
+    sql = """
+            SELECT 
+                 w.brand
+                ,r.Region
+                ,count(w.brand) as no
+            FROM 
+                BDCI.dbo.DW_AutoHome_WOM AS w INNER JOIN
+                BDCI.dbo.DM_VW_region AS r ON w.City = r.City
+            GROUP BY
+                w.brand,r.Region
+            ORDER BY
+                w.brand
+            """
     conn = pymssql.connect(server, user, password, "BDCI")
     df = pd.read_sql_query(sql, conn)
     result = [['brand','东北区','华北区','华东区','华南区','华中区','西区']]
@@ -68,13 +84,18 @@ def getColumnChart_p1():
 def getLevel1Attributes(paraList):
     newList = paraList.strip('[]').replace('"','').split(',')
     conn = pymssql.connect(server, user, password, "BDCI")
-    sql = """SELECT avg(score) as Score
-             ,Aspect
-             ,Brand
-             FROM DW_indexevaluationunpivot
-             group by Brand,aspect
-             order by Aspect asc
-             """
+    sql = """
+            SELECT 
+                 avg(score) as Score
+                ,Aspect
+                ,Brand
+            FROM 
+                DW_indexevaluationunpivot
+            GROUP BY 
+                Brand,aspect
+            ORDER BY 
+                Aspect asc
+            """
     df = pd.read_sql_query(sql, conn)
     #print df.head()
     target = newList
@@ -109,22 +130,28 @@ def getLevel2Attributes(paraList):
     list2 = list1.replace('"','')
     list3 = list2.split(',')
     conn = pymssql.connect(server, user, password, "BDCI")
-    sql = """use bdci
+    sql = """
+            USE BDCI
             SELECT  
-             Brand
-            ,Dimension
-            ,keyindex
-            ,KeyModifier
-            ,SentenceAttitude
-            ,case when SentenceAttitude >= 1 then '1'
-            when SentenceAttitude = 0 then '0'
-            when SentenceAttitude <= -1 then '-1' end  
-            as 
-             Attitude
-            ,frequency
-            FROM DM_AutoHome_WOM_SecondLevelIndex_Noun_Modifier_Attitude_Frequency
-            WHERE updateflag=0 and keyindex!='老板键' 
-            order by keyindex desc 
+                 Brand
+                ,Dimension
+                ,keyindex
+                ,KeyModifier
+                ,SentenceAttitude
+                ,case when SentenceAttitude >= 1 then '1'
+            WHEN 
+                SentenceAttitude = 0 then '0'
+            WHEN
+                SentenceAttitude <= -1 then '-1' end  
+            AS
+                 Attitude
+                ,frequency
+            FROM 
+                DM_AutoHome_WOM_SecondLevelIndex_Noun_Modifier_Attitude_Frequency
+            WHERE 
+                updateflag=0 and keyindex!='老板键' 
+            ORDER BY 
+                keyindex desc 
             """
     df = pd.read_sql_query(sql, conn)
     #brand = u'帕萨特'
@@ -375,14 +402,17 @@ def Config_get_config(id_):
 def Config_get_company(id_):
     id_ = int(id_)  # 防止SQL注入
 
-    sql = """SELECT 
-     [SERIE_ID]
-    ,[SERIE_NAME_CN]
-    ,[COMPANY_ID]
-    ,[COMPANY_NAME_CN]
-    FROM 
-    [BDCI_CHEXUN].[stg].[CONFIG_KEY] where BRAND_ID="""+str(id_)+"""
-         """
+    sql = """
+            SELECT 
+                 [SERIE_ID]
+                ,[SERIE_NAME_CN]
+                ,[COMPANY_ID]
+                ,[COMPANY_NAME_CN]
+            FROM 
+                [BDCI_CHEXUN].[stg].[CONFIG_KEY_2018_01_30] 
+            WHERE
+                BRAND_ID="""+str(id_)+"""
+            """
     conn = pymssql.connect(server, user, password, "BDCI")
     df = pd.read_sql_query(sql, conn)
 
@@ -434,20 +464,24 @@ def Config_get_model(id_):
     id_ = int(id_)  # 防止SQL注入
 
     sql = """  
-    SELECT
-    车型名称, 年代款, SPEC_ID
-     FROM 
-     [BDCI_CHEXUN].[stg].[CONFIG_KEY_SERIE_SPEC] 
-     WHERE [车型名称] IN
-            ( SELECT 
-            [车型名称]
-             FROM 
-             [BDCI_CHEXUN].[stg].[CONFIG_KEY_SERIE_SPEC] 
-            GROUP BY 
-            [车型名称] having count([车型名称]) = 1 )
-     AND
-     SERIE_ID=""" + str(id_) + """
-             """
+            SELECT 
+                 车型名称
+                ,年代款
+                ,SPEC_ID
+            FROM 
+                [BDCI_CHEXUN].[stg].[CONFIG_KEY_SERIE_SPEC] 
+            WHERE 
+                [车型名称] 
+            IN( 
+                SELECT 
+                [车型名称]
+                FROM 
+                [BDCI_CHEXUN].[stg].[CONFIG_KEY_SERIE_SPEC] 
+                GROUP BY 
+                [车型名称] having count([车型名称]) = 1 )
+            AND
+                SERIE_ID=""" + str(id_) + """
+            """
     conn = pymssql.connect(server, user, password, "BDCI")
     df = pd.read_sql_query(sql, conn)
 
@@ -496,20 +530,21 @@ def Config_get_model(id_):
 # 读取配置数据
 def Config_get_config_local(id_):
     id_ = int(id_)
-    sql = """SELECT 
-    [BDCI_CHEXUN].[stg].[CONFIGURATION_DETAILS].[PARA_NAME]
-    ,[PARA_VALUE]
-    FROM 
-    [BDCI_CHEXUN].[stg].[CONFIGURATION_DETAILS]
-    JOIN 
-    [BDCI_CHEXUN].[stg].[CONFIG_ITEM]
-    ON
-    [BDCI_CHEXUN].[stg].[CONFIGURATION_DETAILS].[PARA_NAME]=[BDCI_CHEXUN].[stg].[CONFIG_ITEM].[PARA_NAME]
-    WHERE 
-    [SPEC_ID]="""+str(id_)+"""
-    ORDER BY 
-    convert (int,PARA_ID)
-    """
+    sql = """
+            SELECT 
+                 [BDCI_CHEXUN].[stg].[CONFIGURATION_DETAILS].[PARA_NAME]
+                ,[PARA_VALUE]
+            FROM 
+                [BDCI_CHEXUN].[stg].[CONFIGURATION_DETAILS]
+            JOIN 
+                [BDCI_CHEXUN].[stg].[CONFIG_ITEM]
+            ON
+                [BDCI_CHEXUN].[stg].[CONFIGURATION_DETAILS].[PARA_NAME]=[BDCI_CHEXUN].[stg].[CONFIG_ITEM].[PARA_NAME]
+            WHERE 
+                [SPEC_ID]="""+str(id_)+"""
+            ORDER BY 
+                convert (int,PARA_ID)
+            """
     conn = pymssql.connect(server, user, password, "BDCI")
     df = pd.read_sql_query(sql, conn)
     name = df['PARA_NAME'].tolist()
