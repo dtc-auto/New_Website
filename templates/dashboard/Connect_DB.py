@@ -211,19 +211,20 @@ getLevel2Attributes("凯美瑞,空间")
 def getPurpose(para):
     sql = """
         SELECT 
-         [ForCrossCountry]
-        ,[ForRacing]
-        ,[ForCarry]
-        ,[ForBusiness]
-        ,[ForGirls]
-        ,[ForLongDistance]
-        ,[ForChild] 
-        ,[ForShopping]
-        ,[ForSelfDriving]
-        ,[ForWork]
-        ,[Brand]
-  FROM [BDCI].[dbo].[DM_AutoHoome_Purpose]
-          """
+             [ForCrossCountry]
+            ,[ForRacing]
+            ,[ForCarry]
+            ,[ForBusiness]
+            ,[ForGirls]
+            ,[ForLongDistance]
+            ,[ForChild] 
+            ,[ForShopping]
+            ,[ForSelfDriving]
+            ,[ForWork]
+            ,[Brand]
+        FROM 
+            [BDCI].[dbo].[DM_AutoHoome_Purpose]
+         """
     conn = pymssql.connect(server, user, password, "BDCI")
     df = pd.read_sql_query(sql, conn)
     headers = list(df)
@@ -321,17 +322,29 @@ def people_get_path(company):
         "type": "force",
     }
     if company == 'BMW':
-        sql = """select father_node as source, id as target, user_name as name
-            from [BDCI].[dbo].[DW_Weibo_RepostPath]
-            where root = 3718567394161044
-            """
+        sql = """
+        SELECT 
+             father_node as source
+            ,id as target
+            ,user_name as name
+        FROM 
+            [BDCI].[dbo].[DW_Weibo_RepostPath]
+        WHERE 
+            root = 3718567394161044
+        """
         root_name = '3718567394161044'
     # 3890290613886669、  3908444761689053：300
     else:
-        sql = """select father_node as source, id as target, user_name as name
-            from [BDCI].[dbo].[DW_Weibo_RepostPath]
-            where root = 3898167562657684
-            """
+        sql = """
+        SELECT 
+             father_node as source
+            ,id as target
+            ,user_name as name
+        FROM 
+            [BDCI].[dbo].[DW_Weibo_RepostPath]
+        WHERE
+            root = 3898167562657684
+        """
         root_name = '3898167562657684'
     # 3908011552343259、  3909125471922420：500、  3867692458956092：300
     conn = pymssql.connect(server, user, password, "BDCI")
@@ -373,9 +386,13 @@ def people_get_path(company):
 
 # CP_page
 def CP_get_cluster():
-    sql = """select value, slevel
-                from [BDCI].[dbo].[Source_Weibo_Cluster]
-                """
+    sql = """
+        SELECT 
+             value
+            ,slevel
+        FROM 
+            [BDCI].[dbo].[Source_Weibo_Cluster]
+        """
     conn = pymssql.connect(server, user, password, "BDCI")
     df = pd.read_sql_query(sql, conn)
     x = df['value'].tolist()
@@ -397,7 +414,7 @@ def Config_get_config(id_):
     return content_pos
 
 
-#
+
 # 车系选择框列表
 def Config_get_company(id_):
     id_ = int(id_)  # 防止SQL注入
@@ -663,7 +680,7 @@ def Config_get_config_local(id_):
     re_dic_ = {"name": list_name, "value": list_value, "m": re_list_m, "k": k}
     return re_dic_
 
-Config_get_config_local(108517)
+# Config_get_config_local(108517)
 
 
 
