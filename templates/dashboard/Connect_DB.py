@@ -666,13 +666,21 @@ def Config_get_config_local(id_):
 
     for i in list_order:
         if i in list_name:
-            re_list_m.append("")
+            re_list_m.append('')
         else:
             re_list_m.append(i)
 
+    # 删除多余行
     for i in range(len(re_list_m)-16):
         if re_list_m[i] is not "":
             del re_list_m[i+1]
+
+    # 空值替换为name的类
+    for i in range(len(re_list_m)):
+        if re_list_m[i] != '':
+            target = re_list_m[i]
+        else:
+            re_list_m[i] = target
 
     for key in dic_template.keys():
         k.append(key)
@@ -680,7 +688,7 @@ def Config_get_config_local(id_):
     re_dic_ = {"name": list_name, "value": list_value, "m": re_list_m, "k": k}
     return re_dic_
 
-# Config_get_config_local(108517)
+Config_get_config_local(108517)
 
 
 

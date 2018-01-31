@@ -544,161 +544,113 @@
                             <div class="x_panel">
                                 <h3>Detailed Configuration/详细配置</h3>
 
-
-                                <div  style="float:left;" id="container2"></div>
                                 <div  style="float:left;" id="container"></div>
-
                                 <script type="text/javascript">
-        function createShowingTable2(data) {
-                <!-- 清除原表-->
-                $('#container2').empty();
-                var con2 = document.getElementById("container2");
-                var table2 = document.createElement("table");
-                var thead = table2.createTHead();
-                var tbody = table2.createTBody();
-                var tr = document.createElement("tr");
-                var key = data.name[0]
+                                    function createShowingTable(data) {
+                                            <!-- 清除原表-->
+                                            $('#container').empty();
+                                            var con = document.getElementById("container");
+                                            var table = document.createElement("table");
+                                            var thead = table.createTHead();
+                                            var tbody = table.createTBody();
+                                            var tr = document.createElement("tr");
+                                            var key = data.name[0]
+                                            if (key !== undefined){
+                                            for (var i = 0; i < 3; i++) {
+                                                th = document.createElement("th");
+                                                tr.appendChild(th);
 
-                if (key !== undefined){
-                th = document.createElement("th");
-                tr.appendChild(th);
-                thead.appendChild(tr);
+                                            }
+                                            thead.appendChild(tr);
+                                            for (var i = 0; i < 187; i++) {
+                                                var tr = document.createElement("tr");
+                                                td = document.createElement("td");
+                                                td.width=130;
 
-                for (var i = 0; i < 16; i++) {
-                    var tr = document.createElement("tr");
-                    td = document.createElement("td");
-                    td.width=25;
-                    td.innerHTML = data.k[i]
-                    tr.setAttribute('align','center');
-                    tr.setAttribute('writing','rl')
+                                                td.innerHTML = data.m[i]
+                                                tr.setAttribute('align','center');
+                                                td.width=25;
+                                                td.rowspan="100"
+                                                tr.setAttribute('height',20);
+                                                <!--插入类-->
+                                                tr.appendChild(td);
 
-                    if (data.k[i]=="基础参数")
-                        tr.setAttribute('height',300);
-                    if (data.k[i]=="车身参数")
-                        tr.setAttribute('height',480);
-                    if (data.k[i]=="发动机参数")
-                        tr.setAttribute('height',440);
-                    if (data.k[i]=="底盘转向参数")
-                        tr.setAttribute('height',140);
-                    if (data.k[i]=="地盘转向参数")
-                        tr.setAttribute('height',140);
-                    if (data.k[i]=="车轮制动参数")
-                        tr.setAttribute('height',120);
-                    if (data.k[i]=="安全装备")
-                        tr.setAttribute('height',240);
-                        if (data.k[i]=="控制配置")
-                        tr.setAttribute('height',260);
-                        if (data.k[i]=="外部配置")
-                        tr.setAttribute('height',100);
-                        if (data.k[i]=="内部配置")
-                        tr.setAttribute('height',200);
-                        if (data.k[i]=="座椅配置")
-                        tr.setAttribute('height',360);
-                        if (data.k[i]=="多媒体配置")
-                        tr.setAttribute('height',300);
-                        if (data.k[i]=="灯光配置")
-                        tr.setAttribute('height',180);
-                        if (data.k[i]=="玻璃/后视镜")
-                        tr.setAttribute('height',260);
-                        if (data.k[i]=="空调/冰箱")
-                        tr.setAttribute('height',120);
-                        if (data.k[i]=="高科技配置")
-                        tr.setAttribute('height',160);
-                        if (data.k[i]=="纯电动发动机参数")
-                        tr.setAttribute('height',80);
+                                                td = document.createElement("td");
+                                                td.width=300;
+                                                td.innerHTML = data.name[i]
+                                                tr.setAttribute('align','center');
+                                                tr.setAttribute('height',20);
+                                                <!--插入名称-->
+                                                tr.appendChild(td);
 
-                    <!--插入类-->
-                    tr.appendChild(td);
+                                                td = document.createElement("td");
+                                                td.width=350;
+                                                td.innerHTML = data.value[i];
+                                                tr.setAttribute('height',20);
+                                                <!--插入值-->
+                                                tr.appendChild(td);
 
-                    tbody.appendChild(tr);
-                }
-                table2.border=1;
+                                                tbody.appendChild(tr);
+                                            }
+                                            <!--var tr = document.createElement("tr");-->
+                                            <!--td = document.createElement("td");-->
+                                            <!--td.innerHTML = '<a href=#test>返回顶部</a> '-->
+                                            <!--tr.setAttribute('align','center');-->
+                                            <!--tr.setAttribute('height',68);-->
+                                            <!--&lt;!&ndash;插入返回顶部单元格&ndash;&gt;-->
+                                            <!--tr.appendChild(td);-->
+                                            <!--tbody.appendChild(tr);-->
 
+                                            table.border=1;
+                                            table.id='table1'
+                                            con.appendChild(table);
+                                            <!--合并第一列-->
+                                            $("#table1").rowspan(0)
 
-                con2.appendChild(table2);
-        }
+                                    }
+                                    else{
+                                            th = document.createElement("th");
+                                            tr.appendChild(th);
+                                            thead.appendChild(tr);
+                                            var tr = document.createElement("tr");
+                                            td = document.createElement("td");
+                                            td.innerHTML = '暂无数据'
+                                            <!--插入名称-->
+                                            tr.appendChild(td);
+                                            tbody.appendChild(tr);
 
-}
-        </script>
+                                            con.appendChild(table);
+                                    }
+                            }
 
-                                <script type="text/javascript">
-        function createShowingTable(data) {
-                <!-- 清除原表-->
-                $('#container').empty();
-                var con = document.getElementById("container");
-                var table = document.createElement("table");
-                var thead = table.createTHead();
-                var tbody = table.createTBody();
-                var tr = document.createElement("tr");
-                var key = data.name[0]
-                if (key !== undefined){
-                for (var i = 0; i < 3; i++) {
-                    th = document.createElement("th");
-                    tr.appendChild(th);
-
-                }
-                thead.appendChild(tr);
-                for (var i = 0; i < 187; i++) {
-                    var tr = document.createElement("tr");
-                    td = document.createElement("td");
-                    td.width=130;
-
-                    <!--td.innerHTML = data.m[i]-->
-                    <!--tr.setAttribute('align','center');-->
-                    <!--td.rowspan="100"-->
-                    <!--tr.setAttribute('height',20);-->
-                    <!--&lt;!&ndash;插入类&ndash;&gt;-->
-                    <!--tr.appendChild(td);-->
-
-                    td = document.createElement("td");
-                    td.width=300;
-                    td.innerHTML = data.name[i]
-                    tr.setAttribute('align','center');
-                    tr.setAttribute('height',20);
-                    <!--插入名称-->
-                    tr.appendChild(td);
-
-                    td = document.createElement("td");
-                    td.width=350;
-                    td.innerHTML = data.value[i];
-                    tr.setAttribute('height',20);
-                    <!--插入值-->
-                    tr.appendChild(td);
-
-                    tbody.appendChild(tr);
-                }
-                <!--=================================================-->
-                var tr = document.createElement("tr");
-                td = document.createElement("td");
-                td.innerHTML = '<a href=#test>返回顶部</a> '
-                tr.setAttribute('align','center');
-                tr.setAttribute('height',68);
-                <!--插入类-->
-                tr.appendChild(td);
-                tbody.appendChild(tr);
-
-                table.border=1;
-                con.appendChild(table);
-
-        }
-        else{
-                th = document.createElement("th");
-                tr.appendChild(th);
-                thead.appendChild(tr);
-                var tr = document.createElement("tr");
-                td = document.createElement("td");
-                td.innerHTML = '暂无数据'
-                <!--插入名称-->
-                tr.appendChild(td);
-                tbody.appendChild(tr);
-                con.appendChild(table);
-        }
-}
-
-
-
-
-        </script>
+                                <!--合并第一列函数-->
+                            window.onload = function(){
+                                jQuery.fn.rowspan = function(colIdx) { //封装的一个JQuery小插件
+                                      return this.each(function(){
+                                         var that;
+                                         $('tr', this).each(function(row) {
+                                            $('td:eq('+colIdx+')', this).filter(':visible').each(function(col) {
+                                               if (that!=null && $(this).html() == $(that).html()) {
+                                                  rowspan = $(that).attr("rowSpan");
+                                                  if (rowspan == undefined) {
+                                                     $(that).attr("rowSpan",1);
+                                                     rowspan = $(that).attr("rowSpan"); }
+                                                  rowspan = Number(rowspan)+1;
+                                                  $(that).attr("rowSpan",rowspan);
+                                                  $(this).hide();
+                                               } else {
+                                                  that = this;
+                                               }
+                                            });
+                                         });
+                                      });
+                                   }
+                                   $(function() {
+                                      $("#table1").rowspan(0);//传入的参数是对应的列数从0开始  第一列合并相同
+                                      // $("#table1").rowspan(1);//传入的参数是对应的列数从0开始  第二列合并相同
+                                   });
+                                   }
+    </script>
                             </div>
                         </div>
                     </div>
@@ -713,6 +665,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- footer content  -->
 <footer>
