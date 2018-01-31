@@ -498,6 +498,7 @@ def Config_get_model(id_):
                 [车型名称] having count([车型名称]) = 1 )
             AND
                 SERIE_ID=""" + str(id_) + """
+            GROUP BY 年代款,车型名称,SPEC_ID
             """
     conn = pymssql.connect(server, user, password, "BDCI")
     df = pd.read_sql_query(sql, conn)
@@ -688,17 +689,4 @@ def Config_get_config_local(id_):
     re_dic_ = {"name": list_name, "value": list_value, "m": re_list_m, "k": k}
     return re_dic_
 
-Config_get_config_local(108517)
-
-
-
-
-
-
-
-
-
-
-
-
-
+# Config_get_config_local(108517)

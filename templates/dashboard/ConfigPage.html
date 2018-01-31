@@ -315,7 +315,6 @@
 
                                 $.getJSON('{% url 'ConfigModlePage' %}',{'modelId':modelId}, function(ret){
                                     createShowingTable(ret);
-                                    createShowingTable2(ret);
                                 });
 
 
@@ -369,10 +368,6 @@
                         $("#modelArea").html(modelHtml);
                         $("#modelDiv").toggle();
                     }
-
-
-
-
 
             </script>
                 <a name="top"> </a>
@@ -546,9 +541,12 @@
 
                                 <div  style="float:left;" id="container"></div>
                                 <script type="text/javascript">
+
                                     function createShowingTable(data) {
                                             <!-- 清除原表-->
                                             $('#container').empty();
+                                            <!--添加注解-->
+                                            $("#container").append("<a>注：●标配 ○选配 -无</a>");
                                             var con = document.getElementById("container");
                                             var table = document.createElement("table");
                                             var thead = table.createTHead();
@@ -597,7 +595,7 @@
                                             <!--td.innerHTML = '<a href=#test>返回顶部</a> '-->
                                             <!--tr.setAttribute('align','center');-->
                                             <!--tr.setAttribute('height',68);-->
-                                            <!--&lt;!&ndash;插入返回顶部单元格&ndash;&gt;-->
+                                            <!--插入返回顶部单元格-->
                                             <!--tr.appendChild(td);-->
                                             <!--tbody.appendChild(tr);-->
 
@@ -650,6 +648,7 @@
                                       // $("#table1").rowspan(1);//传入的参数是对应的列数从0开始  第二列合并相同
                                    });
                                    }
+
     </script>
                             </div>
                         </div>
