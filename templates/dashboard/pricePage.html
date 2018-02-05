@@ -316,6 +316,7 @@
 
                                 $.getJSON('{% url 'ConfigModlePage' %}',{'modelId':modelId}, function(ret){
                                     createShowingTable(ret);
+                                    <!--调用函数-->
                                 });
 
 
@@ -511,6 +512,17 @@
                                                 </ul>
                                             </div>
                                         </div>
+
+                                        <h2> Mileage/英里数：</h2>
+                                        <div class="span5">
+                                            <input spellcheck="false"  id="outputTextWord">万公里</input>
+                                        </div>
+                                        <div class="span2">
+                                            <div class=" col-md-1 col-sm-1 col-xs-1"  style="float:right;">
+                                                <input  type="button"  id="select" value = 估算>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -540,117 +552,7 @@
                             <div class="x_panel">
                                 <h3>Detailed Configuration/详细配置</h3>
 
-                                <div  style="float:left;" id="container"></div>
-                                <script type="text/javascript">
 
-                                    function createShowingTable(data) {
-                                            <!-- 清除原表-->
-                                            $('#container').empty();
-                                            <!--添加注解-->
-                                            $("#container").append("<a>注：●标配 ○选配 -无</a>");
-                                            var con = document.getElementById("container");
-                                            var table = document.createElement("table");
-                                            var thead = table.createTHead();
-                                            var tbody = table.createTBody();
-                                            var tr = document.createElement("tr");
-                                            var key = data.name[0]
-                                            if (key !== undefined){
-                                            for (var i = 0; i < 3; i++) {
-                                                th = document.createElement("th");
-                                                tr.appendChild(th);
-
-                                            }
-                                            thead.appendChild(tr);
-                                            for (var i = 0; i < 187; i++) {
-                                                var tr = document.createElement("tr");
-                                                td = document.createElement("td");
-                                                td.width=130;
-
-                                                td.innerHTML = data.m[i]
-                                                tr.setAttribute('align','center');
-                                                td.width=25;
-                                                td.rowspan="100"
-                                                tr.setAttribute('height',20);
-                                                <!--插入类-->
-                                                tr.appendChild(td);
-
-                                                td = document.createElement("td");
-                                                td.width=300;
-                                                td.innerHTML = data.name[i]
-                                                tr.setAttribute('align','center');
-                                                tr.setAttribute('height',20);
-                                                <!--插入名称-->
-                                                tr.appendChild(td);
-
-                                                td = document.createElement("td");
-                                                td.width=350;
-                                                td.innerHTML = data.value[i];
-                                                tr.setAttribute('height',20);
-                                                <!--插入值-->
-                                                tr.appendChild(td);
-
-                                                tbody.appendChild(tr);
-                                            }
-                                            <!--var tr = document.createElement("tr");-->
-                                            <!--td = document.createElement("td");-->
-                                            <!--td.innerHTML = '<a href=#test>返回顶部</a> '-->
-                                            <!--tr.setAttribute('align','center');-->
-                                            <!--tr.setAttribute('height',68);-->
-                                            <!--插入返回顶部单元格-->
-                                            <!--tr.appendChild(td);-->
-                                            <!--tbody.appendChild(tr);-->
-
-                                            table.border=1;
-                                            table.id='table1'
-                                            con.appendChild(table);
-                                            <!--合并第一列-->
-                                            $("#table1").rowspan(0)
-
-                                    }
-                                    else{
-                                            th = document.createElement("th");
-                                            tr.appendChild(th);
-                                            thead.appendChild(tr);
-                                            var tr = document.createElement("tr");
-                                            td = document.createElement("td");
-                                            td.innerHTML = '暂无数据'
-                                            <!--插入名称-->
-                                            tr.appendChild(td);
-                                            tbody.appendChild(tr);
-
-                                            con.appendChild(table);
-                                    }
-                            }
-
-                                <!--合并第一列函数-->
-                            window.onload = function(){
-                                jQuery.fn.rowspan = function(colIdx) { //封装的一个JQuery小插件
-                                      return this.each(function(){
-                                         var that;
-                                         $('tr', this).each(function(row) {
-                                            $('td:eq('+colIdx+')', this).filter(':visible').each(function(col) {
-                                               if (that!=null && $(this).html() == $(that).html()) {
-                                                  rowspan = $(that).attr("rowSpan");
-                                                  if (rowspan == undefined) {
-                                                     $(that).attr("rowSpan",1);
-                                                     rowspan = $(that).attr("rowSpan"); }
-                                                  rowspan = Number(rowspan)+1;
-                                                  $(that).attr("rowSpan",rowspan);
-                                                  $(this).hide();
-                                               } else {
-                                                  that = this;
-                                               }
-                                            });
-                                         });
-                                      });
-                                   }
-                                   $(function() {
-                                      $("#table1").rowspan(0);//传入的参数是对应的列数从0开始  第一列合并相同
-                                      // $("#table1").rowspan(1);//传入的参数是对应的列数从0开始  第二列合并相同
-                                   });
-                                   }
-
-    </script>
                             </div>
                         </div>
                     </div>

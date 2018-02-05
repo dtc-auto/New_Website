@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'xwg!o#50=bpiv9u$g)ze+xpm(($4uy2x%k&i701*%ux2#t8rdy'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -104,7 +104,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = 'C:/inetpub/wwwroot/New_Website/dashboard/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'dashboard/static')
 
 username = 'guest'
 password = 'detecon'

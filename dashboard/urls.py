@@ -1,7 +1,8 @@
 from django.conf.urls import *
 from . import views
+from django.conf.urls.static import static
 from dashboard.views import carOwnerChartPage, carOwnerChart, peopleChartPage, peopleChart, my_login, LTPChartPage, LTPChart, \
-    CPChartPage, CPChart, ConfigChartPage, ConfigCompany, ConfigSeriesChart, ConfigModleChart
+    CPChartPage, CPChart, ConfigChartPage, ConfigCompany, ConfigSeriesChart, ConfigModleChart, priceChartPage
 urlpatterns = [
     # index
     url(r'^$', views.index, name='index'),
@@ -19,14 +20,17 @@ urlpatterns = [
     # LTP dashborad page
     url(r'^LTP_page', LTPChartPage, name='LTPChart'),
     url(r'^LTP/$', LTPChart, name='LTPPage'),
-    # CP dashboard pag
+    # CP dashboard page
     url(r'^CP_page', CPChartPage, name='CPChart'),
     url(r'^CP/$', CPChart, name='CPEchartPage'),
-    # Config dashboard pag
+    # Config dashboard page
     url(r'^Config_page', ConfigChartPage, name='ConfigChart'),
     url(r'^Config/$', ConfigCompany, name='ConfigCompanyPage'),
     url(r'^Config_/$', ConfigSeriesChart, name='ConfigSeriesPage'),
     url(r'^Confi/$', ConfigModleChart, name='ConfigModlePage'),
+    # price dashboard page
+    url(r'^price_page', priceChartPage, name="pricePage"),
+
 ]
 
 

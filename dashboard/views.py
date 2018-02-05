@@ -69,6 +69,9 @@ def CPChartPage(request):
 @login_required
 def ConfigChartPage(request):
     return render(request, 'dashboard/ConfigPage.html')
+@login_required
+def priceChartPage(request):
+    return render(request, 'dashboard/pricePage.html')
 
 # get car page data
 # @login_required
@@ -126,6 +129,7 @@ def LTPChart(request):
           "text={0}" \
           "&pattern=pos" \
           "&format=plain".format(text)
+
     result_pos = urllib.request.urlopen(url_pos)  # POST method
     content_pos = result_pos.read().strip().decode('utf-8')
     content_pos_list = content_pos.split()
