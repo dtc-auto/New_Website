@@ -3,6 +3,9 @@
 
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
+
+        <link rel="stylesheet" href="http://dbushell.github.com/Pikaday/css/pikaday.css">
+    <script src="http://dbushell.github.com/Pikaday/pikaday.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
@@ -33,6 +36,8 @@
     <script type="text/javascript" src="{% static 'js/car/pzcs.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/car/library.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/car/carParameter-2.1.js' %}"></script>
+
+<!--Date-->
 
 </head>
 
@@ -528,7 +533,8 @@
                                         </div>
                                         <h2> Purchase Date/购买日期：</h2>
                                         <div class="span5">
-                                            <input spellcheck="false"  id="inputDate"><br>例如：2016.6.6</input>
+                                            <!--<input spellcheck="false"  id="inputDate"><br>例如：2016.6.6</input>-->
+                                            <input  type="month"  id="inputDate"/>
                                         </div>
                                         <div class="span2">
                                             <div class=" col-md-1 col-sm-1 col-xs-1"  style="float:right;">
@@ -565,6 +571,7 @@
                                 <h3>Valuation Results/估值结果</h3>
                                     <div class="span10">
                                         <div  style="font-family: Arial, Helvetica, sans-serif;font-size:18px;" id="container"></div>
+
                                     </div>
                             </div>
                         </div>
@@ -590,6 +597,7 @@
     <div class="clearfix"></div>
 </footer>
 <!-- /footer content -->
+
 
 <!-- jQuery -->
 <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>

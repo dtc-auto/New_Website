@@ -213,7 +213,8 @@ def PriceModleChart(request):
     Date = request.GET.get('Date', '')
     _id = request.GET.get('_id', '')
     price = float(Price_get_pricel(_id))
-    Date.replace('.', '-')
+    Date.replace('年', '-')
+    Date.replace('月', '-')
     try:
         Date = pd.Period(Date, freq='M')
         Mileage = float(request.GET.get('Mileage', ''))
@@ -222,6 +223,8 @@ def PriceModleChart(request):
     now = time.strftime('%Y-%m-%d', time.localtime(time.time()))
     now = pd.Period(now, freq='M')
     month_gap = int(now - Date)
+    if month_gap == 0:
+        return HttpResponse(json.dumps("Can not estimate this month/无法估算当月购买车辆"), content_type='application/json')
     if month_gap < 0:
         return HttpResponse(json.dumps("Input error, please reenter/输入错误，请重新输入"), content_type='application/json')
     mpm = Mileage / month_gap
