@@ -1,7 +1,7 @@
 /*设置选择框大小*/
 .addbox .selectBrand{width:162px; padding-right:10px;}
 .addbox .selectCxi{width:162px; padding-right:10px;}
-.addbox .selectCmodels{width:300px; padding-right:10px;}
+.addbox .selectCmodels{width:320px; padding-right:10px;}
 .addbox .selectBrand b,.addbox .selectCxi b,.addbox .selectCmodels b{
 	display:block;
 	height:21px;
@@ -16,7 +16,7 @@
 	color:#a3a3a3;
 }
 /*更改下拉框倒三角位置*/
-.addbox .selectCmodels b{background-position: 277px 6px}
+.addbox .selectCmodels b{background-position: 297px 6px}
 .addbox .showbox{ position:absolute; left:0px; top:29px;padding:13px 0; background-color:#fff; border:1px solid #a0a0a0; border-bottom:2px solid #0b47a0; z-index:1300}
 .addbox .lflist{padding:0 10px;float:left;}
 .addbox .rtlist{ float:right;}
@@ -25,15 +25,17 @@
 .addbox .rtlist li a:hover{color:#fff;background-color:#0b47a0;}
 .addbox .con{ display:inline-block;width:100%;}
 .ppbox{width:410px; }
+/*调整brand 左侧选择框大小*/
 .ppbox .lflist{width:100px; overflow:hidden; padding:0 15px; border-right:1px solid #ccc;}
-.ppbox .rtlist{width:260px;}
+/*调整brand 右侧选择框大小*/
+.ppbox .rtlist{width:300px;}
 .ppbox .lflist a{ display:block;width:25px; font-family:"寰蒋闆呴粦";color:#878787; font-size:14px; height:25px; line-height:25px; text-align:center; float:left;}
 .ppbox .lflist a:hover{ color:#fff; text-decoration:none; background-color:#0b47a0;}
 .ppbox .lflist a.on{color:#fff; text-decoration:none; background-color:#0b47a0;}
 .ppbox .rtlist li{width:85px; float:left; height:20px; line-height:20px; margin:1px 0 0 0; overflow:hidden;}
-.cxbox{width:305px; }
+.cxbox{width:450px; }
 .cxbox .lflist{width:150px; overflow:hidden; padding:0 15px; border-right:1px solid #ccc;}
-.cxbox .rtlist{width:150px; padding-right:10px;}
+.cxbox .rtlist{width:280px; padding-right:10px;}
 .cxbox .lflist a{ display:block;font-family:"寰蒋闆呴粦";color:#878787; font-size:14px; height:24px; line-height:24px; margin:1px 0 0 0; padding-left:8px;}
 .cxbox .lflist a:hover{ color:#fff; text-decoration:none; background-color:#0b47a0;}
 .cxbox .lflist a.on{color:#fff; text-decoration:none; background-color:#0b47a0;}

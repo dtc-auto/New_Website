@@ -690,3 +690,152 @@ def Config_get_config_local(id_):
     return re_dic_
 
 # Config_get_config_local(108517)
+
+# 二手车评估
+# 车系选择框列表
+def Price_get_company(id_):
+    id_ = int(id_)  # 防止SQL注入
+
+    sql = """
+            SELECT 
+                 [SERIE_ID]
+                ,serie as [SERIE_NAME_CN]
+                ,[COMPANY_ID]
+                ,company as [COMPANY_NAME_CN]
+            FROM 
+                [BDCI_AUTOHOME_new].[src].[AutoHome_Price_Specs_Forweb]
+            WHERE
+                BRAND_ID="""+str(id_)+"""
+            """
+    conn = pymssql.connect(server, user, password, "BDCI")
+    df = pd.read_sql_query(sql, conn)
+
+    re_list = [] # 返回列表
+
+    company_dic = {
+        "companyId": "",
+        "companyName": "",
+        "seriesList": []
+    } # 第一层嵌套 公司
+    series_dic = {
+        "seriesId": "",
+        "seriesName": ""
+    } # 第二次嵌套 车系
+
+    SERIE_ID = df['SERIE_ID'].tolist()
+    SERIE_NAME = df['SERIE_NAME_CN'].tolist()
+    COMPANY_ID = df['COMPANY_ID'].tolist()
+    COMPANY_NAME_CN = df['COMPANY_NAME_CN'].tolist()
+
+    def delRepeat(liebiao):
+        for x in liebiao:
+            while liebiao.count(x) > 1:
+                del liebiao[liebiao.index(x)]
+        return liebiao
+
+
+    dic_serie = dict(zip(SERIE_ID, SERIE_NAME))
+    dic_company = dict(zip(COMPANY_ID, COMPANY_NAME_CN))
+    dic_key_id = dict(zip(SERIE_ID, COMPANY_ID))
+    for company_id in dic_company.keys():
+        company_dic = {
+            "companyId": "",
+            "companyName": "",
+            "seriesList": []
+        }
+        company_dic["companyId"] = company_id
+        company_dic["companyName"] = dic_company[company_id]
+        for series_id in SERIE_ID:
+            if company_id == dic_key_id[series_id]:
+                # print(company_id, dic_key_id[series_id], series_id)
+                series_dic = {
+                    "seriesId": "",
+                    "seriesName": ""
+                }
+                series_dic["seriesId"] = series_id
+                series_dic["seriesName"] = dic_serie[series_id]
+                company_dic["seriesList"].append(series_dic)
+        re_list.append(company_dic)
+        for i in re_list:
+            i['seriesList']=delRepeat(i['seriesList'])
+    return re_list
+
+# Price_get_company(2)
+
+# 车型选择框
+def Price_get_specl(id_):
+    id_ = int(id_)  # 防止SQL注入
+
+    sql = """  
+            SELECT 
+                 spec_name as 车型名称
+                ,year as 年代款
+                ,SPEC_ID
+            FROM 
+                [BDCI_AUTOHOME_new].[src].[AutoHome_Price_Specs_Forweb]
+            WHERE 
+                SERIE_ID=""" + str(id_) + """
+            GROUP BY year,spec_name,SPEC_ID
+            """
+    conn = pymssql.connect(server, user, password, "BDCI")
+    df = pd.read_sql_query(sql, conn)
+
+    re_list = []  # 返回列表
+
+    year_dic = {
+        "yearId": "",
+        "yearName": "",
+        "modelList": []
+    }  # 第一层嵌套 年份
+    model_dic = {
+        "modelId": "",
+        "modelName": ""
+    }  # 第二次嵌套 车型
+
+    MODEL_NAME = df['车型名称'].tolist()
+    SPEC_ID = df['SPEC_ID'].tolist()
+    YEAR_NAME = df['年代款'].tolist()
+    YEAR_ID = df['年代款'].tolist()  # 设置year_id=year_name
+
+    dic_model = dict(zip(SPEC_ID, MODEL_NAME))
+    dic_year = dict(zip(YEAR_NAME, YEAR_ID))
+    dic_key_id = dict(zip(SPEC_ID, YEAR_ID))
+    for year_id in dic_year.keys():
+        year_dic = {
+            "yearId": "",
+            "yearName": "",
+            "modelList": []
+        }
+        year_dic["yearId"] = year_id
+        year_dic["yearName"] = dic_year[year_id]
+        for spec_id in SPEC_ID:
+            if year_id == dic_key_id[spec_id]:
+                model_dic = {
+                    "modelId": "",
+                    "modelName": ""
+                }
+                model_dic["modelId"] = spec_id
+                model_dic["modelName"] = dic_model[spec_id]
+                year_dic["modelList"].append(model_dic)
+        re_list.append(year_dic)
+    return re_list
+
+# Price_get_specl(11295)
+
+# 计算二手车数值
+def Price_get_pricel(id_):
+    id_ = int(id_)  # 防止SQL注入
+
+    sql = """  
+            SELECT 
+                 price
+            FROM 
+                [BDCI_AUTOHOME_new].[src].[AutoHome_Price_Specs_Forweb]
+            WHERE 
+                SPEC_ID=""" + str(id_) + """
+            """
+    conn = pymssql.connect(server, user, password, "BDCI")
+    df = pd.read_sql_query(sql, conn)
+    price = df['price'].tolist()[0][:-1]
+    return price
+Price_get_pricel(16385)

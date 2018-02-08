@@ -2,7 +2,8 @@ from django.conf.urls import *
 from . import views
 from django.conf.urls.static import static
 from dashboard.views import carOwnerChartPage, carOwnerChart, peopleChartPage, peopleChart, my_login, LTPChartPage, LTPChart, \
-    CPChartPage, CPChart, ConfigChartPage, ConfigCompany, ConfigSeriesChart, ConfigModleChart, priceChartPage
+    CPChartPage, CPChart, ConfigChartPage, ConfigCompany, ConfigSeriesChart, ConfigModleChart, priceChartPage, PriceModleChart, \
+    PriceCompany, PriceSeries
 urlpatterns = [
     # index
     url(r'^$', views.index, name='index'),
@@ -30,6 +31,9 @@ urlpatterns = [
     url(r'^Confi/$', ConfigModleChart, name='ConfigModlePage'),
     # price dashboard page
     url(r'^price_page', priceChartPage, name="pricePage"),
+    url(r'^price_company/$', PriceCompany, name='PriceCompanyPage'),
+    url(r'^price_series/$', PriceSeries, name='PriceSeriesPage'),
+    url(r'^price/$', PriceModleChart, name="Price_ModlePage"),
 
 ]
 
