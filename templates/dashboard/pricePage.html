@@ -3,6 +3,9 @@
 
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
+
+        <link rel="stylesheet" href="http://dbushell.github.com/Pikaday/css/pikaday.css">
+    <script src="http://dbushell.github.com/Pikaday/pikaday.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
@@ -33,6 +36,8 @@
     <script type="text/javascript" src="{% static 'js/car/pzcs.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/car/library.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/car/carParameter-2.1.js' %}"></script>
+
+<!--Date-->
 
 </head>
 
@@ -82,7 +87,6 @@
                                     <li><a href="price_page.html">Car Residual Value <br> 二手车残值</a></li>
                                 </ul>
                             </li>
-
                         </ul>
                     </div>
 
@@ -135,6 +139,7 @@
                     var _brandJson = {"D":[{"id":23,"name":"大众"},{"id":24,"name":"东南"},{"id":25,"name":"东风"},{"id":26,"name":"大发"},{"id":27,"name":"道奇"},{"id":561,"name":"大迪"},{"id":569,"name":"东风风神"},{"id":1090,"name":"DS"},{"id":100220,"name":"达契亚"},{"id":100381,"name":"东风风度"},{"id":100780,"name":"东风风行"}],"F":[{"id":29,"name":"福特"},{"id":30,"name":"丰田"},{"id":31,"name":"菲亚特"},{"id":32,"name":"福田"},{"id":33,"name":"福迪"},{"id":589,"name":"法拉利"},{"id":100160,"name":"Fisker"},{"id":100480,"name":"福汽启腾"},{"id":100920,"name":"法拉第未来"}],"G":[{"id":46,"name":"广汽吉奥"},{"id":671,"name":"广汽"},{"id":1030,"name":"GMC"},{"id":1050,"name":"光冈"},{"id":1130,"name":"观致汽车"},{"id":100466,"name":"Gumpert"}],"A":[{"id":2,"name":"奥迪"},{"id":789,"name":"阿斯顿·马丁"},{"id":910,"name":"阿尔法罗密欧"},{"id":101020,"name":"ALPINA"},{"id":101180,"name":"ARCFOX"}],"B":[{"id":6,"name":"奔驰"},{"id":7,"name":"本田"},{"id":8,"name":"别克"},{"id":9,"name":"宝马"},{"id":10,"name":"标致"},{"id":11,"name":"比亚迪"},{"id":12,"name":"北汽制造"},{"id":14,"name":"保时捷"},{"id":508,"name":"奔腾"},{"id":709,"name":"宝骏"},{"id":809,"name":"宾利"},{"id":829,"name":"布加迪"},{"id":1150,"name":"北京汽车"},{"id":1151,"name":"北汽威旺"},{"id":100100,"name":"巴博斯"},{"id":100520,"name":"北汽幻速"},{"id":100600,"name":"北汽新能源"},{"id":100860,"name":"宝沃"},{"id":101000,"name":"比速汽车"}],"C":[{"id":18,"name":"昌河"},{"id":19,"name":"长安"},{"id":20,"name":"长城"},{"id":100542,"name":"长安欧尚"},{"id":100640,"name":"成功汽车"}],"L":[{"id":21,"name":"猎豹汽车"},{"id":55,"name":"力帆"},{"id":56,"name":"铃木"},{"id":57,"name":"陆风"},{"id":58,"name":"雷诺"},{"id":59,"name":"林肯"},{"id":60,"name":"路虎"},{"id":61,"name":"雷克萨斯"},{"id":64,"name":"路特斯"},{"id":609,"name":"兰博基尼"},{"id":891,"name":"劳斯莱斯"},{"id":930,"name":"理念"},{"id":970,"name":"劳伦士"},{"id":990,"name":"莲花汽车"},{"id":100680,"name":"陆地方舟"},{"id":100720,"name":"雷丁"},{"id":100840,"name":"LOCAL MOTORS"},{"id":101100,"name":"LYNK&CO"}],"M":[{"id":66,"name":"马自达"},{"id":67,"name":"MG"},{"id":70,"name":"MINI"},{"id":769,"name":"玛莎拉蒂"},{"id":849,"name":"迈巴赫"},{"id":100080,"name":"迈凯轮"},{"id":100320,"name":"摩根"}],"N":[{"id":909,"name":"纳智捷"},{"id":100420,"name":"Noble"}],"O":[{"id":72,"name":"欧宝"},{"id":73,"name":"讴歌"},{"id":100401,"name":"欧朗"}],"H":[{"id":37,"name":"海马"},{"id":38,"name":"红旗"},{"id":39,"name":"华普"},{"id":40,"name":"哈飞"},{"id":42,"name":"悍马"},{"id":468,"name":"华泰"},{"id":567,"name":"黄海"},{"id":649,"name":"汇众"},{"id":100180,"name":"哈弗"},{"id":100200,"name":"恒天"},{"id":100400,"name":"海格"},{"id":100465,"name":"Hennessey "},{"id":100700,"name":"华颂"},{"id":100940,"name":"华泰新能源"},{"id":100960,"name":"汉腾汽车"}],"I":[{"id":100464,"name":"Icona"}],"J":[{"id":44,"name":"Jeep"},{"id":45,"name":"吉利"},{"id":48,"name":"捷豹"},{"id":49,"name":"金杯"},{"id":50,"name":"江淮"},{"id":729,"name":"江铃"},{"id":100461,"name":"九龙"},{"id":100462,"name":"金龙"},{"id":100463,"name":"金旅"},{"id":100660,"name":"江铃集团轻汽"},{"id":100980,"name":"江铃集团新能源"}],"K":[{"id":52,"name":"凯迪拉克"},{"id":53,"name":"克莱斯勒"},{"id":562,"name":"开瑞"},{"id":869,"name":"柯尼塞克"},{"id":1070,"name":"凯佰赫"},{"id":100440,"name":"KTM"},{"id":100441,"name":"卡尔森"},{"id":100500,"name":"卡威"},{"id":100620,"name":"凯翼"},{"id":100800,"name":"康迪"}],"T":[{"id":100040,"name":"腾势"},{"id":100241,"name":"TESLA"},{"id":100242,"name":"特雷沃"},{"id":100243,"name":"特纳蒙塔纳"},{"id":100560,"name":"泰卡特"}],"W":[{"id":92,"name":"沃尔沃"},{"id":529,"name":"威麟"},{"id":889,"name":"威兹曼"},{"id":100240,"name":"沃克斯豪尔"},{"id":100360,"name":"五十铃"},{"id":100544,"name":"五菱汽车"},{"id":100820,"name":"威蒙积泰"},{"id":101040,"name":"WEY"},{"id":101060,"name":"威马汽车"},{"id":101080,"name":"蔚来"}],"Q":[{"id":75,"name":"起亚"},{"id":76,"name":"奇瑞"},{"id":100060,"name":"启辰"},{"id":100900,"name":"前途"},{"id":101160,"name":"奇点"}],"P":[{"id":892,"name":"帕加尼"},{"id":100280,"name":"PGO"}],"S":[{"id":81,"name":"三菱"},{"id":82,"name":"斯柯达"},{"id":83,"name":"斯巴鲁"},{"id":84,"name":"萨博"},{"id":85,"name":"双龙"},{"id":86,"name":"双环"},{"id":93,"name":"上汽通用五菱"},{"id":530,"name":"Smart"},{"id":890,"name":"世爵"},{"id":100120,"name":"上汽大通"},{"id":100300,"name":"Scion"},{"id":100361,"name":"思铭"},{"id":100362,"name":"SPIRRA"},{"id":100363,"name":"SSC"},{"id":100540,"name":"陕汽通家"},{"id":100541,"name":"绅宝"},{"id":101120,"name":"SWM斯威汽车"}],"R":[{"id":78,"name":"日产"},{"id":79,"name":"荣威"},{"id":428,"name":"瑞麒"},{"id":100380,"name":"如虎"}],"Y":[{"id":35,"name":"永源"},{"id":100,"name":"一汽"},{"id":101,"name":"英菲尼迪"},{"id":566,"name":"依维柯"},{"id":631,"name":"野马汽车"},{"id":100261,"name":"亚琛施纳泽"},{"id":100580,"name":"英致"},{"id":100740,"name":"御捷"},{"id":101200,"name":"云度新能源"}],"X":[{"id":95,"name":"现代"},{"id":96,"name":"雪佛兰"},{"id":97,"name":"雪铁龙"},{"id":98,"name":"夏利"},{"id":950,"name":"西雅特"},{"id":100561,"name":"新凯"}],"Z":[{"id":103,"name":"中华"},{"id":104,"name":"中兴"},{"id":105,"name":"众泰"},{"id":100260,"name":"ZENVO"},{"id":100340,"name":"之诺"},{"id":100760,"name":"知豆"}]};
                     var _companySeriesJson = [];
                     var _yearModelJson = [];
+                    var _id=0;
                     $(function() {
                         /*控制三个选车区域的隐藏显示*/
                         $(document).bind("click",function(e) {
@@ -187,6 +192,7 @@
                         });
                         $(document).on("click", "#modelArea li a", function() {
                             var modelId = $(this).attr("let"), modelName = $(this).html();
+                             _id = $(this).attr("let");
                             selectModel(modelId, modelName);
                         })
                         /*点击留红效果*/
@@ -245,7 +251,7 @@
                     var selectBrand = function(brandId, brandName) {
                         $("#brandDiv").toggle();
                         $(".selectBrand b").html(brandName);
-                        var para = "id=" + brandId, action = "{% url 'ConfigCompanyPage' %}";
+                        var para = "id=" + brandId, action = "{% url 'PriceCompanyPage' %}";
                         $.ajax({
                             type : "get",
                             url : action,
@@ -277,7 +283,7 @@
                     var selectSeries = function(seriesId, seriesName) {
                         $("#seriesDiv").toggle();
                         $(".selectCxi b").html(seriesName);
-                        var para = "id=" + seriesId, action = "{% url 'ConfigSeriesPage' %}";
+                        var para = "id=" + seriesId, action = "{% url 'PriceSeriesPage' %}";
                         $.ajax({
                             type : "get",
                             url : action,
@@ -313,10 +319,6 @@
                         $(".selectCmodels b").html(modelName);
                         $(".selectCmodels b").attr("let",modelId);
                         //alert("已选择车型：" + modelId);//TODO
-
-                                $.getJSON('{% url 'ConfigModlePage' %}',{'modelId':modelId}, function(ret){
-                                    createShowingTable(ret);
-                                });
 
 
                     }
@@ -369,13 +371,26 @@
                         $("#modelArea").html(modelHtml);
                         $("#modelDiv").toggle();
                     }
+            <!--评估按钮数据传输-->
+            $(document).ready(function(){
+                    $("input[id^='select']").click(function(){
+                     var Mileage = $("#inputMileage").val();
+                     var Date = $("#inputDate").val();
+                     var modelId = selectModel()
+                        $.getJSON('{% url 'Price_ModlePage' %}',{'Mileage':Mileage,'Date':Date,'_id':_id}, function(ret){
+                            $('#container').empty();
+                            $("#container").append(ret);
+                         });
+                      });
+             });
+
 
             </script>
                 <a name="top"> </a>
                 <div class="row">
-                    <div class="col-md-4 col-sm-4 col-xs-4">
+                    <div class="col-md-5 col-sm-5 col-xs-5">
                         <div class="x_panel">
-                            <h3>Car Model Inquiry/查找车型</h3>
+                            <h3>Car Model Inquery/查找车型</h3>
                         </div>
                         <div class="x_panel">
 
@@ -511,6 +526,22 @@
                                                 </ul>
                                             </div>
                                         </div>
+
+                                        <h2> Mileage/里程数：</h2>
+                                        <div class="span5">
+                                            <input spellcheck="false"  id="inputMileage">万公里<br>为保证精确度请输入整数</input>
+                                        </div>
+                                        <h2> Purchase Date/购买日期：</h2>
+                                        <div class="span5">
+                                            <!--<input spellcheck="false"  id="inputDate"><br>例如：2016.6.6</input>-->
+                                            <input  type="month"  id="inputDate"/>
+                                        </div>
+                                        <div class="span2">
+                                            <div class=" col-md-1 col-sm-1 col-xs-1"  style="float:right;">
+                                                <input  type="button"  id="select" value = 估算>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -533,128 +564,19 @@
                         <!--添加内容结束-->
 
                     </div>
-                    <a name="test"> </a>
-                    <div class="blank10"></div>
+                    </div>
                     <div class="row">
-                        <div class="col-md-7 col-sm-7 col-xs-7">
+                        <div class="col-md-5 col-sm-5 col-xs-5">
                             <div class="x_panel">
-                                <h3>Detailed Configuration/详细配置</h3>
+                                <h3>Valuation Results/估值结果</h3>
+                                    <div class="span10">
+                                        <div  style="font-family: Arial, Helvetica, sans-serif;font-size:18px;" id="container"></div>
 
-                                <div  style="float:left;" id="container"></div>
-                                <script type="text/javascript">
-
-                                    function createShowingTable(data) {
-                                            <!-- 清除原表-->
-                                            $('#container').empty();
-                                            <!--添加注解-->
-                                            $("#container").append("<a>注：●标配 ○选配 -无</a>");
-                                            var con = document.getElementById("container");
-                                            var table = document.createElement("table");
-                                            var thead = table.createTHead();
-                                            var tbody = table.createTBody();
-                                            var tr = document.createElement("tr");
-                                            var key = data.name[0]
-                                            if (key !== undefined){
-                                            for (var i = 0; i < 3; i++) {
-                                                th = document.createElement("th");
-                                                tr.appendChild(th);
-
-                                            }
-                                            thead.appendChild(tr);
-                                            for (var i = 0; i < 187; i++) {
-                                                var tr = document.createElement("tr");
-                                                td = document.createElement("td");
-                                                td.width=130;
-
-                                                td.innerHTML = data.m[i]
-                                                tr.setAttribute('align','center');
-                                                td.width=25;
-                                                td.rowspan="100"
-                                                tr.setAttribute('height',20);
-                                                <!--插入类-->
-                                                tr.appendChild(td);
-
-                                                td = document.createElement("td");
-                                                td.width=300;
-                                                td.innerHTML = data.name[i]
-                                                tr.setAttribute('align','center');
-                                                tr.setAttribute('height',20);
-                                                <!--插入名称-->
-                                                tr.appendChild(td);
-
-                                                td = document.createElement("td");
-                                                td.width=350;
-                                                td.innerHTML = data.value[i];
-                                                tr.setAttribute('height',20);
-                                                <!--插入值-->
-                                                tr.appendChild(td);
-
-                                                tbody.appendChild(tr);
-                                            }
-                                            <!--var tr = document.createElement("tr");-->
-                                            <!--td = document.createElement("td");-->
-                                            <!--td.innerHTML = '<a href=#test>返回顶部</a> '-->
-                                            <!--tr.setAttribute('align','center');-->
-                                            <!--tr.setAttribute('height',68);-->
-                                            <!--插入返回顶部单元格-->
-                                            <!--tr.appendChild(td);-->
-                                            <!--tbody.appendChild(tr);-->
-
-                                            table.border=1;
-                                            table.id='table1'
-                                            con.appendChild(table);
-                                            <!--合并第一列-->
-                                            $("#table1").rowspan(0)
-
-                                    }
-                                    else{
-                                            th = document.createElement("th");
-                                            tr.appendChild(th);
-                                            thead.appendChild(tr);
-                                            var tr = document.createElement("tr");
-                                            td = document.createElement("td");
-                                            td.innerHTML = '暂无数据'
-                                            <!--插入名称-->
-                                            tr.appendChild(td);
-                                            tbody.appendChild(tr);
-
-                                            con.appendChild(table);
-                                    }
-                            }
-
-                                <!--合并第一列函数-->
-                            window.onload = function(){
-                                jQuery.fn.rowspan = function(colIdx) { //封装的一个JQuery小插件
-                                      return this.each(function(){
-                                         var that;
-                                         $('tr', this).each(function(row) {
-                                            $('td:eq('+colIdx+')', this).filter(':visible').each(function(col) {
-                                               if (that!=null && $(this).html() == $(that).html()) {
-                                                  rowspan = $(that).attr("rowSpan");
-                                                  if (rowspan == undefined) {
-                                                     $(that).attr("rowSpan",1);
-                                                     rowspan = $(that).attr("rowSpan"); }
-                                                  rowspan = Number(rowspan)+1;
-                                                  $(that).attr("rowSpan",rowspan);
-                                                  $(this).hide();
-                                               } else {
-                                                  that = this;
-                                               }
-                                            });
-                                         });
-                                      });
-                                   }
-                                   $(function() {
-                                      $("#table1").rowspan(0);//传入的参数是对应的列数从0开始  第一列合并相同
-                                      // $("#table1").rowspan(1);//传入的参数是对应的列数从0开始  第二列合并相同
-                                   });
-                                   }
-
-    </script>
+                                    </div>
                             </div>
                         </div>
                     </div>
-                </div>
+
 
                 <!--end 底部-->
                 <!--END container-->
@@ -675,6 +597,7 @@
     <div class="clearfix"></div>
 </footer>
 <!-- /footer content -->
+
 
 <!-- jQuery -->
 <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
