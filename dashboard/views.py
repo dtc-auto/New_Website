@@ -242,4 +242,3 @@ def PriceModleChart(request):
     rePrice = round(price - rePrice, 2)
     re_ = "您的爱车估值为 "+str(rePrice)+"万元（估值结果仅供参考）"
     return HttpResponse(json.dumps(re_), content_type='application/json')
-
