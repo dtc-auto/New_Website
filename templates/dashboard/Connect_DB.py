@@ -5,6 +5,7 @@ import pandas as pd
 import urllib
 
 server = "SQLDEV02\sql"
+server = "127.0.0.1"
 user = "dtc"
 password = "asdf1234"
 
@@ -314,37 +315,22 @@ def people_get_pie(company):
     if company == 'BMW':
         return dit_BMW
 
-def people_get_path(company):
+# =======================修改部分=============================
+def people_get_path(all_):
+    root_name = all_[1]
+    # all_ = all_[0]
     path_data = {
         "nodes": [],
         "links": [],
         "type": "force",
     }
-    if company == 'BMW':
-        sql = """
-        SELECT 
-             father_node as source
-            ,id as target
-            ,user_name as name
-        FROM 
-            [BDCI].[dbo].[DW_Weibo_RepostPath]
-        WHERE 
-            root = 3718567394161044
-        """
-        root_name = '3718567394161044'
+
+    sql = """select father_node as source, id as target, user_name as name
+        from [BDCI].[dbo].[DW_Weibo_RepostPath]
+        where root = 
+        """+str(all_[1])
     # 3890290613886669、  3908444761689053：300
-    else:
-        sql = """
-        SELECT 
-             father_node as source
-            ,id as target
-            ,user_name as name
-        FROM 
-            [BDCI].[dbo].[DW_Weibo_RepostPath]
-        WHERE
-            root = 3898167562657684
-        """
-        root_name = '3898167562657684'
+
     # 3908011552343259、  3909125471922420：500、  3867692458956092：300
     conn = pymssql.connect(server, user, password, "BDCI")
     df = pd.read_sql_query(sql, conn)
@@ -352,13 +338,13 @@ def people_get_path(company):
     targetList = df['target'].tolist()
     nameList = df['name'].tolist()
     dic_number_id = dict(zip(targetList, nameList))
-    dic_number_id[root_name] = company
+    dic_number_id[root_name] = all_[0]
     # 将数字name替换为中文
     def change_ch(targetList):
         for i in range(0, len(targetList)):
             for key in dic_number_id.keys():
                 if key == targetList[i]:
-                    targetList[i]=dic_number_id[key]
+                    targetList[i] = dic_number_id[key]
     change_ch(sourceList)
     change_ch(targetList)
     # 去重
@@ -366,7 +352,7 @@ def people_get_path(company):
     # 添加nodes:[{"name": "allName[0]",itemStyle:{normal:{color:'green'}},]
     for i in range(0, len(allName)):
         name_ = allName[i]
-        if name_ == company:
+        if name_ == all_[0]:
             dit_ = {'name': name_, 'itemStyle': {'normal': {'color': 'rgb(255,0,0)'}}}
             path_data["nodes"].append(dit_)
         else:
@@ -382,7 +368,29 @@ def people_get_path(company):
         path_data["links"].append(dit_)
 
     return path_data
+# people_get_path(['BMW','3718567394161044'])
 
+# 返回微博内容：因为本地无原始表数据，所以只用2条微博做示范，可自由增加id（root）与text个数
+def people_get_text(company):
+
+    text_bmw = [
+        ['3718567394161044', '3908444761689053'],
+        ['新BMW X1 行动定义自由 新BMW X1，作为同级唯一全系标准配备高端动力配置的车型，用10款车型为客户提供更多高端舒适体验',
+         'BMW X1自由能量，即将全力爆发。 ​​​​'
+         ]
+    ]
+    text_vw = [
+        ['3898167562657684', '3855030983972696'],
+        ['不仅仅是油电混合，更是满足你出行的多种选择。全新Golf GTE让你动静随芯选',
+         '凌风渡越，颠覆想象。沿袭前瞻造车理念，大众汽车凌渡以全新轿跑个性之魅，颠覆时尚美学。极致横向拓展前脸，配合动感氙气大灯，为整车勾勒出简洁流畅的外观线条。'
+         ]
+    ]
+    if company == 'BMW':
+        return text_bmw
+    else:
+        return text_vw
+
+# =======================修改部分=============================
 # CP_page
 def CP_get_cluster():
     sql = """

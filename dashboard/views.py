@@ -8,7 +8,7 @@ import pandas as pd
 import time
 from templates.dashboard.Connect_DB \
     import getCarOwner, getColumnChart_p1, getLevel1Attributes, getLevel2Attributes, getPurpose, people_get_pie, people_get_path, CP_get_cluster, \
-    Config_get_config_local, Config_get_company, Config_get_model, Price_get_company, Price_get_specl, Price_get_pricel
+    Config_get_config_local, Config_get_company, Config_get_model, Price_get_company, Price_get_specl, Price_get_pricel,  people_get_text
 import json
 from django import forms
 from django.shortcuts import render,render_to_response
@@ -107,21 +107,26 @@ def carOwnerChart(request):
     return HttpResponse(json.dumps(dict), content_type='application/json')
 # get people page data
 # @login_required
+# =====================修改部分======================
 def peopleChart(request):
     target = request.GET.get('a', '')
     path = request.GET.get('path', '')
 
+
     # 当 select path 时进入 people_get_path
     if len(path) > 0:
-        path = people_get_path(path)
-        dict = {'path': path}
+        path_list = json.loads(path)
+        path_re = people_get_path(path_list)
+        dict = {'path': path_re}
         return HttpResponse(json.dumps(dict), content_type='application/json')
 
     pie_data = people_get_pie(target)
+    weibo_text = people_get_text(target)  # 需引用 people_get_text
     dict = {'people_get_pie': pie_data,
+                'weibo_text':weibo_text
             }
     return HttpResponse(json.dumps(dict), content_type='application/json')
-
+# =====================修改部分======================
 # get LTP
 def LTPChart(request):
     text = request.GET.get('a', '')

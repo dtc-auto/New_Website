@@ -76,9 +76,8 @@
                                     <li><a href="auto_page.html">Product Index Analysis <br> 产品指标分析</a></li>
                                     <li><a href="people_page.html">Forward Path Analysis <br> 传播路径分析</a></li>
                                     <li><a href="LTP_page.html">Natural Language Processing<br> 自然语言处理</a></li>
-                                    <li><a href="CP_page.html" >Customer Partition <br> 客户群体划分</a></li>
+                                    <li><a href="CP_page.html" >Costomer Partition <br> 客户群体划分</a></li>
                                     <li><a href="Config_page.html">Model and Configuration <br> 车型与配置</a></li>
-                                    <li><a href="price_page.html">Car Residual Value <br> 二手车残值</a></li>
                                 </ul>
                             </li>
 
@@ -180,35 +179,79 @@
             <!-- /select tiles-->
 
             <!--接收数据库返回信息-->
+            <!--============================修改部分===============================-->
             <script type="text/javascript">
-                $(document).ready(function(){
-                  $("#sel1").change(function(){
+            <!--select 微博内容下拉列表-->
+            var select_text = function(){
+                var company = $("#sel1").val();
+                $.getJSON('{% url 'peopleEchartPage' %}',{'a':company}, function(ret){
+                    $("#select_text option").remove()
+                    var selDom = $("#select_text");
+                    for (var i = 0; i <ret.weibo_text[0].length; i++){
+                        var d = "<option value="+ret.weibo_text[0][i]+">"+ret.weibo_text[1][i]+"</option>"
+                        selDom.append(d);//添加option
+                    }
+                })
+            }
+
+            select_text()  // 提前改变传播路径下拉菜单
+
+            $(document).ready(function(){
+                <!--初始化页面加载-->
+                var company = $("#sel1").val();
+                var root = $("#select_text").val();
+                var array1 = [company,root]
+                var json_array1 = JSON.stringify(array1);
+                $.getJSON('{% url 'peopleEchartPage' %}',{'a':company}, function(ret){
+                    drawPieAge(ret.people_get_pie);
+                    drawPieGender(ret.people_get_pie);
+                    drawPieRegion(ret.people_get_pie);
+                    drawPieCityLevel(ret.people_get_pie);
+                })
+                $.getJSON('{% url 'peopleEchartPage' %}',{'path':json_array1}, function(ret){
+                    drawPath(ret.path)
+                })
+
+
+                <!--改变公司名-->
+                $("#sel1").change(function(){
+                    select_text()  // 改变传播路径下拉菜单
+
                     var company = $("#sel1").val();
+                    var root = $("#select_text").val();
+                    var array1 = [company,root]
+                    var json_array1 = JSON.stringify(array1);
                     $.getJSON('{% url 'peopleEchartPage' %}',{'a':company}, function(ret){
                         drawPieAge(ret.people_get_pie);
                         drawPieGender(ret.people_get_pie);
                         drawPieRegion(ret.people_get_pie);
                         drawPieCityLevel(ret.people_get_pie);
                     })
-                    $.getJSON('{% url 'peopleEchartPage' %}',{'path':company}, function(ret){
-                        drawPath(ret.path)
+                    $.getJSON('{% url 'peopleEchartPage' %}',{'path':json_array1}, function(ret){
+                    drawPath(ret.path)
                     })
                 });
-              });
-                 var company = $("#sel1").val();
-                    $.getJSON('{% url 'peopleEchartPage' %}',{'a':company}, function(ret){
-                        drawPieAge(ret.people_get_pie);
-                        drawPieGender(ret.people_get_pie);
-                        drawPieRegion(ret.people_get_pie);
-                        drawPieCityLevel(ret.people_get_pie);
-                    })
-                    $.getJSON('{% url 'peopleEchartPage' %}',{'path':company}, function(ret){
+
+                <!--改变微博-->
+                 $("#select_text").change(function(){
+                        var company = $("#sel1").val();
+                        var root = $("#select_text").val();
+                        var array1 = [company,root]
+                        var json_array1 = JSON.stringify(array1);
+                        $.getJSON('{% url 'peopleEchartPage' %}',{'path':json_array1}, function(ret){
                         drawPath(ret.path)
-                    })
+                        })
+                    });
+            });
+
+
+
+
 
 
 
             </script>
+            <!--============================修改部分===============================-->
             <!--/接收数据库返回信息-->
 
             <!-- 图表行-->
@@ -537,6 +580,18 @@
                 </div>
             </div>
             </div>
+            <!--微博搜索-->
+            <div class="col-lg-13 ">
+                <form method="get">
+                    <div class="form-group ">
+                        <!--<h4><label for="sel1">Select Brand</label></h4>-->
+                        <select class="form-control" id="select_text">
+
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <!--/微博搜索-->
 
             <div class="row">
                 <!-- path 图框 -->
