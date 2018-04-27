@@ -108,24 +108,24 @@ def carOwnerChart(request):
 # get people page data
 # @login_required
 # =====================修改部分======================
-    def peopleChart(request):
-        target = request.GET.get('a', '')
-        path = request.GET.get('path', '')
+def peopleChart(request):
+    target = request.GET.get('a', '')
+    path = request.GET.get('path', '')
 
 
-        # 当 select path 时进入 people_get_path
-        if len(path) > 0:
-            path_list = json.loads(path)
-            path_re = people_get_path(path_list)
-            dict = {'path': path_re}
-            return HttpResponse(json.dumps(dict), content_type='application/json')
-
-        pie_data = people_get_pie(target)
-        weibo_text = people_get_text(target)  # 需引用 people_get_text
-        dict = {'people_get_pie': pie_data,
-                    'weibo_text':weibo_text
-                }
+    # 当 select path 时进入 people_get_path
+    if len(path) > 0:
+        path_list = json.loads(path)
+        path_re = people_get_path(path_list)
+        dict = {'path': path_re}
         return HttpResponse(json.dumps(dict), content_type='application/json')
+
+    pie_data = people_get_pie(target)
+    weibo_text = people_get_text(target)  # 需引用 people_get_text
+    dict = {'people_get_pie': pie_data,
+                'weibo_text':weibo_text
+            }
+    return HttpResponse(json.dumps(dict), content_type='application/json')
 # =====================修改部分======================
 # get LTP
 def LTPChart(request):
