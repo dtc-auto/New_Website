@@ -250,11 +250,10 @@ def getPurpose(para):
     for i_list in range(1, len(result)):
         for i_ in range(1, len(result[i_list])):
             # print(result[i_list])
-            result[i_list][i_] = float('%.3f'% result[i_list][i_])
+            value_ = float('%.3f' % result[i_list][i_])
+            result[i_list][i_] = (round(value_ * 100))
     return result
 # getPurpose('凯美瑞')
-
-
 # people_page  0:age, 1:gender, 2:region, 3:city leve
 def people_get_pie(company):
     # 大众静态数据
