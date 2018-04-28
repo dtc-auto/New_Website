@@ -317,6 +317,11 @@ def people_get_pie(company):
 
 # =======================修改部分=============================
 def people_get_path(all_):
+    try:
+        test_ = int(all_[1])  # 防止sql注入
+    except:
+        return 0
+
     root_name = all_[1]
     # all_ = all_[0]
     path_data = {
