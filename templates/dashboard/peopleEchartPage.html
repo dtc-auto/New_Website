@@ -185,7 +185,7 @@
                 var select_text = function(){
                     var company = $("#sel1").val();
                     var year_ = $("#select_date").val();
-                    var array1 = [company, 'year_']
+                    var array1 = [company, year_]
                     $.getJSON('{% url 'peopleEchartPage' %}',{'b':array1}, function(ret){
                         $("#select_text option").remove()
                         var selDom = $("#select_text");

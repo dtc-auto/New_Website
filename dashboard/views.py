@@ -112,7 +112,7 @@ def peopleChart(request):
     target = request.GET.get('a', '')
     target_b = request.GET.get('b', '')
     if len(target_b) > 3:
-        target_b =json.loads(target_b)
+        target_b = json.loads(target_b)
         weibo_text = people_get_text(target_b)
         dict = {
                 'weibo_text': weibo_text
