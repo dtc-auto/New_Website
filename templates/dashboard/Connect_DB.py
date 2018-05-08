@@ -376,7 +376,14 @@ def people_get_path(all_):
 # people_get_path(['BMW','3718567394161044'])
 
 # 返回微博内容：因为本地无原始表数据，所以只用2条微博做示范，可自由增加id（root）与text个数
-def people_get_text(company):
+
+def people_get_text(target_b):
+    # 暂无表数据，if保持前端可用性
+    if target_b is list:
+        year_ = target_b[1]  # year
+        company = target_b[0]  # company
+    else:
+        company = target_b
 
     text_bmw = [
         ['3718567394161044', '3908444761689053'],

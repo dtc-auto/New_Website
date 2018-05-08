@@ -110,10 +110,18 @@ def carOwnerChart(request):
 # =====================修改部分======================
 def peopleChart(request):
     target = request.GET.get('a', '')
-    path = request.GET.get('path', '')
+    target_b = request.GET.get('b', '')
+    if len(target_b) > 3:
+        target_b =json.loads(target_b)
+        weibo_text = people_get_text(target_b)
+        dict = {
+                'weibo_text': weibo_text
+                }
+        return HttpResponse(json.dumps(dict), content_type='application/json')
 
 
     # 当 select path 时进入 people_get_path
+    path = request.GET.get('path', '')
     if len(path) > 0:
         path_list = json.loads(path)
         path_re = people_get_path(path_list)

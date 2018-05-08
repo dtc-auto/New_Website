@@ -184,7 +184,9 @@
                 <!--select 微博内容下拉列表-->
                 var select_text = function(){
                     var company = $("#sel1").val();
-                    $.getJSON('{% url 'peopleEchartPage' %}',{'a':company}, function(ret){
+                    var year_ = $("#select_date").val();
+                    var array1 = [company, 'year_']
+                    $.getJSON('{% url 'peopleEchartPage' %}',{'b':array1}, function(ret){
                         $("#select_text option").remove()
                         var selDom = $("#select_text");
                         for (var i = 0; i <ret.weibo_text[0].length; i++){
@@ -233,15 +235,19 @@
                     });
 
                     <!--改变微博-->
-                     $("#select_text").change(function(){
-                            var company = $("#sel1").val();
-                            var root = $("#select_text").val();
-                            var array1 = [company,root]
-                            var json_array1 = JSON.stringify(array1);
-                            $.getJSON('{% url 'peopleEchartPage' %}',{'path':json_array1}, function(ret){
-                            drawPath(ret.path)
-                            })
-                        });
+                    $("#select_text").change(function(){
+                        var company = $("#sel1").val();
+                        var root = $("#select_text").val();
+                        var array1 = [company,root]
+                        var json_array1 = JSON.stringify(array1);
+                        $.getJSON('{% url 'peopleEchartPage' %}',{'path':json_array1}, function(ret){
+                        drawPath(ret.path)
+                        })
+                    });
+                    <!--改变年份-->
+                    $("#select_date").change(function(){
+                        select_text()
+                    });
                 });
 
             </script>
@@ -578,8 +584,17 @@
             <div class="col-lg-13 ">
                 <form method="get">
                     <div class="form-group ">
-                        <!--<h4><label for="sel1">Select Brand</label></h4>-->
-                        <select class="form-control" id="select_text">
+                        <h4><label for="sel1">OEM Weibo Message/官方微博消息</label></h4>
+
+                        <select class="form-control" id="select_date" >
+                            <option value="2013">2013年</option>
+                            <option value="2014">2014年</option>
+                            <option value="2015">2015年</option>
+                            <option value="2016">2016年</option>
+                            <option value="2017" selected="selected">2017年</option>
+                        </select>
+
+                        <select class="form-control" id="select_text" >
 
                         </select>
                     </div>
